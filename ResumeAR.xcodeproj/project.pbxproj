@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		6B7FEC0BFF589550B9C070D5 /* Pods_ResumeARUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E56FCA7EF741C4A255DD999 /* Pods_ResumeARUITests.framework */; };
 		71F8328FE4F1E798A9860939 /* Pods_ResumeAR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB79904913C588F1D757CDCB /* Pods_ResumeAR.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		B424BCFA201F92DA00B18120 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = B424BCF9201F92DA00B18120 /* Cartfile */; };
 		B430E1231FE8448A00058C99 /* CloudantRESTCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = B430E1221FE8448A00058C99 /* CloudantRESTCall.swift */; };
 		B460D4B61FA38E66004CB81F /* Face.swift in Sources */ = {isa = PBXBuildFile; fileRef = B460D4B51FA38E66004CB81F /* Face.swift */; };
 		B460D4B81FA39981004CB81F /* CIImage+FaceDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B460D4B71FA39981004CB81F /* CIImage+FaceDetection.swift */; };
@@ -66,6 +67,7 @@
 		3E03336E2D20E30384E39305 /* Pods_ResumeARTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ResumeARTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		917FBE407CE9365748FEAE22 /* Pods-ResumeARTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ResumeARTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ResumeARTests/Pods-ResumeARTests.release.xcconfig"; sourceTree = "<group>"; };
 		994BFF8B069F0D50FEEA8B9E /* Pods-ResumeAR.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ResumeAR.release.xcconfig"; path = "Pods/Target Support Files/Pods-ResumeAR/Pods-ResumeAR.release.xcconfig"; sourceTree = "<group>"; };
+		B424BCF9201F92DA00B18120 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		B430E1221FE8448A00058C99 /* CloudantRESTCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudantRESTCall.swift; sourceTree = "<group>"; };
 		B460D4B51FA38E66004CB81F /* Face.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Face.swift; sourceTree = "<group>"; };
 		B460D4B71FA39981004CB81F /* CIImage+FaceDetection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CIImage+FaceDetection.swift"; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 		B4BF23521FA2745C002906DD = {
 			isa = PBXGroup;
 			children = (
+				B424BCF9201F92DA00B18120 /* Cartfile */,
 				B4BF235D1FA2745D002906DD /* ResumeAR */,
 				B4BF23741FA2745D002906DD /* ResumeARTests */,
 				B4BF237F1FA2745D002906DD /* ResumeARUITests */,
@@ -322,6 +325,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B424BCFA201F92DA00B18120 /* Cartfile in Resources */,
 				B4BF23611FA2745D002906DD /* art.scnassets in Resources */,
 				B4BF236B1FA2745D002906DD /* LaunchScreen.storyboard in Resources */,
 				B4BF23681FA2745D002906DD /* Assets.xcassets in Resources */,
@@ -434,12 +438,14 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ResumeAR/Pods-ResumeAR-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/PKHUD/PKHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PKHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",

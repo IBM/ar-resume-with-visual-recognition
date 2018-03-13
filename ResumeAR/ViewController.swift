@@ -14,6 +14,7 @@ import RxSwift
 import RxCocoa
 //import Async
 import VisualRecognitionV3
+import PKHUD
 
 
 class ViewController: UIViewController, ARSCNViewDelegate {
@@ -50,7 +51,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Run the view's session
         sceneView.session.run(configuration)
         
-        Observable<Int>.interval(1, scheduler: SerialDispatchQueueScheduler(qos: .default))
+        Observable<Int>.interval(0.6, scheduler: SerialDispatchQueueScheduler(qos: .default))
             .subscribeOn(SerialDispatchQueueScheduler(qos: .background))
             .concatMap{ _ in  self.faceObservation() }
             .flatMap{ Observable.from($0)}
@@ -62,12 +63,24 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 }
                 self.updateNode(classes: element.classes, position: element.position, frame: element.frame)
             }.disposed(by: 👜)
+        
+        Observable<Int>.interval(1.0, scheduler: SerialDispatchQueueScheduler(qos: .default))
+            .subscribeOn(SerialDispatchQueueScheduler(qos: .background))
+            .subscribe { [unowned self] _ in
+                
+                self.faces.filter{ $0.updated.isAfter(seconds: 1.5) && !$0.hidden }.forEach{ face in
+                    print("Hide node: \(face.name)")
+                    DispatchQueue.main.async{ face.node.hide() }
+                }
+            }.disposed(by: 👜)
+        
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        // Pause the view's session
+        👜 = DisposeBag()
         sceneView.session.pause()
     }
     
@@ -76,16 +89,18 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Release any cached data, images, etc that aren't in use.
     }
 
-    // MARK: - ARSCNViewDelegate
-    
-/*
-    // Override to create and configure nodes for anchors added to the view's session.
-    func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
-        let node = SCNNode()
-     
-        return node
+    func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {
+        
+        switch camera.trackingState {
+        case .limited(.initializing):
+            PKHUD.sharedHUD.contentView = PKHUDProgressView(title: "Initializing", subtitle: nil)
+            PKHUD.sharedHUD.show()
+        case .notAvailable:
+            print("Not available")
+        default:
+            PKHUD.sharedHUD.hide()
+        }
     }
-*/
     
     func session(_ session: ARSession, didFailWithError error: Error) {
         // Present an error message to the user
@@ -112,29 +127,19 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 return Disposables.create()
             }
             
-            // Verify tracking state and abort
-            //            guard case .normal = frame.camera.trackingState else {
-            //                print("Tracking not available: \(frame.camera.trackingState)")
-            //                observer.onCompleted()
-            //                return Disposables.create()
-            //            }
-            
             // Create and rotate image
             let image = CIImage.init(cvPixelBuffer: frame.capturedImage).rotate
-            
             let facesRequest = VNDetectFaceRectanglesRequest { request, error in
                 guard error == nil else {
                     print("Face request error: \(error!.localizedDescription)")
                     observer.onCompleted()
                     return
                 }
-                
                 guard let observations = request.results as? [VNFaceObservation] else {
                     print("No face observations")
                     observer.onCompleted()
                     return
                 }
-                
                 // Map response
                 let response = observations.map({ (face) -> (observation: VNFaceObservation, image: CIImage, frame: ARFrame) in
                     return (observation: face, image: image, frame: frame)
@@ -176,8 +181,7 @@ private func faceClassification(face: VNFaceObservation, image: CIImage, frame: 
             let failure = { (error: Error) in print(error) }
             let owners = ["me"]
             
-            visualRecognition.classify(imageFile: imagePath, owners: owners,  threshold: 0, failure: failure){ classifiedImages in
-                print(classifiedImages)
+            visualRecognition.classify(imageFile: imagePath, owners: owners,  threshold: 0, failure: failure){ classifiedImages in                
                 observer.onNext((classes: classifiedImages.images, position: worldCoord, frame: frame))
                 observer.onCompleted()
             }
@@ -260,7 +264,6 @@ private func faceClassification(face: VNFaceObservation, image: CIImage, frame: 
     }
     
     private func updateNode(classes: [ClassifiedImage], position: SCNVector3, frame: ARFrame) {
-        
         guard let person = classes.first else {
             print("No classification found")
             return
@@ -269,8 +272,6 @@ private func faceClassification(face: VNFaceObservation, image: CIImage, frame: 
         let classifier = person.classifiers.first
         let name = classifier?.name
         let classifierId = classifier?.classifierID
-        
-        
             // Filter for existent face
             let results = self.faces.filter{ $0.name == name && $0.timestamp != frame.timestamp }
                 .sorted{ $0.node.position.distance(toVector: position) < $1.node.position.distance(toVector: position) }
@@ -287,10 +288,8 @@ private func faceClassification(face: VNFaceObservation, image: CIImage, frame: 
                     let face = Face.init(name: name!, node: node, timestamp: frame.timestamp)
                     self.faces.append(face)
                 }
-                
                 return
             }
-            
             // Update existent face
             DispatchQueue.main.async {
                 
@@ -308,7 +307,6 @@ private func faceClassification(face: VNFaceObservation, image: CIImage, frame: 
                     existentFace.timestamp = frame.timestamp
                 }
             }
-        
     }
     
     func convert(cmage:CIImage) -> UIImage

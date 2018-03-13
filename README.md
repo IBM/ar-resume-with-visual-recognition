@@ -48,16 +48,22 @@ To test locally you can do the following:
   "location": "<location (city,state) of the person in image>"
 }
 ```
+To create a document, send a POST request with the document's JSON content to https://$ACCOUNT.cloudant.com/$DATABASE. for example:
+
+`curl https://$ACCOUNT.cloudant.com/$DATABASE \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d "$JSON"`
+Replace `$JSON` with the proper JSON in above format.
+
 3. Run the app and point the camera view to your image.
 
 # Links
 
-<ul>
- 	<li><a href="https://developer.apple.com/arkit/">ARKit</a></li>
- 	<li><a href="https://github.com/watson-developer-cloud/swift-sdk">Watson Swift SDK</a></li>
-  <li><a href="https://www.ibm.com/watson/services/visual-recognition-4/">IBM Visual Recognition</a></li>
- 	<li><a href="https://www.ibm.com/cloud/cloudant">IBM Cloudant</a></li>
-</ul>
+* [ARKit](https://developer.apple.com/arkit)
+* [Watson Swift SDK](https://github.com/watson-developer-cloud/swift-sdk)
+* [IBM Visual Recognition](https://www.ibm.com/watson/services/visual-recognition-4)
+* [IBM Cloudant](https://www.ibm.com/cloud/cloudant) 	
 
 # License
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)

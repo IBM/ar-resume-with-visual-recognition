@@ -4,7 +4,7 @@ In this code pattern, we will create augmented reality based résumé with Visua
 
 # Flow
 
-![ARResume Architecture](https://github.com/sanjeevghimire/ARBasedResumeWithFaceRecognition/blob/master/ARResume.png "ARResume Architecture")
+![ARResume Architecture](https://github.com/IBM/ar-resume-with-visual-recognition/blob/readme.update/ARResume.png "ARResume Architecture")
 
 1. Face recognition using iOS Vision API
 2. Classify cropped face using IBM Visual Recognition

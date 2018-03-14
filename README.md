@@ -48,6 +48,15 @@ To test locally you can do the following:
   "location": "<location (city,state) of the person in image>"
 }
 ```
+
+To add the document you can use the followig POST command
+`curl https://$ACCOUNT.cloudant.com/$DATABASE \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d "$JSON"
+`
+where `$ACCOUNT` is your bluemix account id, `$DATABASE` is the database you created in IBM Cloudant and `$JSON` is above json.
+
 3. Run the app and point the camera view to your image.
 
 # Links

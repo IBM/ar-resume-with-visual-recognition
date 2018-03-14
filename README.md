@@ -6,10 +6,11 @@ In this code pattern, we will create augmented reality based résumé with Visua
 
 ![ARResume Architecture](architecture.png)
 
-1. Face recognition using iOS Vision API
-2. Classify cropped face using IBM Visual Recognition
-3. Get details from IBM Cloudant using the classification
-4. Overlay the data in front of the user in the mobile camera view
+1. User initiates the ar app.
+2. App opens up the camera view to detect the face, and crops it.
+3. Classify cropped face using IBM Visual Recognition
+4. Get details from IBM Cloudant using the classification
+5. Overlay the data in front of the user in the mobile camera view
 
 
 # Included Components

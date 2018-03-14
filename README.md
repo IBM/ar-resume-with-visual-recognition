@@ -14,14 +14,13 @@ In this code pattern, we will create augmented reality based résumé with Visua
 
 # Included Components
 1. Swift mobile app
-    a. Face Recognition using Vision API
-    b. ARKit : An iOS augmented reality platform        
+    1. Face Recognition using Vision API
+    1. ARKit : An iOS augmented reality platform        
 2. IBM Visual Recognition: An IBM service to analyze the visual content of images or video frames to understand what is happening in a scene
 3. IBM Cloudant DB: A highly scalable and performant JSON database service
 
 
 # Steps
-
 1. Clone the project using `git clone https://github.com/IBM/ARBasedResumeWithFaceRecognition`
 2. Login to IBM Bluemix account, create a IBM Visual Recognition service and save the credentials.
 3. Using the IBM Visual Recognition Beta Tool, create a classifier. A classifier will train the visual recognition so that the    VR API will recognizse different images of the same person. Use atleast 10 images of your head shot and also use a negative    training by using a different headshot which is not you.
@@ -56,13 +55,10 @@ To test locally you can do the following:
 3. Run the app and point the camera view to your image.
 
 # Links
-
-<ul>
- 	<li><a href="https://developer.apple.com/arkit/">ARKit</a></li>
- 	<li><a href="https://github.com/watson-developer-cloud/swift-sdk">Watson Swift SDK</a></li>
-  <li><a href="https://www.ibm.com/watson/services/visual-recognition-4/">IBM Visual Recognition</a></li>
- 	<li><a href="https://www.ibm.com/cloud/cloudant">IBM Cloudant</a></li>
-</ul>
+* [ARKit](https://developer.apple.com/arkit)
+* [Watson Swift SDK](https://github.com/watson-developer-cloud/swift-sdk)
+* [IBM Visual Recognition](https://www.ibm.com/watson/services/visual-recognition-4)
+* [IBM Cloudant](https://www.ibm.com/cloud/cloudant) 
 
 # License
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)

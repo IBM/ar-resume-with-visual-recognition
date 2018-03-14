@@ -15,6 +15,9 @@
 		B460D4B81FA39981004CB81F /* CIImage+FaceDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B460D4B71FA39981004CB81F /* CIImage+FaceDetection.swift */; };
 		B460D4BA1FA3A433004CB81F /* SCNVector3+Distance.swift in Sources */ = {isa = PBXBuildFile; fileRef = B460D4B91FA3A433004CB81F /* SCNVector3+Distance.swift */; };
 		B460D4BE1FAA3C8F004CB81F /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = B460D4BD1FAA3C8F004CB81F /* Credentials.swift */; };
+		B479E7522059A3C300786B47 /* linkedin.png in Resources */ = {isa = PBXBuildFile; fileRef = B479E74F2059A3C200786B47 /* linkedin.png */; };
+		B479E7532059A3C300786B47 /* facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = B479E7502059A3C200786B47 /* facebook.png */; };
+		B479E7542059A3C300786B47 /* twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = B479E7512059A3C200786B47 /* twitter.png */; };
 		B4B2E7961FCDDF4E006DDB9D /* SCNNode+Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B2E7951FCDDF4E006DDB9D /* SCNNode+Text.swift */; };
 		B4BE3DAE1FDB186C00268324 /* VisualRecognitionV3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4BE3DAC1FDB185900268324 /* VisualRecognitionV3.framework */; };
 		B4BE3DAF1FDB186C00268324 /* VisualRecognitionV3.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B4BE3DAC1FDB185900268324 /* VisualRecognitionV3.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -73,6 +76,9 @@
 		B460D4B71FA39981004CB81F /* CIImage+FaceDetection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CIImage+FaceDetection.swift"; sourceTree = "<group>"; };
 		B460D4B91FA3A433004CB81F /* SCNVector3+Distance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNVector3+Distance.swift"; sourceTree = "<group>"; };
 		B460D4BD1FAA3C8F004CB81F /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
+		B479E74F2059A3C200786B47 /* linkedin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = linkedin.png; sourceTree = "<group>"; };
+		B479E7502059A3C200786B47 /* facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook.png; sourceTree = "<group>"; };
+		B479E7512059A3C200786B47 /* twitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twitter.png; sourceTree = "<group>"; };
 		B4B2E7951FCDDF4E006DDB9D /* SCNNode+Text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNNode+Text.swift"; sourceTree = "<group>"; };
 		B4BE3DAC1FDB185900268324 /* VisualRecognitionV3.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VisualRecognitionV3.framework; path = Carthage/Build/iOS/VisualRecognitionV3.framework; sourceTree = "<group>"; };
 		B4BF235B1FA2745D002906DD /* ResumeAR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ResumeAR.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -173,6 +179,9 @@
 		B4BF235D1FA2745D002906DD /* ResumeAR */ = {
 			isa = PBXGroup;
 			children = (
+				B479E7502059A3C200786B47 /* facebook.png */,
+				B479E74F2059A3C200786B47 /* linkedin.png */,
+				B479E7512059A3C200786B47 /* twitter.png */,
 				B4BF235E1FA2745D002906DD /* AppDelegate.swift */,
 				B4BF23601FA2745D002906DD /* art.scnassets */,
 				B4BF23621FA2745D002906DD /* ViewController.swift */,
@@ -326,8 +335,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				B424BCFA201F92DA00B18120 /* Cartfile in Resources */,
+				B479E7542059A3C300786B47 /* twitter.png in Resources */,
 				B4BF23611FA2745D002906DD /* art.scnassets in Resources */,
 				B4BF236B1FA2745D002906DD /* LaunchScreen.storyboard in Resources */,
+				B479E7532059A3C300786B47 /* facebook.png in Resources */,
+				B479E7522059A3C300786B47 /* linkedin.png in Resources */,
 				B4BF23681FA2745D002906DD /* Assets.xcassets in Resources */,
 				B4BF23661FA2745D002906DD /* Main.storyboard in Resources */,
 			);

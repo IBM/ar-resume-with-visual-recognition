@@ -18,7 +18,7 @@ import PKHUD
 
 
 class ViewController: UIViewController, ARSCNViewDelegate {
-
+    
     @IBOutlet var sceneView: ARSCNView!
     var 👜 = DisposeBag()
     
@@ -88,7 +88,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         super.didReceiveMemoryWarning()
         // Release any cached data, images, etc that aren't in use.
     }
-
+    
     func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {
         
         switch camera.trackingState {
@@ -153,9 +153,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             return Disposables.create()
         }
     }
-
-
-private func faceClassification(face: VNFaceObservation, image: CIImage, frame: ARFrame) -> Observable<(classes: [ClassifiedImage], position: SCNVector3, frame: ARFrame)> {
+    
+    
+    private func faceClassification(face: VNFaceObservation, image: CIImage, frame: ARFrame) -> Observable<(classes: [ClassifiedImage], position: SCNVector3, frame: ARFrame)> {
         return Observable<(classes: [ClassifiedImage], position: SCNVector3, frame: ARFrame)>.create{ observer in
             
             // Determine position of the face
@@ -173,15 +173,15 @@ private func faceClassification(face: VNFaceObservation, image: CIImage, frame: 
             let imagePath = FileManager.default.temporaryDirectory.appendingPathComponent(fileName)
             let uiImage: UIImage = self.convert(cmage: pixel)
             if let data = UIImagePNGRepresentation(uiImage) {
-                    try? data.write(to: imagePath)
-                }
+                try? data.write(to: imagePath)
+            }
             
             
             let visualRecognition = VisualRecognition.init(apiKey: Credentials.VR_API_KEY, version: Credentials.VERSION)
             let failure = { (error: Error) in print(error) }
             let owners = ["me"]
             
-            visualRecognition.classify(imageFile: imagePath, owners: owners,  threshold: 0, failure: failure){ classifiedImages in                
+            visualRecognition.classify(imageFile: imagePath, owners: owners,  threshold: 0, failure: failure){ classifiedImages in
                 observer.onNext((classes: classifiedImages.images, position: worldCoord, frame: frame))
                 observer.onCompleted()
             }
@@ -272,41 +272,41 @@ private func faceClassification(face: VNFaceObservation, image: CIImage, frame: 
         let classifier = person.classifiers.first
         let name = classifier?.name
         let classifierId = classifier?.classifierID
-            // Filter for existent face
-            let results = self.faces.filter{ $0.name == name && $0.timestamp != frame.timestamp }
-                .sorted{ $0.node.position.distance(toVector: position) < $1.node.position.distance(toVector: position) }
+        // Filter for existent face
+        let results = self.faces.filter{ $0.name == name && $0.timestamp != frame.timestamp }
+            .sorted{ $0.node.position.distance(toVector: position) < $1.node.position.distance(toVector: position) }
+        
+        // Create new face
+        //note:: texture
+        guard let existentFace = results.first else {
+            CloudantRESTCall().getResumeInfo(classificationId: classifierId!) { (resultJSON) in
+                let node = SCNNode.init(withJSON: resultJSON["docs"][0], position: position)
+                DispatchQueue.main.async {
+                    self.sceneView.scene.rootNode.addChildNode(node)
+                    node.show()
+                }
+                let face = Face.init(name: name!, node: node, timestamp: frame.timestamp)
+                self.faces.append(face)
+            }
+            return
+        }
+        // Update existent face
+        DispatchQueue.main.async {
             
-            // Create new face
-            //note:: texture
-            guard let existentFace = results.first else {
-                CloudantRESTCall().getResumeInfo(classificationId: classifierId!) { (resultJSON) in
-                    let node = SCNNode.init(withJSON: resultJSON["docs"][0], position: position)
-                    DispatchQueue.main.async {
-                        self.sceneView.scene.rootNode.addChildNode(node)
-                        node.show()
-                    }
-                    let face = Face.init(name: name!, node: node, timestamp: frame.timestamp)
-                    self.faces.append(face)
+            // Filter for face that's already displayed
+            if let displayFace = results.filter({ !$0.hidden }).first  {
+                let distance = displayFace.node.position.distance(toVector: position)
+                if(distance >= 0.03 ) {
+                    displayFace.node.move(position)
                 }
-                return
-            }
-            // Update existent face
-            DispatchQueue.main.async {
+                displayFace.timestamp = frame.timestamp
                 
-                // Filter for face that's already displayed
-                if let displayFace = results.filter({ !$0.hidden }).first  {
-                    let distance = displayFace.node.position.distance(toVector: position)
-                    if(distance >= 0.03 ) {
-                        displayFace.node.move(position)
-                    }
-                    displayFace.timestamp = frame.timestamp
-                    
-                } else {                    
-                    existentFace.node.position = position
-                    existentFace.node.show()
-                    existentFace.timestamp = frame.timestamp
-                }
+            } else {
+                existentFace.node.position = position
+                existentFace.node.show()
+                existentFace.timestamp = frame.timestamp
             }
+        }
     }
     
     func convert(cmage:CIImage) -> UIImage
@@ -333,3 +333,4 @@ private func faceClassification(face: VNFaceObservation, image: CIImage, frame: 
         return randomString
     }
 }
+

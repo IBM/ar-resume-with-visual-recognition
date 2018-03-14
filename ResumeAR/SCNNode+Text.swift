@@ -21,7 +21,7 @@ public extension SCNNode {
         // Full Name text
         let fullName = profile["fullname"].stringValue
         let fullNameBubble = SCNText(string: fullName, extrusionDepth: CGFloat(bubbleDepth))
-        fullNameBubble.font = UIFont(name: "Futura", size: 0.15)?.withTraits(traits: .traitBold)
+        fullNameBubble.font = UIFont(name: "Futura", size: 0.10)?.withTraits(traits: .traitBold)
         fullNameBubble.alignmentMode = kCAAlignmentCenter
         fullNameBubble.firstMaterial?.diffuse.contents = UIColor.orange
         fullNameBubble.firstMaterial?.specular.contents = UIColor.white
@@ -33,14 +33,23 @@ public extension SCNNode {
         // Centre Node - to Centre-Bottom point
         fullNameNode.pivot = SCNMatrix4MakeTranslation( (maxBound.x - minBound.x)/2, minBound.y, bubbleDepth/2)
         // Reduce default text size
-        fullNameNode.scale = SCNVector3Make(0.2, 0.2, 0.2)
-        fullNameNode.simdPosition = simd_float3.init(x: 0.1, y: 0.06, z: 0)
+        fullNameNode.scale = SCNVector3Make(0.1, 0.1, 0.1)
+        fullNameNode.simdPosition = simd_float3.init(x: 0.06, y: 0.09, z: 0)
         
+        //        Linked in icon
+        let material = SCNMaterial()
+        material.diffuse.contents = UIImage.init(named: "linkedin.png")
+        material.isDoubleSided = false
+        let linkedinBox = SCNBox.init(width: 0.1, height: 0.1, length: 0.01, chamferRadius: 0)
+        let linkedinBoxNode = SCNNode(geometry: linkedinBox)
+        linkedinBox.firstMaterial = material
+        linkedinBoxNode.scale = SCNVector3Make(0.1, 0.1, 0.1)
+        linkedinBoxNode.simdPosition = simd_float3.init(x: 0.02, y: 0.085, z: 0)
         
         // linkedin text
-        let linkedIn = "LinkedIn: " + profile["linkedin"].stringValue
+        let linkedIn = profile["linkedin"].stringValue
         let linkedInBubble = SCNText(string: linkedIn, extrusionDepth: CGFloat(bubbleDepth))
-        linkedInBubble.font = UIFont(name: "Futura", size: 0.15)?.withTraits(traits: .traitBold)
+        linkedInBubble.font = UIFont(name: "Futura", size: 0.10)?.withTraits(traits: .traitBold)
         linkedInBubble.alignmentMode = kCAAlignmentCenter
         linkedInBubble.firstMaterial?.diffuse.contents = UIColor.orange
         linkedInBubble.firstMaterial?.specular.contents = UIColor.white
@@ -52,12 +61,25 @@ public extension SCNNode {
         // Centre Node - to Centre-Bottom point
         linkedInNode.pivot = SCNMatrix4MakeTranslation( (maxBound.x - minBound.x)/2, minBound.y, bubbleDepth/2)
         // Reduce default text size
-        linkedInNode.scale = SCNVector3Make(0.2, 0.2, 0.2)
-        linkedInNode.simdPosition = simd_float3.init(x: 0.1, y: 0.05, z: 0)
+        linkedInNode.scale = SCNVector3Make(0.1, 0.1, 0.1)
+        linkedInNode.simdPosition = simd_float3.init(x: 0.07, y: 0.08, z: 0)
+        
+        
+        //        Linked in icon
+        let twitterMaterial = SCNMaterial()
+        twitterMaterial.diffuse.contents = UIImage.init(named: "twitter.png")
+        twitterMaterial.isDoubleSided = false
+        let twitterIconBox = SCNBox.init(width: 0.1, height: 0.1, length: 0.01, chamferRadius: 0)
+        let twitterIconNode = SCNNode(geometry: twitterIconBox)
+        twitterIconBox.firstMaterial = twitterMaterial
+        twitterIconNode.scale = SCNVector3Make(0.1, 0.1, 0.1)
+        twitterIconNode.simdPosition = simd_float3.init(x: 0.02, y: 0.075, z: 0)
+        
+        
         //twitter text
-        let twitter = "Twitter: " + profile["twitter"].stringValue
+        let twitter = profile["twitter"].stringValue
         let twitterBubble = SCNText(string: twitter, extrusionDepth: CGFloat(bubbleDepth))
-        twitterBubble.font = UIFont(name: "Futura", size: 0.15)?.withTraits(traits: .traitBold)
+        twitterBubble.font = UIFont(name: "Futura", size: 0.10)?.withTraits(traits: .traitBold)
         twitterBubble.alignmentMode = kCAAlignmentCenter
         twitterBubble.firstMaterial?.diffuse.contents = UIColor.orange
         twitterBubble.firstMaterial?.specular.contents = UIColor.white
@@ -69,29 +91,42 @@ public extension SCNNode {
         // Centre Node - to Centre-Bottom point
         twitterNode.pivot = SCNMatrix4MakeTranslation( (maxBound.x - minBound.x)/2, minBound.y, bubbleDepth/2)
         // Reduce default text size
-        twitterNode.scale = SCNVector3Make(0.2, 0.2, 0.2)
-        twitterNode.simdPosition = simd_float3.init(x: 0.1, y: 0.04, z: 0)
+        twitterNode.scale = SCNVector3Make(0.1, 0.1, 0.1)
+        twitterNode.simdPosition = simd_float3.init(x: 0.07, y: 0.07, z: 0)
+        
+        
+        //        Linked in icon
+        let fbMaterial = SCNMaterial()
+        fbMaterial.diffuse.contents = UIImage.init(named: "facebook.png")
+        fbMaterial.isDoubleSided = false
+        let fbIconBox = SCNBox.init(width: 0.1, height: 0.1, length: 0.01, chamferRadius: 0)
+        let fbIconNode = SCNNode(geometry: fbIconBox)
+        fbIconBox.firstMaterial = fbMaterial
+        fbIconNode.scale = SCNVector3Make(0.1, 0.1, 0.1)
+        fbIconNode.simdPosition = simd_float3.init(x: 0.02, y: 0.065, z: 0)
+        
         //facebook
-        let facebook = "Facebook: "+profile["facebook"].stringValue
+        let facebook = profile["facebook"].stringValue
         let fbBubble = SCNText(string: facebook, extrusionDepth: CGFloat(bubbleDepth))
-        fbBubble.font = UIFont(name: "Futura", size: 0.15)?.withTraits(traits: .traitBold)
+        fbBubble.font = UIFont(name: "Futura", size: 0.10)?.withTraits(traits: .traitBold)
         fbBubble.alignmentMode = kCAAlignmentCenter
         fbBubble.firstMaterial?.diffuse.contents = UIColor.orange
         fbBubble.firstMaterial?.specular.contents = UIColor.white
         fbBubble.firstMaterial?.isDoubleSided = true
         fbBubble.chamferRadius = CGFloat(bubbleDepth)
-        // fullname BUBBLE NODE
+        //        // fullname BUBBLE NODE
         //let (minBoundL, maxBoundL) = linkedInBubble.boundingBox
         let fbNode = SCNNode(geometry: fbBubble)
         // Centre Node - to Centre-Bottom point
         fbNode.pivot = SCNMatrix4MakeTranslation( (maxBound.x - minBound.x)/2, minBound.y, bubbleDepth/2)
         // Reduce default text size
-        fbNode.scale = SCNVector3Make(0.2, 0.2, 0.2)
-        fbNode.simdPosition = simd_float3.init(x: 0.1, y: 0.03, z: 0)
-        //phone
-        let phone = "Phone: "+profile["phone"].stringValue
+        fbNode.scale = SCNVector3Make(0.1, 0.1, 0.1)
+        fbNode.simdPosition = simd_float3.init(x: 0.07, y: 0.06, z: 0)
+        
+        //        //phone
+        let phone = profile["phone"].stringValue
         let phoneBubble = SCNText(string: phone, extrusionDepth: CGFloat(bubbleDepth))
-        phoneBubble.font = UIFont(name: "Futura", size: 0.15)?.withTraits(traits: .traitBold)
+        phoneBubble.font = UIFont(name: "Futura", size: 0.09)?.withTraits(traits: .traitBold)
         phoneBubble.alignmentMode = kCAAlignmentCenter
         phoneBubble.firstMaterial?.diffuse.contents = UIColor.orange
         phoneBubble.firstMaterial?.specular.contents = UIColor.white
@@ -103,12 +138,12 @@ public extension SCNNode {
         // Centre Node - to Centre-Bottom point
         phoneNode.pivot = SCNMatrix4MakeTranslation( (maxBound.x - minBound.x)/2, minBound.y, bubbleDepth/2)
         // Reduce default text size
-        phoneNode.scale = SCNVector3Make(0.2, 0.2, 0.2)
-        phoneNode.simdPosition = simd_float3.init(x: 0.1, y: 0.02, z: 0)
+        phoneNode.scale = SCNVector3Make(0.1, 0.1, 0.1)
+        phoneNode.simdPosition = simd_float3.init(x: 0.07, y: 0.05, z: 0)
         //location
-        let location = "Location: "+profile["location"].stringValue
+        let location = profile["location"].stringValue
         let locBubble = SCNText(string: location, extrusionDepth: CGFloat(bubbleDepth))
-        locBubble.font = UIFont(name: "Ï", size: 0.15)?.withTraits(traits: .traitBold)
+        locBubble.font = UIFont(name: "Futura", size: 0.10)?.withTraits(traits: .traitBold)
         locBubble.alignmentMode = kCAAlignmentCenter
         locBubble.firstMaterial?.diffuse.contents = UIColor.orange
         locBubble.firstMaterial?.specular.contents = UIColor.white
@@ -120,29 +155,17 @@ public extension SCNNode {
         // Centre Node - to Centre-Bottom point
         locNode.pivot = SCNMatrix4MakeTranslation( (maxBound.x - minBound.x)/2, minBound.y, bubbleDepth/2)
         // Reduce default text size
-        locNode.scale = SCNVector3Make(0.2, 0.2, 0.2)
-        locNode.simdPosition = simd_float3.init(x: 0.1, y: 0.01, z: 0)
-
-//        // 3D IMAGE NODE
-//        let faceScene = SCNScene(named: "art.scnassets/ship.scn")
-//        //let box = SCNBox.init(width: 0.5, height: 0.5, length: 0.01, chamferRadius: 0)
-//        let boxNode = SCNNode()
-//        //faceScene!.rootNode.addChildNode(boxNode)
-//        boxNode.addChildNode((faceScene?.rootNode)!)
-//        boxNode.scale = SCNVector3Make(0.2, 0.2, 0.2)
-//        boxNode.simdPosition = simd_float3.init(x: -0.05, y: 0, z: 0)
+        locNode.scale = SCNVector3Make(0.1, 0.1, 0.1)
+        locNode.simdPosition = simd_float3.init(x: 0.07, y: 0.04, z: 0)
         
-//        // IMAGE NODE
-//        let material = SCNMaterial()
-//        material.diffuse.contents = UIImage.init(named: profile["image"].stringValue)
-//        material.isDoubleSided = true
-//        let box = SCNBox.init(width: 0.5, height: 0.5, length: 0.01, chamferRadius: 0)
-//        let boxNode = SCNNode(geometry: box)
-//        box.firstMaterial = material
-//        boxNode.scale = SCNVector3Make(0.1, 0.1, 0.1)
-//        boxNode.simdPosition = simd_float3.init(x: 0.05, y: 0, z: 0)
-        
-        
+        //        // 3D IMAGE NODE
+        //        let faceScene = SCNScene(named: "art.scnassets/ship.scn")
+        //        //let box = SCNBox.init(width: 0.5, height: 0.5, length: 0.01, chamferRadius: 0)
+        //        let boxNode = SCNNode()
+        //        //faceScene!.rootNode.addChildNode(boxNode)
+        //        boxNode.addChildNode((faceScene?.rootNode)!)
+        //        boxNode.scale = SCNVector3Make(0.2, 0.2, 0.2)
+        //        boxNode.simdPosition = simd_float3.init(x: -0.05, y: 0, z: 0)
         
         // CENTRE POINT NODE
         let sphere = SCNSphere(radius: 0.004)
@@ -152,14 +175,15 @@ public extension SCNNode {
         
         self.init()
         addChildNode(fullNameNode)
-        //addChildNode(boxNode)
         addChildNode(linkedInNode)
+        addChildNode(linkedinBoxNode)
+        addChildNode(twitterIconNode)
         addChildNode(twitterNode)
+        addChildNode(fbIconNode)
         addChildNode(fbNode)
         addChildNode(phoneNode)
         addChildNode(locNode)
         addChildNode(sphereNode)
-        //addChildNode(containerNode)
         constraints = [billboardConstraint]
         self.position = position
     }
@@ -198,4 +222,3 @@ private extension UIFont {
         return UIFont(descriptor: descriptor!, size: 0)
     }
 }
-

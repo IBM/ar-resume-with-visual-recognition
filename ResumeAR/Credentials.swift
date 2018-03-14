@@ -9,7 +9,8 @@
 public struct Credentials {
     //weather api credentials from bluemix
     public static let CLASSIFICATION_API_URL = "https://gateway-a.watsonplatform.net/visual-recognition/api/v3/classify?version=2016-05-20&threshold=0&owners=me&api_key="
-    public static let VR_API_KEY = "54af183c2b444862db4ada552dff06f09fe40eab"
+    //public static let VR_API_KEY = "54af183c2b444862db4ada552dff06f09fe40eab"
+    public static let VR_API_KEY = "c15fd9f9942481eca9cf065066d8a8c4c419abea"
     public static let VERSION = "2017-11-08"
     
     

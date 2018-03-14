@@ -4,7 +4,7 @@ In this code pattern, we will create augmented reality based résumé with Visua
 
 # Flow
 
-![ARResume Architecture](https://github.com/sanjeevghimire/ARBasedResumeWithFaceRecognition/blob/master/ARResume.jpg "ARResume Architecture")
+![ARResume Architecture](architecture.png)
 
 1. Face recognition using iOS Vision API
 2. Classify cropped face using IBM Visual Recognition
@@ -30,11 +30,6 @@ In this code pattern, we will create augmented reality based résumé with Visua
 7. From command line, run `pod install`
 8. After `step 7` is done, run `carthage update --platform iOS`
 9. Once `step 7` and `step 8` are successful, `build and run` using Xcode.
-
-
-3. Get IBM Cloudant Database and update the Credentials.swift
-4. Open the project using Xcode
-5. Build and Run
 
 # Test
 To test locally you can do the following: 

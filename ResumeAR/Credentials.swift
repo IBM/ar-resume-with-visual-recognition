@@ -11,7 +11,7 @@ public struct Credentials {
     public static let CLASSIFICATION_API_URL = "<visual recognition url>"
     public static let VR_API_KEY = "<VR API key>"
     public static let VERSION = "2017-11-08"
-        
+    
     //cloudant details
     public static let CLOUDANT_USERNAME = "<username>";
     public static let CLOUDANT_PASSWORD = "<password>";

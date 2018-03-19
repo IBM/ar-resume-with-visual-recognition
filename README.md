@@ -23,6 +23,9 @@ In this code pattern, we will create augmented reality based résumé with Visua
 * [Artificial Intelligence](https://medium.com/ibm-data-science-experience): Artificial intelligence can be applied to disparate solution spaces to deliver disruptive technologies.
 * [Mobile](https://mobilefirstplatform.ibmcloud.com/): Systems of engagement are increasingly using mobile technology as the platform for delivery.
 
+# Watch the Video
+
+[![](https://i.ytimg.com/vi/9ue2ClqNzsE/0.jpg)](https://youtu.be/9ue2ClqNzsE)
 
 # Steps
 1. Clone the project using `git clone https://github.com/IBM/ARBasedResumeWithFaceRecognition`

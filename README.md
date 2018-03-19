@@ -14,11 +14,14 @@ In this code pattern, we will create augmented reality based résumé with Visua
 
 
 # Included Components
-1. Swift mobile app
-    1. Face Recognition using Vision API
-    1. ARKit : An iOS augmented reality platform        
-2. IBM Visual Recognition: An IBM service to analyze the visual content of images or video frames to understand what is happening in a scene
-3. IBM Cloudant DB: A highly scalable and performant JSON database service
+* [ARKit](https://developer.apple.com/arkit/): ARKit is an augmented reality framework for iOS applications.
+* [Watson Visual Recognition](https://www.ibm.com/watson/developercloud/visual-recognition.html): Visual Recognition understands the contents of images - visual concepts tag the image, find human faces, approximate age and gender, and find similar images in a collection.
+* [Cloudant NoSQL DB](https://console.ng.bluemix.net/catalog/services/cloudant-nosql-db): A fully managed data layer designed for modern web and mobile applications that leverages a flexible JSON schema.
+
+# Technologies
+
+* [Artificial Intelligence](https://medium.com/ibm-data-science-experience): Artificial intelligence can be applied to disparate solution spaces to deliver disruptive technologies.
+* [Mobile](https://mobilefirstplatform.ibmcloud.com/): Systems of engagement are increasingly using mobile technology as the platform for delivery.
 
 
 # Steps

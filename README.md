@@ -20,6 +20,9 @@ In this code pattern, we will create augmented reality based résumé with Visua
 2. IBM Visual Recognition: An IBM service to analyze the visual content of images or video frames to understand what is happening in a scene
 3. IBM Cloudant DB: A highly scalable and performant JSON database service
 
+# Watch the Video
+
+[![](https://i.ytimg.com/vi/9ue2ClqNzsE/0.jpg)](https://youtu.be/9ue2ClqNzsE)
 
 # Steps
 1. Clone the project using `git clone https://github.com/IBM/ARBasedResumeWithFaceRecognition`

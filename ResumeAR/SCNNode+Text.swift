@@ -7,7 +7,6 @@
 //
 import Foundation
 import ARKit
-//import Async
 import SwiftyJSON
 
 public extension SCNNode {

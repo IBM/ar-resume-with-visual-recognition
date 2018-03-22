@@ -1,4 +1,5 @@
-# Use Watson Visual Recognition to Create Augmented Reality based Rèsumè
+# Use Watson Visual Recognition to Create Augmented Reality based Résumé
+
 The easiest way to find and connect to people around the world is through social media apps like Facebook, Twitter and LinkedIn. These, however, only provide text based search capabilities. However, with the recently announced release of the iOS ARKit toolkit, search is now possible using facial recognition. Combining iOS face recognition using Vision API, classification using IBM Visual Recognition, and person identification using classified image and data, one can build an app to search faces and identify them. One of the use cases is to build a Augmented Reality based résumé using visual recognition.
 
 The main purpose of this code pattern is to demonstrate how to identify a person and his details using Augmented Reality and Visual Recognition. In this code pattern, we will create augmented reality based résumés with Visual Recognition. The iOS app recognizes the face and presents you with the AR view that displays a résumé of the person in the camera view. The app utilizes IBM Visual Recognition to classify the image and uses that classification to get details about the person from data stored in an IBM Cloudant NoSQL database.

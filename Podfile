@@ -11,6 +11,7 @@ target 'ResumeAR' do
     #pod 'AsyncSwift'
     pod 'SwiftyJSON'
     pod 'PKHUD',      '~> 5.0'
+    pod 'EZLoadingActivity'
 
   target 'ResumeARTests' do
     inherit! :search_paths

@@ -187,6 +187,37 @@ public extension SCNNode {
         self.position = position
     }
     
+    convenience init(withText text : String, position: SCNVector3) {
+        let bubbleDepth : Float = 0.01 // the 'depth' of 3D text
+        
+        // TEXT BILLBOARD CONSTRAINT
+        let billboardConstraint = SCNBillboardConstraint()
+        billboardConstraint.freeAxes = SCNBillboardAxis.Y
+        
+        // BUBBLE-TEXT
+        let bubble = SCNText(string: text, extrusionDepth: CGFloat(bubbleDepth))
+        bubble.font = UIFont(name: "Futura", size: 0.15)?.withTraits(traits: .traitBold)
+        bubble.alignmentMode = kCAAlignmentCenter
+        bubble.firstMaterial?.diffuse.contents = UIColor.orange
+        bubble.firstMaterial?.specular.contents = UIColor.white
+        bubble.firstMaterial?.isDoubleSided = true
+        bubble.chamferRadius = CGFloat(bubbleDepth)
+        
+        // BUBBLE NODE
+        let (minBound, maxBound) = bubble.boundingBox
+        let bubbleNode = SCNNode(geometry: bubble)
+        // Centre Node - to Centre-Bottom point
+        bubbleNode.pivot = SCNMatrix4MakeTranslation( (maxBound.x - minBound.x)/2, minBound.y, bubbleDepth/2)
+        // Reduce default text size
+        bubbleNode.scale = SCNVector3Make(0.1, 0.1, 0.1)
+        bubbleNode.simdPosition = simd_float3.init(x: 0.06, y: 0.09, z: 0)
+
+        self.init()
+        addChildNode(bubbleNode)
+        constraints = [billboardConstraint]
+        self.position = position
+    }
+    
     func move(_ position: SCNVector3)  {
         SCNTransaction.begin()
         SCNTransaction.animationDuration = 0.4

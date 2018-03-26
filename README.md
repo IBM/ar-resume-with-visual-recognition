@@ -44,9 +44,14 @@ git clone https://github.com/IBM/ar-resume-with-visual-recognition
 
 2. Log into [IBM Cloud](http://bluemix.net/) account and create a [Watson Visual Recognition](https://console.bluemix.net/catalog/services/visual-recognition) service. Create a set of credentials and identify your API key.
 
-3. Create a classifier using the [Watson Visual Recognition tool](https://watson-visual-recognition.ng.bluemix.net/). A classifier will train the visual recognition service, it will be able to recognize different images of the same person. Use at least ten images of your head shot and also create a negative data set by using headshots that are not your own.
+3. When the app loads, the app will create 3 classifiers for each of the zip files [`ResumeAR/sanjeev.zip`](sanjeev.zip), [`ResumeAR/steve.zip`](steve.zip) and [`ResumeAR/scott.zip`](scott.zip).
 
-4. Create an [IBM Cloudant NoSQL database](https://console.bluemix.net/catalog/services/cloudant-nosql-db) and save the credentials. Each JSON document in this database represents **one** person. The JSON schema can be found in [`schema.json`](ResumeAR/schema.json). Replace the `classificationId` in the schema with the `classificationId` you receive from the classifier once the Watson Visual Recognition model has been successfully trained. This ID will be used to retrieve details about the classified person.
+To create a new classifier use the [Watson Visual Recognition tool](https://watson-visual-recognition.ng.bluemix.net/). A classifier will train the visual recognition service, it will be able to recognize different images of the same person. Use at least ten images of your head shot and also create a negative data set by using headshots that are not your own.
+
+4. Create an [IBM Cloudant NoSQL database](https://console.bluemix.net/catalog/services/cloudant-nosql-db) and save the credentials. Each JSON document in this database represents **one** person. The JSON schema can be found in [`schema.json`]
+(ResumeAR/schema.json). 
+
+ByWhen the app loads, it will also create 3 documents for the 3 classification done in step 3. To create new documents in the same database, Use the [`schema.json`](ResumeAR/schema.json) provided to fill out the details. Replace the `classificationId` in the schema with the `classificationId` you receive from the classifier once the Watson Visual Recognition model has been successfully trained. This ID will be used to retrieve details about the classified person.
 
 5. Open the project using `Xcode`.
 
@@ -60,6 +65,16 @@ git clone https://github.com/IBM/ar-resume-with-visual-recognition
 
 9. Once the previous steps are complete go back to Xcode and run the application by clicking the the `Build` and `Run` menu options.
 ![Xcode Build and Run](images/build-and-run.png)
+
+NOTE: The tranining in Watson Visual Recognition might take couple of minutes. If the status is in `training`, then the AR will show `Training in progress` in your view. You can check the status of your classifier by using following curl command:
+
+```
+curl "https://gateway-a.watsonplatform.net/visual-recognition/api/v3/classifiers?api_key={API_KEY}&verbose=true&version=2016-05-20"
+```
+
+Replace the `API_KEY` with the Watson Visual Recognition api key.
+
+10. To test you can use the test images provided in [`images/TestImages`](test image) folder.
 
 # Adding to the database
 

@@ -44,7 +44,7 @@ git clone https://github.com/IBM/ar-resume-with-visual-recognition
 
 2. Log into [IBM Cloud](http://bluemix.net/) account and create a [Watson Visual Recognition](https://console.bluemix.net/catalog/services/visual-recognition) service. Create a set of credentials and identify your API key.
 
-3. When the app loads, the app will create 3 classifiers for each of the zip files [`ResumeAR/sanjeev.zip`](sanjeev.zip), [`ResumeAR/steve.zip`](steve.zip) and [`ResumeAR/scott.zip`](scott.zip).
+3. When the app loads, the app will create 3 classifiers for each of the zip files [`ResumeAR/sanjeev.zip`](ResumeAR/sanjeev.zip), [`ResumeAR/steve.zip`](ResumeAR/steve.zip) and [`ResumeAR/scott.zip`](ResumeAR/scott.zip).
 > To create a new classifier use the [Watson Visual Recognition tool](https://watson-visual-recognition.ng.bluemix.net/). A classifier will train the visual recognition service, it will be able to recognize different images of the same person. Use at least ten images of your head shot and also create a negative data set by using headshots that are not your own.
 
 4. Create an [IBM Cloudant NoSQL database](https://console.bluemix.net/catalog/services/cloudant-nosql-db) and save the credentials. Each JSON document in this database represents **one** person. The JSON schema can be found in [`schema.json`]

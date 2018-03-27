@@ -97,7 +97,9 @@ curl -H "Content-Type: application/json" -X POST -d $data https://$ACCOUNT.cloud
 
 # Sample Output
 
-![Sample Output](images/sample-output.png)
+![Sample Output](images/sanjeev_sample_output.png)
+![Sample Output](images/steve_sample_output.png)
+![Sample Output](images/scott_sample_output.png)
 
 # Learn more
 

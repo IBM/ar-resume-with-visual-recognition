@@ -12,23 +12,25 @@ import ARKit
 import Vision
 import RxSwift
 import RxCocoa
-//import Async
+import SwiftyJSON
 import VisualRecognitionV3
 import PKHUD
+import EZLoadingActivity
 
 
 class ViewController: UIViewController, ARSCNViewDelegate {
     
     @IBOutlet var sceneView: ARSCNView!
     var 👜 = DisposeBag()
-    
     var faces: [Face] = []
-    
     var bounds: CGRect = CGRect(x: 0, y: 0, width: 0, height: 0)
+    let visualRecognition = VisualRecognition.init(apiKey: Credentials.VR_API_KEY, version: Credentials.VERSION)
+
+    
+    var isTraining: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // Set the view's delegate
         sceneView.delegate = self
         // Show statistics such as fps and timing information
@@ -36,11 +38,99 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.autoenablesDefaultLighting = true
         bounds = sceneView.bounds
         
-        // Create a new scene
-        //let scene = SCNScene(named: "art.scnassets/ship.scn")!
-        // Set the scene to the view
-        //sceneView.scene = scene
+        self.visualRecognition.listClassifiers(){
+            classifiers in
+ 
+            
+        // check to see if VR classifier has already been created.
+        if(classifiers.classifiers.count == 0){
+                /*
+                 We will create 3 classifier by default during app load if not yet created:
+                 1. Steve
+                 2. Sanjeev
+                 3. Scott
+
+                 */
+                let sanjeevZipPath: URL  = Bundle.main.url(forResource: Constant.sanjeevZip, withExtension: "zip")!
+                let steveZipPath: URL = Bundle.main.url(forResource: Constant.steveZip, withExtension: "zip")!
+                let scottZipPath: URL = Bundle.main.url(forResource: Constant.scottZip, withExtension: "zip")!
+                let sanjeevNegativeZipPath: URL = Bundle.main.url(forResource: Constant.sanjeevNegativeZip, withExtension: "zip")!
+                let steveNegativeZipPath: URL = Bundle.main.url(forResource: Constant.steveNegativeZip, withExtension: "zip")!
+                let scottNegativeZipPath: URL = Bundle.main.url(forResource: Constant.scottNegativeZip, withExtension: "zip")!
+            
+                let failure = { (error: Error) in print(error) }
+            
+                //Steve classification
+                var stevePos: [PositiveExample] = []
+                let steveClassifier = PositiveExample.init(name: "Steve", examples: steveZipPath)
+                stevePos.append(steveClassifier)
+            self.visualRecognition.createClassifier(name: "SteveMartinelli", positiveExamples: stevePos, negativeExamples: steveNegativeZipPath, failure: failure){
+                    Classifier in
+                    let userData = ["classificationId": Classifier.classifierID,
+                                          "fullname": Constant.SteveName,
+                                          "linkedin": Constant.SteveLI,
+                                          "twitter": Constant.SteveTW,
+                                          "facebook": Constant.SteveFB,
+                                          "phone": Constant.StevePh,
+                                          "location": Constant.SteveLoc]
+                    
+                    CloudantRESTCall().updatePersonData(userData: JSON(userData)){ (resultJSON) in
+                        if(!resultJSON["ok"].boolValue){
+                            print("Error while saving user Data",userData)
+                            return
+                        }
+                    }
+                }
+            
+                //Sanjeev  Classification
+                var sanjeevPos: [PositiveExample] = []
+                let sanjeevClassifier = PositiveExample.init(name: "Sanjeev", examples: sanjeevZipPath)
+                sanjeevPos.append(sanjeevClassifier)
+            self.visualRecognition.createClassifier(name: "SanjeevGhimire", positiveExamples: sanjeevPos, negativeExamples: sanjeevNegativeZipPath, failure: failure){
+                    Classifier in
+                    let userData = ["classificationId": Classifier.classifierID,
+                                    "fullname": Constant.SanjeevName,
+                                    "linkedin": Constant.SanjeevLI,
+                                    "twitter": Constant.SanjeevTW,
+                                    "facebook": Constant.SanjeevFB,
+                                    "phone": Constant.SanjeevPh,
+                                    "location": Constant.SanjeevLoc]
+                    
+                    CloudantRESTCall().updatePersonData(userData: JSON(userData)){ (resultJSON) in
+                        if(!resultJSON["ok"].boolValue){
+                            print("Error while saving user Data",userData)
+                            return
+                        }
+                    }
+                }
+                // Scott classification
+                var scottPos: [PositiveExample] = []
+                let scottClassifier = PositiveExample.init(name: "Scott", examples: scottZipPath)
+                scottPos.append(scottClassifier)
+            self.visualRecognition.createClassifier(name: "ScottDAngelo", positiveExamples: scottPos, negativeExamples: scottNegativeZipPath, failure: failure){
+                    Classifier in
+                    let userData = ["classificationId": Classifier.classifierID,
+                                    "fullname": Constant.ScottName,
+                                    "linkedin": Constant.ScottLI,
+                                    "twitter": Constant.ScottTW,
+                                    "facebook": Constant.ScottFB,
+                                    "phone": Constant.ScottPh,
+                                    "location": Constant.ScottLoc]
+                    
+                    CloudantRESTCall().updatePersonData(userData: JSON(userData)){ (resultJSON) in
+                        if(!resultJSON["ok"].boolValue){
+                            print("Error while saving user Data",userData)
+                            return
+                        }
+                    }
+                }
+            }else {
+                self.isTraining = classifiers.classifiers[0].status == "training"
+            }
+        }
+        
     }
+ 
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -69,7 +159,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             .subscribe { [unowned self] _ in
                 
                 self.faces.filter{ $0.updated.isAfter(seconds: 1.5) && !$0.hidden }.forEach{ face in
-                    print("Hide node: \(face.name)")
+                    //print("Hide node: \(face.name)")
                     DispatchQueue.main.async{ face.node.hide() }
                 }
             }.disposed(by: 👜)
@@ -83,6 +173,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         👜 = DisposeBag()
         sceneView.session.pause()
     }
+    
+    
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -126,6 +219,16 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 observer.onCompleted()
                 return Disposables.create()
             }
+            
+            // check if visual recognition is not ready yet.
+            self.visualRecognition.listClassifiers(){ classifiers in
+                if(classifiers.classifiers.count == 0 || classifiers.classifiers[0].status == "training"){
+                    self.updateNodeWithStillInTraining()
+                    observer.onCompleted()
+                    return
+                }
+            }
+            
             
             // Create and rotate image
             let image = CIImage.init(cvPixelBuffer: frame.capturedImage).rotate
@@ -176,12 +279,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 try? data.write(to: imagePath)
             }
             
-            
-            let visualRecognition = VisualRecognition.init(apiKey: Credentials.VR_API_KEY, version: Credentials.VERSION)
             let failure = { (error: Error) in print(error) }
             let owners = ["me"]
             
-            visualRecognition.classify(imageFile: imagePath, owners: owners,  threshold: 0, failure: failure){ classifiedImages in
+            self.visualRecognition.classify(image: uiImage, threshold: 0, owners: owners, failure: failure){ classifiedImages in                
                 observer.onNext((classes: classifiedImages.images, position: worldCoord, frame: frame))
                 observer.onCompleted()
             }
@@ -263,15 +364,35 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         return nil
     }
     
+    
+    // updating node when not ready for visual recogntion aka training in progress.
+    private func updateNodeWithStillInTraining(){
+        let node = SCNNode.init(withText: "Training in progress", position: SCNVector3.init(0, 0, 0))
+        DispatchQueue.main.async {
+            self.sceneView.scene.rootNode.addChildNode(node)
+            node.show()
+        }
+    }
+    
     private func updateNode(classes: [ClassifiedImage], position: SCNVector3, frame: ARFrame) {
-        guard let person = classes.first else {
+        guard let classifiedImage = classes.first else {
             print("No classification found")
             return
         }
         
-        let classifier = person.classifiers.first
-        let name = classifier?.name
-        let classifierId = classifier?.classifierID
+        // get the classifier result with best score
+        var personWithHighScore: ClassifierResult? = nil
+        var highestScore: Double = 0.0
+        classifiedImage.classifiers.forEach { classifierResult in
+            let score: Double = (classifierResult.classes.first?.score)!
+            if(score > highestScore){
+                highestScore = score
+                personWithHighScore = classifierResult
+            }
+        }
+        
+        let name = personWithHighScore?.name
+        let classifierId = personWithHighScore?.classifierID
         // Filter for existent face
         let results = self.faces.filter{ $0.name == name && $0.timestamp != frame.timestamp }
             .sorted{ $0.node.position.distance(toVector: position) < $1.node.position.distance(toVector: position) }

@@ -1,15 +1,15 @@
-# Use Watson Visual Recognition to create an Augmented Reality based résumé
+# Use Watson Visual Recognition and Core ML to create an Augmented Reality based résumé
 
 The easiest way to find and connect to people around the world is through social media apps like Facebook, Twitter and LinkedIn. These, however, only provide text based search capabilities. However, with the recently announced release of the iOS ARKit toolkit, search is now possible using facial recognition. Combining iOS face recognition using Vision API, classification using IBM Visual Recognition, and person identification using classified image and data, one can build an app to search faces and identify them. One of the use cases is to build a Augmented Reality based résumé using visual recognition.
 
-The main purpose of this code pattern is to demonstrate how to identify a person and his details using Augmented Reality and Visual Recognition. The iOS app recognizes the face and presents you with the AR view that displays a résumé of the person in the camera view. The app utilizes Watson Visual Recognition to classify the image and uses that classification to get details about the person from data stored in a Cloudant NoSQL database.
+The main purpose of this code pattern is to demonstrate how to identify a person and his details using Augmented Reality and Visual Recognition. The iOS app recognizes the face and presents you with the AR view that displays a résumé of the person in the camera view. The app classifies a person face with Watson Visual Recognition and Core ML. The images are classified offline using a deep neural network that is trained by Visual Recognition.
 
 After completing this code pattern a user will know how to:
 
 * Configure ARKit
 * Use the iOS Vision module
 * Create a Swift iOS application that uses the Watson Swift SDK
-* Use the face classifier of Watson Visual Recognition
+* Classify images with [Watson Visual Recognition](https://www.ibm.com/watson/services/visual-recognition/) and [Core ML](https://developer.apple.com/machine-learning/)
 
 # Flow
 ![ARResume Architecture](images/architecture.png)
@@ -24,6 +24,7 @@ After completing this code pattern a user will know how to:
 
 * [ARKit](https://developer.apple.com/arkit/): ARKit is an augmented reality framework for iOS applications.
 * [Watson Visual Recognition](https://www.ibm.com/watson/developercloud/visual-recognition.html): Visual Recognition understands the contents of images - visual concepts tag the image, find human faces, approximate age and gender, and find similar images in a collection.
+* [Core ML](https://developer.apple.com/documentation/coreml): With Core ML, you can integrate trained machine learning models into your app.
 * [Cloudant NoSQL DB](https://console.ng.bluemix.net/catalog/services/cloudant-nosql-db): A fully managed data layer designed for modern web and mobile applications that leverages a flexible JSON schema.
 
 # Technologies
@@ -33,7 +34,7 @@ After completing this code pattern a user will know how to:
 
 # Watch the Video
 
-[![](https://i.ytimg.com/vi/9ue2ClqNzsE/0.jpg)](https://youtu.be/9ue2ClqNzsE)
+[![](https://i.ytimg.com/vi/9ue2ClqNzsE/0.jpg)](https://youtu.be/FyeEF0Rb154)
 
 # Steps
 
@@ -57,7 +58,7 @@ git clone https://github.com/IBM/ar-resume-with-visual-recognition
 7. At a command line, run `pod install` to install the dependencies.
 ![Pod Install Output](images/pod-install-output.png)
 
-8. Run `carthage update --platform iOS` to install the Watson related dependencies.
+8. Run `carthage bootstrap --platform iOS` to install the Watson related dependencies.
 ![Carthage Install Output](images/carthage-output.png)
 
 9. Once the previous steps are complete go back to Xcode and run the application by clicking the `Build` and `Run` menu options.
@@ -106,6 +107,10 @@ curl -H "Content-Type: application/json" -X POST -d $data https://$ACCOUNT.cloud
 * **Artificial Intelligence Code Patterns**: Enjoyed this Code Pattern? Check out our other [AI Code Patterns](https://developer.ibm.com/code/technologies/artificial-intelligence/).
 * **AI and Data Code Pattern Playlist**: Bookmark our [playlist](https://www.youtube.com/playlist?list=PLzUbsvIyrNfknNewObx5N7uGZ5FKH0Fde) with all of our Code Pattern videos
 * **With Watson**: Want to take your Watson app to the next level? Looking to utilize Watson Brand assets? [Join the With Watson program](https://www.ibm.com/watson/with-watson/) to leverage exclusive brand, marketing, and tech resources to amplify and accelerate your Watson embedded commercial solution.
+* **Offline image classification using Watson Visual Recognition and Core ML** [Visual Recognition Example](https://github.com/watson-developer-cloud/visual-recognition-coreml)
+
+# Troubleshooting
+* In order to start from scratch you need to delete the Watson Visual Recognition trained models, delete the data from the Cloudant database and delete the app to delete downloaded models.
 
 # Links
 

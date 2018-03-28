@@ -15,7 +15,7 @@ import RxCocoa
 import SwiftyJSON
 import VisualRecognitionV3
 import PKHUD
-import EZLoadingActivity
+import CoreML
 
 
 class ViewController: UIViewController, ARSCNViewDelegate {
@@ -25,7 +25,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     var faces: [Face] = []
     var bounds: CGRect = CGRect(x: 0, y: 0, width: 0, height: 0)
     let visualRecognition = VisualRecognition.init(apiKey: Credentials.VR_API_KEY, version: Credentials.VERSION)
-
+    var classifierIds: [String] = []
     
     var isTraining: Bool = true
     
@@ -37,6 +37,16 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.showsStatistics = true
         sceneView.autoenablesDefaultLighting = true
         bounds = sceneView.bounds
+        
+        let localModels = try? self.visualRecognition.listLocalModels()
+        if let count = localModels?.count, count > 0 {
+            localModels?.forEach { classifierId in
+                if(!self.classifierIds.contains(classifierId)){
+                    self.classifierIds.append(classifierId)
+                }
+            }
+            self.isTraining = false;
+        }else{
         
         self.visualRecognition.listClassifiers(){
             classifiers in
@@ -128,6 +138,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 self.isTraining = classifiers.classifiers[0].status == "training"
             }
         }
+        }
         
     }
  
@@ -143,7 +154,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         Observable<Int>.interval(0.6, scheduler: SerialDispatchQueueScheduler(qos: .default))
             .subscribeOn(SerialDispatchQueueScheduler(qos: .background))
-            .concatMap{ _ in  self.faceObservation() }
+            .flatMap{_ in self.makeClassificationReadyForAR()}            
+            .flatMap{ self.faceObservation(isReady: $0) }
             .flatMap{ Observable.from($0)}
             .flatMap{ self.faceClassification(face: $0.observation, image: $0.image, frame: $0.frame) }
             .subscribe { [unowned self] event in
@@ -154,7 +166,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 self.updateNode(classes: element.classes, position: element.position, frame: element.frame)
             }.disposed(by: 👜)
         
-        Observable<Int>.interval(1.0, scheduler: SerialDispatchQueueScheduler(qos: .default))
+        Observable<Int>.interval(0.6, scheduler: SerialDispatchQueueScheduler(qos: .default))
             .subscribeOn(SerialDispatchQueueScheduler(qos: .background))
             .subscribe { [unowned self] _ in
                 
@@ -212,23 +224,20 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     
     // MARK: - Face detections
-    private func faceObservation() -> Observable<[(observation: VNFaceObservation, image: CIImage, frame: ARFrame)]> {
+    private func faceObservation(isReady: Bool) -> Observable<[(observation: VNFaceObservation, image: CIImage, frame: ARFrame)]> {
         return Observable<[(observation: VNFaceObservation, image: CIImage, frame: ARFrame)]>.create{ observer in
+            if(!isReady){
+                print("Training is still in progress")
+                self.updateNodeWithStillInTraining()
+                observer.onCompleted()
+                return Disposables.create()
+            }
+            
             guard let frame = self.sceneView.session.currentFrame else {
                 print("No frame available")
                 observer.onCompleted()
                 return Disposables.create()
             }
-            
-            // check if visual recognition is not ready yet.
-            self.visualRecognition.listClassifiers(){ classifiers in
-                if(classifiers.classifiers.count == 0 || classifiers.classifiers[0].status == "training"){
-                    self.updateNodeWithStillInTraining()
-                    observer.onCompleted()
-                    return
-                }
-            }
-            
             
             // Create and rotate image
             let image = CIImage.init(cvPixelBuffer: frame.capturedImage).rotate
@@ -270,21 +279,15 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             }
             
             // Create Classification request
-            let fileName = self.randomString(length: 20) + ".png"
             let pixel = image.cropImage(toFace: face)
             //convert the cropped image to UI image
-            let imagePath = FileManager.default.temporaryDirectory.appendingPathComponent(fileName)
             let uiImage: UIImage = self.convert(cmage: pixel)
-            if let data = UIImagePNGRepresentation(uiImage) {
-                try? data.write(to: imagePath)
-            }
-            
+         
             let failure = { (error: Error) in print(error) }
-            let owners = ["me"]
-            
-            self.visualRecognition.classify(image: uiImage, threshold: 0, owners: owners, failure: failure){ classifiedImages in                
-                observer.onNext((classes: classifiedImages.images, position: worldCoord, frame: frame))
-                observer.onCompleted()
+            self.visualRecognition.classifyWithLocalModel(image: uiImage, classifierIDs: self.classifierIds, threshold: 0, failure: failure) { classifiedImages in
+                  print(classifiedImages)
+                  observer.onNext((classes: classifiedImages.images, position: worldCoord, frame: frame))
+                  observer.onCompleted()
             }
             
             return Disposables.create()
@@ -338,7 +341,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             if let position = determineWorldCoord(boundingBox) {
                 array.append(position)
             }
-            usleep(12000) // .012 seconds
+            //usleep(12000) // .012 seconds
         }
         
         if array.isEmpty {
@@ -438,20 +441,57 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         return image
     }
     
-    func randomString(length: Int) -> String {
-        
-        let letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-        let len = UInt32(letters.length)
-        
-        var randomString = ""
-        
-        for _ in 0 ..< length {
-            let rand = arc4random_uniform(len)
-            var nextChar = letters.character(at: Int(rand))
-            randomString += NSString(characters: &nextChar, length: 1) as String
+   
+    private func makeClassificationReadyForAR() -> Observable<Bool>{
+        return Observable<Bool>.create{ observer in
+        //get all the classifier id
+        // check if visual recognition is not ready yet.
+          
+        if(!self.classifierIds.isEmpty){
+            observer.onNext(true)
+            observer.onCompleted()
+            return Disposables.create()
         }
-        
-        return randomString
+            
+            
+        let localModels = try? self.visualRecognition.listLocalModels()
+        if let count = localModels?.count, count > 0 {
+            localModels?.forEach { classifierId in
+                if(!self.classifierIds.contains(classifierId)){
+                    self.classifierIds.append(classifierId)
+                }
+            }
+            observer.onNext(true)
+            observer.onCompleted()
+            return Disposables.create()
+        }
+          
+    
+        self.visualRecognition.listClassifiers(){ classifiers in
+            let count: Int = classifiers.classifiers.count
+            if(count == 0 || classifiers.classifiers[0].status == "training"){
+                print("Still in Training phase")
+                observer.onNext(false)
+                observer.onCompleted()
+            }
+            
+            if(count > 0 && classifiers.classifiers[0].status == "ready"){
+                classifiers.classifiers.forEach{
+                    classifier in
+                    if(!self.classifierIds.contains(classifier.classifierID)){
+                        self.classifierIds.append(classifier.classifierID)
+                    }
+                    self.visualRecognition.updateLocalModel(classifierID: classifier.classifierID)
+                }
+                observer.onNext(true)
+                observer.onCompleted()
+            }
+            
+        }
+         return Disposables.create()
+        }
     }
+    
+    
 }
 

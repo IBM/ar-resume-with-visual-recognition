@@ -38,6 +38,16 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.autoenablesDefaultLighting = true
         bounds = sceneView.bounds
         
+        let localModels = try? self.visualRecognition.listLocalModels()
+        if let count = localModels?.count, count > 0 {
+            localModels?.forEach { classifierId in
+                if(!self.classifierIds.contains(classifierId)){
+                    self.classifierIds.append(classifierId)
+                }
+            }
+            self.isTraining = false;
+        }else{
+        
         self.visualRecognition.listClassifiers(){
             classifiers in
  
@@ -127,6 +137,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             }else {
                 self.isTraining = classifiers.classifiers[0].status == "training"
             }
+        }
         }
         
     }
@@ -436,7 +447,27 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         return Observable<Bool>.create{ observer in
         //get all the classifier id
         // check if visual recognition is not ready yet.
+          
+        if(!self.classifierIds.isEmpty){
+            observer.onNext(true)
+            observer.onCompleted()
+            return Disposables.create()
+        }
             
+            
+        let localModels = try? self.visualRecognition.listLocalModels()
+        if let count = localModels?.count, count > 0 {
+            localModels?.forEach { classifierId in
+                if(!self.classifierIds.contains(classifierId)){
+                    self.classifierIds.append(classifierId)
+                }
+            }
+            observer.onNext(true)
+            observer.onCompleted()
+            return Disposables.create()
+        }
+          
+    
         self.visualRecognition.listClassifiers(){ classifiers in
             let count: Int = classifiers.classifiers.count
             if(count > 0){

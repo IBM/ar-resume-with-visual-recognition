@@ -7,8 +7,7 @@
 //
 
 public struct Credentials {
-    //weather api credentials from bluemix
-    public static let CLASSIFICATION_API_URL = "<visual recognition url>"
+//    //weather api credentials from bluemix
     public static let VR_API_KEY = "<VR API key>"
     public static let VERSION = "2017-11-08"
 

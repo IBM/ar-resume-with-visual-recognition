@@ -154,8 +154,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         Observable<Int>.interval(0.6, scheduler: SerialDispatchQueueScheduler(qos: .default))
             .subscribeOn(SerialDispatchQueueScheduler(qos: .background))
-            .flatMap{_ in self.makeClassificationReadyForAR()}
-            .flatMap{Observable.from(optional: $0)}
+            .flatMap{_ in self.makeClassificationReadyForAR()}            
             .flatMap{ self.faceObservation(isReady: $0) }
             .flatMap{ Observable.from($0)}
             .flatMap{ self.faceClassification(face: $0.observation, image: $0.image, frame: $0.frame) }
@@ -470,13 +469,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
         self.visualRecognition.listClassifiers(){ classifiers in
             let count: Int = classifiers.classifiers.count
-            if(count > 0){
-                classifiers.classifiers.forEach { classifierResult in
-                    if(!self.classifierIds.contains(classifierResult.classifierID)){
-                        self.classifierIds.append(classifierResult.classifierID)
-                    }
-                }
-            }
             if(count == 0 || classifiers.classifiers[0].status == "training"){
                 print("Still in Training phase")
                 observer.onNext(false)
@@ -484,9 +476,12 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             }
             
             if(count > 0 && classifiers.classifiers[0].status == "ready"){
-                self.classifierIds.forEach{
-                    classifierId in
-                    self.visualRecognition.updateLocalModel(classifierID: classifierId)
+                classifiers.classifiers.forEach{
+                    classifier in
+                    if(!self.classifierIds.contains(classifier.classifierID)){
+                        self.classifierIds.append(classifier.classifierID)
+                    }
+                    self.visualRecognition.updateLocalModel(classifierID: classifier.classifierID)
                 }
                 observer.onNext(true)
                 observer.onCompleted()

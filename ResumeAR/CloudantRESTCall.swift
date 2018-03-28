@@ -61,10 +61,10 @@ class CloudantRESTCall {
                 print("Error: did not receive data")
                 return
             }
-            print("Profile JSON: ",responseData)
             let profileJSON : JSON
             do{
                  profileJSON = try JSON(data: responseData)
+                 print("Profile JSON: ",profileJSON)
             }catch {
                 print("Error: cannot create JSON from todo")
                 return

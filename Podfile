@@ -7,11 +7,9 @@ target 'ResumeAR' do
   # Pods for ResumeAR
 
     pod 'RxSwift',    '~> 4.0'
-    pod 'RxCocoa',    '~> 4.0'
-    #pod 'AsyncSwift'
+    pod 'RxCocoa',    '~> 4.0'    
     pod 'SwiftyJSON'
     pod 'PKHUD',      '~> 5.0'
-    pod 'EZLoadingActivity'
 
   target 'ResumeARTests' do
     inherit! :search_paths

@@ -34,7 +34,7 @@ After completing this code pattern a user will know how to:
 
 # Watch the Video
 
-[![](https://i.ytimg.com/vi/9ue2ClqNzsE/0.jpg)](https://youtu.be/FyeEF0Rb154)
+[![](https://i.ytimg.com/vi/FyeEF0Rb154/0.jpg)](https://youtu.be/FyeEF0Rb154)
 
 # Steps
 

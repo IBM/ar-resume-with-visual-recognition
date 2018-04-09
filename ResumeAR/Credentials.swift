@@ -7,15 +7,16 @@
 //
 
 public struct Credentials {
-    //    //weather api credentials from bluemix
+    // Visual Recognition API details
     public static let VR_API_KEY = "<VR API key>"
     public static let VERSION = "2017-11-08"
     
-    //cloudant details
+    // Cloudant API details
     public static let CLOUDANT_USERNAME = "<username>";
     public static let CLOUDANT_PASSWORD = "<password>";
     public static let CLOUDANT_HOST = "<host>";
     public static let CLOUDANT_DATABASE = "<database name>";
     public static let CLOUDANT_PORT = 443;
-    public static let CLOUDANT_URL = "<cloudant url>";
+    public static let CLOUDANT_GET = "<cloudant url>";
+    public static let CLOUDANT_CREATE = "<cloudant url to add>"
 }

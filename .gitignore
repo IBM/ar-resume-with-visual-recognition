@@ -70,6 +70,3 @@ fastlane/test_output
 Podfile.lock
 
 .DS_Store
-
-#ignore credentials file
-**/Credentials.swift

@@ -36,7 +36,6 @@
 		B4BF236B1FA2745D002906DD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4BF23691FA2745D002906DD /* LaunchScreen.storyboard */; };
 		B4BF23761FA2745D002906DD /* ResumeARTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BF23751FA2745D002906DD /* ResumeARTests.swift */; };
 		B4BF23811FA2745D002906DD /* ResumeARUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BF23801FA2745D002906DD /* ResumeARUITests.swift */; };
-		B4D1A7EB207BE4A30017093A /* CredentialsSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4D1A7EA207BE4A30017093A /* CredentialsSample.swift */; };
 		B4D1A7ED207BE6610017093A /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4D1A7EC207BE6610017093A /* Credentials.swift */; };
 		BCFAE1E895D8576182872115 /* Pods_ResumeARTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E03336E2D20E30384E39305 /* Pods_ResumeARTests.framework */; };
 /* End PBXBuildFile section */
@@ -111,7 +110,6 @@
 		B4BF237C1FA2745D002906DD /* ResumeARUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ResumeARUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4BF23801FA2745D002906DD /* ResumeARUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResumeARUITests.swift; sourceTree = "<group>"; };
 		B4BF23821FA2745D002906DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B4D1A7EA207BE4A30017093A /* CredentialsSample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialsSample.swift; sourceTree = "<group>"; };
 		B4D1A7EC207BE6610017093A /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
 		C29CFFAD58110276DDA6E827 /* Pods-ResumeARTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ResumeARTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ResumeARTests/Pods-ResumeARTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D14F62B22DF90272AD6973C2 /* Pods-ResumeARUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ResumeARUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ResumeARUITests/Pods-ResumeARUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -220,7 +218,6 @@
 				B4B2E7951FCDDF4E006DDB9D /* SCNNode+Text.swift */,
 				B430E1221FE8448A00058C99 /* CloudantRESTCall.swift */,
 				B479E75D2064616800786B47 /* Constant.swift */,
-				B4D1A7EA207BE4A30017093A /* CredentialsSample.swift */,
 				B4D1A7EC207BE6610017093A /* Credentials.swift */,
 			);
 			path = ResumeAR;
@@ -556,7 +553,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B4D1A7EB207BE4A30017093A /* CredentialsSample.swift in Sources */,
 				B4BF23631FA2745D002906DD /* ViewController.swift in Sources */,
 				B4D1A7ED207BE6610017093A /* Credentials.swift in Sources */,
 				B460D4B61FA38E66004CB81F /* Face.swift in Sources */,

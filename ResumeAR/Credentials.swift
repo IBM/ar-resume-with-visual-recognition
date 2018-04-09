@@ -17,6 +17,5 @@ public struct Credentials {
     public static let CLOUDANT_HOST = "<host>";
     public static let CLOUDANT_DATABASE = "<database name>";
     public static let CLOUDANT_PORT = 443;
-    public static let CLOUDANT_GET = "https://<cloudant_url>/<database_name>/_find";
-    public static let CLOUDANT_CREATE = "https://<cloudant_url>/<database_name>"
+    public static let CLOUDANT_URL = "https://<cloudant_url>/<database_name>"
 }

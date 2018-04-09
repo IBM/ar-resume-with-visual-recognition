@@ -11,9 +11,11 @@ import SwiftyJSON
 
 
 class CloudantRESTCall {
+    
+    public static let FIND_DOCUMENTS = "/_find"
 
     func getResumeInfo(classificationId: String, completionHandler: @escaping (_ result: JSON) -> Void){
-        let urlString = Credentials.CLOUDANT_GET.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)!
+        let urlString = (Credentials.CLOUDANT_URL + CloudantRESTCall.FIND_DOCUMENTS).addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)!
         guard let endpointURL: URL = URL(string: urlString) else {
             print("Error: cannot create URL")
             return
@@ -77,7 +79,7 @@ class CloudantRESTCall {
     
     
     func updatePersonData(userData: JSON, completionHandler: @escaping (_ result: JSON) -> Void){
-        let urlString = Credentials.CLOUDANT_CREATE.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)!
+        let urlString = Credentials.CLOUDANT_URL.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)!
         guard let endpointURL: URL = URL(string: urlString) else {
             print("Error: cannot create URL")
             return

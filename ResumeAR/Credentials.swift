@@ -24,5 +24,5 @@ public struct Credentials {
     public static let CLOUDANT_URL = "<cloudant url>";
     
     // Cloudant database name
-    public static let CLOUDANT_DATABASE = "resumear";
+    public static let CLOUDANT_DATABASE = "<database name>";
 }

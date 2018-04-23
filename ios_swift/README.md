@@ -12,7 +12,7 @@ After completing this code pattern a user will know how to:
 * Classify images with [Watson Visual Recognition](https://www.ibm.com/watson/services/visual-recognition/) and [Core ML](https://developer.apple.com/machine-learning/)
 
 # Flow
-![ARResume Architecture](images/architecture.png)
+![ARResume Architecture](../images/architecture.png)
 
 1. User opens the app on their mobile
 2. A face is detected using the iOS Vision module
@@ -68,13 +68,13 @@ git clone https://github.com/IBM/ar-resume-with-visual-recognition
 ```
 
 7. At a command line, run `pod install` to install the dependencies.
-![Pod Install Output](images/pod-install-output.png)
+![Pod Install Output](../images/pod-install-output.png)
 
 8. Run `carthage bootstrap --platform iOS` to install the Watson related dependencies.
-![Carthage Install Output](images/carthage-output.png)
+![Carthage Install Output](../images/carthage-output.png)
 
 9. Once the previous steps are complete go back to Xcode and run the application by clicking the `Build` and `Run` menu options.
-![Xcode Build and Run](images/build-and-run.png)
+![Xcode Build and Run](../images/build-and-run.png)
 
 NOTE: The training in Watson Visual Recognition might take couple of minutes. If the status is in `training`, then the AR will show `Training in progress` in your AR view. You can check the status of your classifier by using following curl command:
 
@@ -84,7 +84,7 @@ curl "https://gateway-a.watsonplatform.net/visual-recognition/api/v3/classifiers
 
 Replace the `API_KEY` with the Watson Visual Recognition api key.
 
-10. To test you can use the test images provided in [`images/TestImages`](images/TestImages) folder.
+10. To test you can use the test images provided in [`Test Images`](../images/TestImages) folder.
 
 # Adding to the database
 
@@ -110,9 +110,9 @@ curl -H "Content-Type: application/json" -X POST -d $data https://$ACCOUNT.cloud
 
 # Sample Output
 
-![Sample Output](images/sanjeev_sample_output.png)
-![Sample Output](images/steve_sample_output.png)
-![Sample Output](images/scott_sample_output.png)
+![Sample Output](../images/sanjeev_sample_output.png)
+![Sample Output](../images/steve_sample_output.png)
+![Sample Output](../images/scott_sample_output.png)
 
 # Learn more
 

@@ -7,9 +7,9 @@
 //
 
 import XCTest
-@testable import ResumeAR
+//@testable import ResumeARStarter
 
-class ResumeARTests: XCTestCase {
+class ResumeARStarterTests: XCTestCase {
     
     override func setUp() {
         super.setUp()

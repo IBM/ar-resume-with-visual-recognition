@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6B7FEC0BFF589550B9C070D5 /* Pods_ResumeARUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E56FCA7EF741C4A255DD999 /* Pods_ResumeARUITests.framework */; };
-		71F8328FE4F1E798A9860939 /* Pods_ResumeAR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB79904913C588F1D757CDCB /* Pods_ResumeAR.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		B424BCFA201F92DA00B18120 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = B424BCF9201F92DA00B18120 /* Cartfile */; };
 		B430E1231FE8448A00058C99 /* CloudantRESTCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = B430E1221FE8448A00058C99 /* CloudantRESTCall.swift */; };
 		B460D4B61FA38E66004CB81F /* Face.swift in Sources */ = {isa = PBXBuildFile; fileRef = B460D4B51FA38E66004CB81F /* Face.swift */; };
@@ -34,10 +32,8 @@
 		B4BF23661FA2745D002906DD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4BF23641FA2745D002906DD /* Main.storyboard */; };
 		B4BF23681FA2745D002906DD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4BF23671FA2745D002906DD /* Assets.xcassets */; };
 		B4BF236B1FA2745D002906DD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4BF23691FA2745D002906DD /* LaunchScreen.storyboard */; };
-		B4BF23761FA2745D002906DD /* ResumeARTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BF23751FA2745D002906DD /* ResumeARTests.swift */; };
-		B4BF23811FA2745D002906DD /* ResumeARUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BF23801FA2745D002906DD /* ResumeARUITests.swift */; };
-		B4D1A7ED207BE6610017093A /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4D1A7EC207BE6610017093A /* Credentials.swift */; };
-		BCFAE1E895D8576182872115 /* Pods_ResumeARTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E03336E2D20E30384E39305 /* Pods_ResumeARTests.framework */; };
+		B4BF23761FA2745D002906DD /* ResumeARStarterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BF23751FA2745D002906DD /* ResumeARStarterTests.swift */; };
+		B4BF23811FA2745D002906DD /* ResumeARStarterUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BF23801FA2745D002906DD /* ResumeARStarterUITests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,12 +68,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1E56FCA7EF741C4A255DD999 /* Pods_ResumeARUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ResumeARUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		206766989E0D85E5A7FBE668 /* Pods-ResumeAR.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ResumeAR.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ResumeAR/Pods-ResumeAR.debug.xcconfig"; sourceTree = "<group>"; };
-		249475E961B61478AC2D393C /* Pods-ResumeARUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ResumeARUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ResumeARUITests/Pods-ResumeARUITests.release.xcconfig"; sourceTree = "<group>"; };
-		3E03336E2D20E30384E39305 /* Pods_ResumeARTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ResumeARTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		917FBE407CE9365748FEAE22 /* Pods-ResumeARTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ResumeARTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ResumeARTests/Pods-ResumeARTests.release.xcconfig"; sourceTree = "<group>"; };
-		994BFF8B069F0D50FEEA8B9E /* Pods-ResumeAR.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ResumeAR.release.xcconfig"; path = "Pods/Target Support Files/Pods-ResumeAR/Pods-ResumeAR.release.xcconfig"; sourceTree = "<group>"; };
+		0813C13666504D6FBD8F48EA /* Pods-ResumeARStarterTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ResumeARStarterTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ResumeARStarterTests/Pods-ResumeARStarterTests.debug.xcconfig"; sourceTree = "<group>"; };
+		4C33CFD8056E0A660D48BFDE /* Pods-ResumeARStarterTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ResumeARStarterTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ResumeARStarterTests/Pods-ResumeARStarterTests.release.xcconfig"; sourceTree = "<group>"; };
+		634A962A52A1A075E534D36D /* Pods-ResumeARStarterUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ResumeARStarterUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ResumeARStarterUITests/Pods-ResumeARStarterUITests.release.xcconfig"; sourceTree = "<group>"; };
+		6A91AD30D70E0E1956FB9126 /* Pods-ResumeARStarter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ResumeARStarter.release.xcconfig"; path = "Pods/Target Support Files/Pods-ResumeARStarter/Pods-ResumeARStarter.release.xcconfig"; sourceTree = "<group>"; };
+		710EAA129B144D6E8C4D954D /* Pods-ResumeARStarter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ResumeARStarter.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ResumeARStarter/Pods-ResumeARStarter.debug.xcconfig"; sourceTree = "<group>"; };
+		9207D4A6B6D634246F893885 /* Pods-ResumeARStarterUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ResumeARStarterUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ResumeARStarterUITests/Pods-ResumeARStarterUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		B424BCF9201F92DA00B18120 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		B430E1221FE8448A00058C99 /* CloudantRESTCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudantRESTCall.swift; sourceTree = "<group>"; };
 		B460D4B51FA38E66004CB81F /* Face.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Face.swift; sourceTree = "<group>"; };
@@ -90,13 +86,13 @@
 		B479E7582064525F00786B47 /* scott.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = scott.zip; sourceTree = "<group>"; };
 		B479E75D2064616800786B47 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		B479E75F2064631800786B47 /* sanjeev.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = sanjeev.zip; sourceTree = "<group>"; };
-		B479E7612064643600786B47 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		B479E7612064643600786B47 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		B479E7632068854C00786B47 /* steve_negative.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = steve_negative.zip; sourceTree = "<group>"; };
 		B479E7642068854C00786B47 /* sanjeev_negative.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = sanjeev_negative.zip; sourceTree = "<group>"; };
 		B479E7652068854C00786B47 /* scott_negative.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = scott_negative.zip; sourceTree = "<group>"; };
 		B4B2E7951FCDDF4E006DDB9D /* SCNNode+Text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNNode+Text.swift"; sourceTree = "<group>"; };
 		B4BE3DAC1FDB185900268324 /* VisualRecognitionV3.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VisualRecognitionV3.framework; path = Carthage/Build/iOS/VisualRecognitionV3.framework; sourceTree = "<group>"; };
-		B4BF235B1FA2745D002906DD /* ResumeAR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ResumeAR.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B4BF235B1FA2745D002906DD /* ResumeARStarter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ResumeARStarter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4BF235E1FA2745D002906DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B4BF23601FA2745D002906DD /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		B4BF23621FA2745D002906DD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -104,16 +100,12 @@
 		B4BF23671FA2745D002906DD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B4BF236A1FA2745D002906DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B4BF236C1FA2745D002906DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B4BF23711FA2745D002906DD /* ResumeARTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ResumeARTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B4BF23751FA2745D002906DD /* ResumeARTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResumeARTests.swift; sourceTree = "<group>"; };
+		B4BF23711FA2745D002906DD /* ResumeARStarterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ResumeARStarterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B4BF23751FA2745D002906DD /* ResumeARStarterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResumeARStarterTests.swift; sourceTree = "<group>"; };
 		B4BF23771FA2745D002906DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B4BF237C1FA2745D002906DD /* ResumeARUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ResumeARUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B4BF23801FA2745D002906DD /* ResumeARUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResumeARUITests.swift; sourceTree = "<group>"; };
+		B4BF237C1FA2745D002906DD /* ResumeARStarterUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ResumeARStarterUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B4BF23801FA2745D002906DD /* ResumeARStarterUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResumeARStarterUITests.swift; sourceTree = "<group>"; };
 		B4BF23821FA2745D002906DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B4D1A7EC207BE6610017093A /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
-		C29CFFAD58110276DDA6E827 /* Pods-ResumeARTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ResumeARTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ResumeARTests/Pods-ResumeARTests.debug.xcconfig"; sourceTree = "<group>"; };
-		D14F62B22DF90272AD6973C2 /* Pods-ResumeARUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ResumeARUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ResumeARUITests/Pods-ResumeARUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		FB79904913C588F1D757CDCB /* Pods_ResumeAR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ResumeAR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,7 +114,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B4BE3DAE1FDB186C00268324 /* VisualRecognitionV3.framework in Frameworks */,
-				71F8328FE4F1E798A9860939 /* Pods_ResumeAR.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,7 +121,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BCFAE1E895D8576182872115 /* Pods_ResumeARTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,7 +128,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6B7FEC0BFF589550B9C070D5 /* Pods_ResumeARUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,12 +137,12 @@
 		202D954606B6B43535D66211 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				206766989E0D85E5A7FBE668 /* Pods-ResumeAR.debug.xcconfig */,
-				994BFF8B069F0D50FEEA8B9E /* Pods-ResumeAR.release.xcconfig */,
-				C29CFFAD58110276DDA6E827 /* Pods-ResumeARTests.debug.xcconfig */,
-				917FBE407CE9365748FEAE22 /* Pods-ResumeARTests.release.xcconfig */,
-				D14F62B22DF90272AD6973C2 /* Pods-ResumeARUITests.debug.xcconfig */,
-				249475E961B61478AC2D393C /* Pods-ResumeARUITests.release.xcconfig */,
+				710EAA129B144D6E8C4D954D /* Pods-ResumeARStarter.debug.xcconfig */,
+				6A91AD30D70E0E1956FB9126 /* Pods-ResumeARStarter.release.xcconfig */,
+				0813C13666504D6FBD8F48EA /* Pods-ResumeARStarterTests.debug.xcconfig */,
+				4C33CFD8056E0A660D48BFDE /* Pods-ResumeARStarterTests.release.xcconfig */,
+				9207D4A6B6D634246F893885 /* Pods-ResumeARStarterUITests.debug.xcconfig */,
+				634A962A52A1A075E534D36D /* Pods-ResumeARStarterUITests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -162,9 +151,6 @@
 			isa = PBXGroup;
 			children = (
 				B4BE3DAC1FDB185900268324 /* VisualRecognitionV3.framework */,
-				FB79904913C588F1D757CDCB /* Pods_ResumeAR.framework */,
-				3E03336E2D20E30384E39305 /* Pods_ResumeARTests.framework */,
-				1E56FCA7EF741C4A255DD999 /* Pods_ResumeARUITests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -174,9 +160,9 @@
 			children = (
 				B479E7612064643600786B47 /* Podfile */,
 				B424BCF9201F92DA00B18120 /* Cartfile */,
-				B4BF235D1FA2745D002906DD /* ResumeAR */,
-				B4BF23741FA2745D002906DD /* ResumeARTests */,
-				B4BF237F1FA2745D002906DD /* ResumeARUITests */,
+				B4BF235D1FA2745D002906DD /* ResumeARStarter */,
+				B4BF23741FA2745D002906DD /* ResumeARStarterTests */,
+				B4BF237F1FA2745D002906DD /* ResumeARStarterUITests */,
 				B4BF235C1FA2745D002906DD /* Products */,
 				202D954606B6B43535D66211 /* Pods */,
 				4181389323BBC2B8BAEDDAC8 /* Frameworks */,
@@ -186,14 +172,14 @@
 		B4BF235C1FA2745D002906DD /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B4BF235B1FA2745D002906DD /* ResumeAR.app */,
-				B4BF23711FA2745D002906DD /* ResumeARTests.xctest */,
-				B4BF237C1FA2745D002906DD /* ResumeARUITests.xctest */,
+				B4BF235B1FA2745D002906DD /* ResumeARStarter.app */,
+				B4BF23711FA2745D002906DD /* ResumeARStarterTests.xctest */,
+				B4BF237C1FA2745D002906DD /* ResumeARStarterUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		B4BF235D1FA2745D002906DD /* ResumeAR */ = {
+		B4BF235D1FA2745D002906DD /* ResumeARStarter */ = {
 			isa = PBXGroup;
 			children = (
 				B479E7642068854C00786B47 /* sanjeev_negative.zip */,
@@ -218,35 +204,34 @@
 				B4B2E7951FCDDF4E006DDB9D /* SCNNode+Text.swift */,
 				B430E1221FE8448A00058C99 /* CloudantRESTCall.swift */,
 				B479E75D2064616800786B47 /* Constant.swift */,
-				B4D1A7EC207BE6610017093A /* Credentials.swift */,
 			);
-			path = ResumeAR;
+			path = ResumeARStarter;
 			sourceTree = "<group>";
 		};
-		B4BF23741FA2745D002906DD /* ResumeARTests */ = {
+		B4BF23741FA2745D002906DD /* ResumeARStarterTests */ = {
 			isa = PBXGroup;
 			children = (
-				B4BF23751FA2745D002906DD /* ResumeARTests.swift */,
+				B4BF23751FA2745D002906DD /* ResumeARStarterTests.swift */,
 				B4BF23771FA2745D002906DD /* Info.plist */,
 			);
-			path = ResumeARTests;
+			path = ResumeARStarterTests;
 			sourceTree = "<group>";
 		};
-		B4BF237F1FA2745D002906DD /* ResumeARUITests */ = {
+		B4BF237F1FA2745D002906DD /* ResumeARStarterUITests */ = {
 			isa = PBXGroup;
 			children = (
-				B4BF23801FA2745D002906DD /* ResumeARUITests.swift */,
+				B4BF23801FA2745D002906DD /* ResumeARStarterUITests.swift */,
 				B4BF23821FA2745D002906DD /* Info.plist */,
 			);
-			path = ResumeARUITests;
+			path = ResumeARStarterUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B4BF235A1FA2745D002906DD /* ResumeAR */ = {
+		B4BF235A1FA2745D002906DD /* ResumeARStarter */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B4BF23851FA2745D002906DD /* Build configuration list for PBXNativeTarget "ResumeAR" */;
+			buildConfigurationList = B4BF23851FA2745D002906DD /* Build configuration list for PBXNativeTarget "ResumeARStarter" */;
 			buildPhases = (
 				E9FA0663D44743E410B2D1BC /* [CP] Check Pods Manifest.lock */,
 				B4BF23571FA2745D002906DD /* Sources */,
@@ -260,14 +245,14 @@
 			);
 			dependencies = (
 			);
-			name = ResumeAR;
+			name = ResumeARStarter;
 			productName = ResumeAR;
-			productReference = B4BF235B1FA2745D002906DD /* ResumeAR.app */;
+			productReference = B4BF235B1FA2745D002906DD /* ResumeARStarter.app */;
 			productType = "com.apple.product-type.application";
 		};
-		B4BF23701FA2745D002906DD /* ResumeARTests */ = {
+		B4BF23701FA2745D002906DD /* ResumeARStarterTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B4BF23881FA2745D002906DD /* Build configuration list for PBXNativeTarget "ResumeARTests" */;
+			buildConfigurationList = B4BF23881FA2745D002906DD /* Build configuration list for PBXNativeTarget "ResumeARStarterTests" */;
 			buildPhases = (
 				45ABD60E5144AE12A1962748 /* [CP] Check Pods Manifest.lock */,
 				B4BF236D1FA2745D002906DD /* Sources */,
@@ -281,14 +266,14 @@
 			dependencies = (
 				B4BF23731FA2745D002906DD /* PBXTargetDependency */,
 			);
-			name = ResumeARTests;
+			name = ResumeARStarterTests;
 			productName = ResumeARTests;
-			productReference = B4BF23711FA2745D002906DD /* ResumeARTests.xctest */;
+			productReference = B4BF23711FA2745D002906DD /* ResumeARStarterTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		B4BF237B1FA2745D002906DD /* ResumeARUITests */ = {
+		B4BF237B1FA2745D002906DD /* ResumeARStarterUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B4BF238B1FA2745D002906DD /* Build configuration list for PBXNativeTarget "ResumeARUITests" */;
+			buildConfigurationList = B4BF238B1FA2745D002906DD /* Build configuration list for PBXNativeTarget "ResumeARStarterUITests" */;
 			buildPhases = (
 				0550DFF84BC76D707383520A /* [CP] Check Pods Manifest.lock */,
 				B4BF23781FA2745D002906DD /* Sources */,
@@ -302,9 +287,9 @@
 			dependencies = (
 				B4BF237E1FA2745D002906DD /* PBXTargetDependency */,
 			);
-			name = ResumeARUITests;
+			name = ResumeARStarterUITests;
 			productName = ResumeARUITests;
-			productReference = B4BF237C1FA2745D002906DD /* ResumeARUITests.xctest */;
+			productReference = B4BF237C1FA2745D002906DD /* ResumeARStarterUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -333,7 +318,7 @@
 					};
 				};
 			};
-			buildConfigurationList = B4BF23561FA2745C002906DD /* Build configuration list for PBXProject "ResumeAR" */;
+			buildConfigurationList = B4BF23561FA2745C002906DD /* Build configuration list for PBXProject "ResumeARStarter" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -346,9 +331,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B4BF235A1FA2745D002906DD /* ResumeAR */,
-				B4BF23701FA2745D002906DD /* ResumeARTests */,
-				B4BF237B1FA2745D002906DD /* ResumeARUITests */,
+				B4BF235A1FA2745D002906DD /* ResumeARStarter */,
+				B4BF23701FA2745D002906DD /* ResumeARStarterTests */,
+				B4BF237B1FA2745D002906DD /* ResumeARStarterUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -404,7 +389,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-ResumeARUITests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-ResumeARStarterUITests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -423,7 +408,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ResumeARTests/Pods-ResumeARTests-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ResumeARStarterTests/Pods-ResumeARStarterTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		45ABD60E5144AE12A1962748 /* [CP] Check Pods Manifest.lock */ = {
@@ -437,7 +422,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-ResumeARTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-ResumeARStarterTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -456,7 +441,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ResumeARTests/Pods-ResumeARTests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ResumeARStarterTests/Pods-ResumeARStarterTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		BAEAF549EFD1F05E92DEC580 /* [CP] Copy Pods Resources */ = {
@@ -471,7 +456,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ResumeAR/Pods-ResumeAR-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ResumeARStarter/Pods-ResumeARStarter-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C7C5CDDBE3D48F0EA7C3C56E /* [CP] Embed Pods Frameworks */ = {
@@ -480,7 +465,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-ResumeAR/Pods-ResumeAR-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-ResumeARStarter/Pods-ResumeARStarter-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/PKHUD/PKHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
@@ -495,7 +480,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ResumeAR/Pods-ResumeAR-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ResumeARStarter/Pods-ResumeARStarter-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DFE7933959EA1D65C3588036 /* [CP] Copy Pods Resources */ = {
@@ -510,7 +495,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ResumeARUITests/Pods-ResumeARUITests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ResumeARStarterUITests/Pods-ResumeARStarterUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E9FA0663D44743E410B2D1BC /* [CP] Check Pods Manifest.lock */ = {
@@ -524,7 +509,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-ResumeAR-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-ResumeARStarter-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -543,7 +528,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ResumeARUITests/Pods-ResumeARUITests-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ResumeARStarterUITests/Pods-ResumeARStarterUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -554,7 +539,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B4BF23631FA2745D002906DD /* ViewController.swift in Sources */,
-				B4D1A7ED207BE6610017093A /* Credentials.swift in Sources */,
 				B460D4B61FA38E66004CB81F /* Face.swift in Sources */,
 				B460D4B81FA39981004CB81F /* CIImage+FaceDetection.swift in Sources */,
 				B479E75E2064616800786B47 /* Constant.swift in Sources */,
@@ -569,7 +553,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B4BF23761FA2745D002906DD /* ResumeARTests.swift in Sources */,
+				B4BF23761FA2745D002906DD /* ResumeARStarterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -577,7 +561,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B4BF23811FA2745D002906DD /* ResumeARUITests.swift in Sources */,
+				B4BF23811FA2745D002906DD /* ResumeARStarterUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -586,12 +570,12 @@
 /* Begin PBXTargetDependency section */
 		B4BF23731FA2745D002906DD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = B4BF235A1FA2745D002906DD /* ResumeAR */;
+			target = B4BF235A1FA2745D002906DD /* ResumeARStarter */;
 			targetProxy = B4BF23721FA2745D002906DD /* PBXContainerItemProxy */;
 		};
 		B4BF237E1FA2745D002906DD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = B4BF235A1FA2745D002906DD /* ResumeAR */;
+			target = B4BF235A1FA2745D002906DD /* ResumeARStarter */;
 			targetProxy = B4BF237D1FA2745D002906DD /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -725,7 +709,7 @@
 		};
 		B4BF23861FA2745D002906DD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 206766989E0D85E5A7FBE668 /* Pods-ResumeAR.debug.xcconfig */;
+			baseConfigurationReference = 710EAA129B144D6E8C4D954D /* Pods-ResumeARStarter.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -735,9 +719,9 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
-				INFOPLIST_FILE = ResumeAR/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/ResumeARStarter/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.sg.ResumeAR;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sg.ResumeARStarter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
@@ -747,7 +731,7 @@
 		};
 		B4BF23871FA2745D002906DD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 994BFF8B069F0D50FEEA8B9E /* Pods-ResumeAR.release.xcconfig */;
+			baseConfigurationReference = 6A91AD30D70E0E1956FB9126 /* Pods-ResumeARStarter.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -757,9 +741,9 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
-				INFOPLIST_FILE = ResumeAR/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/ResumeARStarter/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.sg.ResumeAR;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sg.ResumeARStarter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
@@ -769,7 +753,7 @@
 		};
 		B4BF23891FA2745D002906DD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C29CFFAD58110276DDA6E827 /* Pods-ResumeARTests.debug.xcconfig */;
+			baseConfigurationReference = 0813C13666504D6FBD8F48EA /* Pods-ResumeARStarterTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -781,13 +765,13 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ResumeAR.app/ResumeAR";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ResumeARStarter.app/ResumeARStarter";
 			};
 			name = Debug;
 		};
 		B4BF238A1FA2745D002906DD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 917FBE407CE9365748FEAE22 /* Pods-ResumeARTests.release.xcconfig */;
+			baseConfigurationReference = 4C33CFD8056E0A660D48BFDE /* Pods-ResumeARStarterTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -799,13 +783,13 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ResumeAR.app/ResumeAR";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ResumeARStarter.app/ResumeARStarter";
 			};
 			name = Release;
 		};
 		B4BF238C1FA2745D002906DD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D14F62B22DF90272AD6973C2 /* Pods-ResumeARUITests.debug.xcconfig */;
+			baseConfigurationReference = 9207D4A6B6D634246F893885 /* Pods-ResumeARStarterUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -822,7 +806,7 @@
 		};
 		B4BF238D1FA2745D002906DD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 249475E961B61478AC2D393C /* Pods-ResumeARUITests.release.xcconfig */;
+			baseConfigurationReference = 634A962A52A1A075E534D36D /* Pods-ResumeARStarterUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -840,7 +824,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B4BF23561FA2745C002906DD /* Build configuration list for PBXProject "ResumeAR" */ = {
+		B4BF23561FA2745C002906DD /* Build configuration list for PBXProject "ResumeARStarter" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B4BF23831FA2745D002906DD /* Debug */,
@@ -849,7 +833,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B4BF23851FA2745D002906DD /* Build configuration list for PBXNativeTarget "ResumeAR" */ = {
+		B4BF23851FA2745D002906DD /* Build configuration list for PBXNativeTarget "ResumeARStarter" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B4BF23861FA2745D002906DD /* Debug */,
@@ -858,7 +842,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B4BF23881FA2745D002906DD /* Build configuration list for PBXNativeTarget "ResumeARTests" */ = {
+		B4BF23881FA2745D002906DD /* Build configuration list for PBXNativeTarget "ResumeARStarterTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B4BF23891FA2745D002906DD /* Debug */,
@@ -867,7 +851,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B4BF238B1FA2745D002906DD /* Build configuration list for PBXNativeTarget "ResumeARUITests" */ = {
+		B4BF238B1FA2745D002906DD /* Build configuration list for PBXNativeTarget "ResumeARStarterUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B4BF238C1FA2745D002906DD /* Debug */,

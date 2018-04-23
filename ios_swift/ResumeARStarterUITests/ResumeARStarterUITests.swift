@@ -8,7 +8,7 @@
 
 import XCTest
 
-class ResumeARUITests: XCTestCase {
+class ResumeARStarterUITests: XCTestCase {
         
     override func setUp() {
         super.setUp()

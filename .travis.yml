@@ -1,0 +1,28 @@
+# Register this repo at https://travis.ibm.com
+
+# We don't know and don't care about the starter language, but use npm and node inside some scripts:
+language: node_js
+
+# Specify a level for stability.
+node_js:
+  - '5.5.0'
+
+# Nothing special to install since we're just verifying compatibility of this repo with the
+# developer experience infrastructure.
+install: true
+
+# Clone the repository that has the smart script for validating this repo against the registry
+# microservice (which itself validates against scaffolder, therefore Yeoman and SDKGen microservices).
+# It's the kitchen sink of validation!
+before_script:
+  - git clone -b v1 git@github.ibm.com:bluemix-mobile-services/bmd-devops-pipeline.git
+
+# Run a dry-run registration for pull requests, and a real registration for pushes.
+# register-starter.sh is smart!
+script:
+  - ./bmd-devops-pipeline/scripts/register-starter.sh $TRAVIS_BRANCH
+
+# Pull request builds and push builds only run when the target branch is one of these:
+branches:
+  only:
+    - development

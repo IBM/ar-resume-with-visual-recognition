@@ -2,12 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/sanjeevghimire/Documents/projects/ResumeARIBM/ar-resume-starter-kit/ios_swift/ResumeARStarter.xcodeproj">
+      location = "group:ResumeARStarter.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:ResumeARStarter.xcodeproj">
    </FileRef>
 </Workspace>

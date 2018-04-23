@@ -17,5 +17,5 @@
       "visualRecognition": "free",
       "cloudant": "free"
   },
-  "tags": ["devex", "cli"]
+  "tags": ["devex"]
 }

@@ -15,14 +15,73 @@
 import Foundation
 import SwiftyJSON
 
-
 class CloudantRESTCall {
     
     public static let FIND_DOCUMENTS = "/_find"
-    public static let CLOUDANT_DB_URL = Credentials.CLOUDANT_URL + "/" + Credentials.CLOUDANT_DATABASE
-
+    
+    // Cloudant URL
+    let cloudantURL: String
+    //cloudant database
+    var database: String?
+    
+    init(cloudantUrl: String) {
+        self.cloudantURL = cloudantUrl
+    }
+    
+    func createDatabase(databaseName: String,completionHandler: @escaping (_ result: JSON) -> Void){
+        let urlString = (self.cloudantURL + "/" + databaseName).addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)!
+        guard let endpointURL: URL = URL(string: urlString) else {
+            print("Error: cannot create URL")
+            return
+        }
+        
+        var request = URLRequest(url: endpointURL)
+        request.httpMethod = "PUT"
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let session = URLSession.shared
+        
+        let task = session.dataTask(with: request) { (data, response, error) in
+            
+            guard let httpResponse = response as? HTTPURLResponse else {
+                print("Error while getting response")
+                return
+            }
+            
+            let field = httpResponse.statusCode
+            guard field == 201 || field == 412 else {
+                print("Error with authorization while creating database to cloudant.")
+                return
+            }
+            
+            // check for any errors
+            guard error == nil else {
+                print("error creating db data")
+                print(error!)
+                return
+            }
+            
+            // make sure we got data
+            guard let responseData = data else {
+                print("Error: did not receive data")
+                return
+            }
+            print("Database creation JSON: ",responseData)
+            let dbDetails : JSON
+            do{
+                dbDetails = try JSON(data: responseData)
+            }catch {
+                print("Error: cannot create JSON")
+                return
+            }
+            completionHandler(dbDetails)
+        }
+        task.resume()
+    }
+    
     func getResumeInfo(classificationId: String, completionHandler: @escaping (_ result: JSON) -> Void){
-        let urlString = (CloudantRESTCall.CLOUDANT_DB_URL + CloudantRESTCall.FIND_DOCUMENTS).addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)!
+        let urlString = (self.cloudantURL + "/" + self.database! + CloudantRESTCall.FIND_DOCUMENTS).addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)!
         guard let endpointURL: URL = URL(string: urlString) else {
             print("Error: cannot create URL")
             return
@@ -46,7 +105,7 @@ class CloudantRESTCall {
         let session = URLSession.shared
         
         let task = session.dataTask(with: request) { (data, response, error) in
-          
+            
             guard let httpResponse = response as? HTTPURLResponse else {
                 print("Error while getting response")
                 return
@@ -72,8 +131,8 @@ class CloudantRESTCall {
             }
             let profileJSON : JSON
             do{
-                 profileJSON = try JSON(data: responseData)
-                 print("Profile JSON: ",profileJSON)
+                profileJSON = try JSON(data: responseData)
+                print("Profile JSON: ",profileJSON)
             }catch {
                 print("Error: cannot create JSON from todo")
                 return
@@ -81,12 +140,12 @@ class CloudantRESTCall {
             completionHandler(profileJSON)
         }
         task.resume()
-      
+        
     }
     
     
     func updatePersonData(userData: JSON, completionHandler: @escaping (_ result: JSON) -> Void){
-        let urlString = CloudantRESTCall.CLOUDANT_DB_URL.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)!
+        let urlString = (self.cloudantURL + "/" + self.database!).addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)!
         guard let endpointURL: URL = URL(string: urlString) else {
             print("Error: cannot create URL")
             return

@@ -48,4 +48,7 @@ public struct Constant {
     public static let scottNegativeZip = "scott_negative"
     public static let steveNegativeZip = "steve_negative"
     
+    // database name
+    public static let databaseName =  "resumear"
+    
 }

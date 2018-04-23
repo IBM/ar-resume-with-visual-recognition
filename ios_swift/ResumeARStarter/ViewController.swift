@@ -12,7 +12,6 @@
  the License.
  */
 
-
 import UIKit
 import SceneKit
 import ARKit
@@ -31,8 +30,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     var 👜 = DisposeBag()
     var faces: [Face] = []
     var bounds: CGRect = CGRect(x: 0, y: 0, width: 0, height: 0)
-    let visualRecognition = VisualRecognition.init(apiKey: Credentials.VR_API_KEY, version: Credentials.VERSION)
+    var visualRecognition: VisualRecognition?
+    var cloudantRestCall: CloudantRESTCall?
     var classifierIds: [String] = []
+    
+    let VERSION = "2017-12-07"
     
     var isTraining: Bool = true
     
@@ -44,10 +46,12 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.showsStatistics = true
         sceneView.autoenablesDefaultLighting = true
         bounds = sceneView.bounds
+        //configure IBM cloud services required by this app
+        self.configureCloudantAndVisualRecognition()
         
-        let localModels = try? self.visualRecognition.listLocalModels()
-        if let count = localModels?.count, count > 0 {
-            localModels?.forEach { classifierId in
+        let localModels = try? self.visualRecognition?.listLocalModels()
+        if let count = localModels??.count, count > 0 {
+            localModels??.forEach { classifierId in
                 if(!self.classifierIds.contains(classifierId)){
                     self.classifierIds.append(classifierId)
                 }
@@ -55,7 +59,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             self.isTraining = false;
         }else{
         
-        self.visualRecognition.listClassifiers(){
+            self.visualRecognition?.listClassifiers(){
             classifiers in
  
             
@@ -66,7 +70,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                  1. Steve
                  2. Sanjeev
                  3. Scott
-
                  */
                 let sanjeevZipPath: URL  = Bundle.main.url(forResource: Constant.sanjeevZip, withExtension: "zip")!
                 let steveZipPath: URL = Bundle.main.url(forResource: Constant.steveZip, withExtension: "zip")!
@@ -81,7 +84,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 var stevePos: [PositiveExample] = []
                 let steveClassifier = PositiveExample.init(name: "Steve", examples: steveZipPath)
                 stevePos.append(steveClassifier)
-            self.visualRecognition.createClassifier(name: "SteveMartinelli", positiveExamples: stevePos, negativeExamples: steveNegativeZipPath, failure: failure){
+            self.visualRecognition?.createClassifier(name: "SteveMartinelli", positiveExamples: stevePos, negativeExamples: steveNegativeZipPath, failure: failure){
                     Classifier in
                     let userData = ["classificationId": Classifier.classifierID,
                                           "fullname": Constant.SteveName,
@@ -91,7 +94,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                                           "phone": Constant.StevePh,
                                           "location": Constant.SteveLoc]
                     
-                    CloudantRESTCall().updatePersonData(userData: JSON(userData)){ (resultJSON) in
+                self.cloudantRestCall?.updatePersonData(userData: JSON(userData)){ (resultJSON) in
                         if(!resultJSON["ok"].boolValue){
                             print("Error while saving user Data",userData)
                             return
@@ -103,7 +106,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 var sanjeevPos: [PositiveExample] = []
                 let sanjeevClassifier = PositiveExample.init(name: "Sanjeev", examples: sanjeevZipPath)
                 sanjeevPos.append(sanjeevClassifier)
-            self.visualRecognition.createClassifier(name: "SanjeevGhimire", positiveExamples: sanjeevPos, negativeExamples: sanjeevNegativeZipPath, failure: failure){
+            self.visualRecognition?.createClassifier(name: "SanjeevGhimire", positiveExamples: sanjeevPos, negativeExamples: sanjeevNegativeZipPath, failure: failure){
                     Classifier in
                     let userData = ["classificationId": Classifier.classifierID,
                                     "fullname": Constant.SanjeevName,
@@ -113,7 +116,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                                     "phone": Constant.SanjeevPh,
                                     "location": Constant.SanjeevLoc]
                     
-                    CloudantRESTCall().updatePersonData(userData: JSON(userData)){ (resultJSON) in
+                    self.cloudantRestCall?.updatePersonData(userData: JSON(userData)){ (resultJSON) in
                         if(!resultJSON["ok"].boolValue){
                             print("Error while saving user Data",userData)
                             return
@@ -124,7 +127,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 var scottPos: [PositiveExample] = []
                 let scottClassifier = PositiveExample.init(name: "Scott", examples: scottZipPath)
                 scottPos.append(scottClassifier)
-            self.visualRecognition.createClassifier(name: "ScottDAngelo", positiveExamples: scottPos, negativeExamples: scottNegativeZipPath, failure: failure){
+            self.visualRecognition?.createClassifier(name: "ScottDAngelo", positiveExamples: scottPos, negativeExamples: scottNegativeZipPath, failure: failure){
                     Classifier in
                     let userData = ["classificationId": Classifier.classifierID,
                                     "fullname": Constant.ScottName,
@@ -134,7 +137,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                                     "phone": Constant.ScottPh,
                                     "location": Constant.ScottLoc]
                     
-                    CloudantRESTCall().updatePersonData(userData: JSON(userData)){ (resultJSON) in
+                    self.cloudantRestCall?.updatePersonData(userData: JSON(userData)){ (resultJSON) in
                         if(!resultJSON["ok"].boolValue){
                             print("Error while saving user Data",userData)
                             return
@@ -149,6 +152,29 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
     }
  
+    // Setup cloudant driver and visual recognition api
+    func configureCloudantAndVisualRecognition() {
+        // Retrieve plist
+        guard let path = Bundle.main.path(forResource: "BMSCredentials", ofType: "plist"),
+            let credentials = NSDictionary(contentsOfFile: path) as? [String: AnyObject] else {
+                return
+        }
+        
+        // Retrieve credentials
+        guard let vrApiKey = credentials["visualrecognitionApi_key"] as? String, !vrApiKey.isEmpty,
+            let url = credentials["cloudantUrl"] as? String, !url.isEmpty else {
+                return
+        }
+        
+        self.visualRecognition = VisualRecognition.init(apiKey: vrApiKey, version: self.VERSION)
+        self.cloudantRestCall = CloudantRESTCall.init(cloudantUrl: url)
+        
+        self.cloudantRestCall?.createDatabase(databaseName: Constant.databaseName){ (dbDetails) in
+            print(dbDetails)
+            self.cloudantRestCall?.database = Constant.databaseName
+        }
+        
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -182,8 +208,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                     DispatchQueue.main.async{ face.node.hide() }
                 }
             }.disposed(by: 👜)
-        
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -291,7 +315,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             let uiImage: UIImage = self.convert(cmage: pixel)
          
             let failure = { (error: Error) in print(error) }
-            self.visualRecognition.classifyWithLocalModel(image: uiImage, classifierIDs: self.classifierIds, threshold: 0, failure: failure) { classifiedImages in
+            self.visualRecognition?.classifyWithLocalModel(image: uiImage, classifierIDs: self.classifierIds, threshold: 0, failure: failure) { classifiedImages in
                   print(classifiedImages)
                   observer.onNext((classes: classifiedImages.images, position: worldCoord, frame: frame))
                   observer.onCompleted()
@@ -410,7 +434,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Create new face
         //note:: texture
         guard let existentFace = results.first else {
-            CloudantRESTCall().getResumeInfo(classificationId: classifierId!) { (resultJSON) in
+            self.cloudantRestCall?.getResumeInfo(classificationId: classifierId!) { (resultJSON) in
                 let node = SCNNode.init(withJSON: resultJSON["docs"][0], position: position)
                 DispatchQueue.main.async {
                     self.sceneView.scene.rootNode.addChildNode(node)
@@ -461,9 +485,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
             
             
-        let localModels = try? self.visualRecognition.listLocalModels()
-        if let count = localModels?.count, count > 0 {
-            localModels?.forEach { classifierId in
+        let localModels = try? self.visualRecognition?.listLocalModels()
+            if let count = localModels??.count, count > 0 {
+                localModels??.forEach { classifierId in
                 if(!self.classifierIds.contains(classifierId)){
                     self.classifierIds.append(classifierId)
                 }
@@ -474,7 +498,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
           
     
-        self.visualRecognition.listClassifiers(){ classifiers in
+        self.visualRecognition?.listClassifiers(){ classifiers in
             let count: Int = classifiers.classifiers.count
             if(count == 0 || classifiers.classifiers[0].status == "training"){
                 print("Still in Training phase")
@@ -488,7 +512,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                     if(!self.classifierIds.contains(classifier.classifierID)){
                         self.classifierIds.append(classifier.classifierID)
                     }
-                    self.visualRecognition.updateLocalModel(classifierID: classifier.classifierID)
+                    self.visualRecognition?.updateLocalModel(classifierID: classifier.classifierID)
                 }
                 observer.onNext(true)
                 observer.onCompleted()

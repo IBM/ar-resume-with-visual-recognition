@@ -70,3 +70,4 @@ fastlane/test_output
 
 # ignore cred file
 **/BMSCredentials.plist
+**/*.xcworkspace

@@ -58,100 +58,104 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             }
             self.isTraining = false;
         }else{
-        
+            
             self.visualRecognition?.listClassifiers(){
-            classifiers in
- 
-            
-        // check to see if VR classifier has already been created.
-        if(classifiers.classifiers.count == 0){
-                /*
-                 We will create 3 classifier by default during app load if not yet created:
-                 1. Steve
-                 2. Sanjeev
-                 3. Scott
-                 */
-                let sanjeevZipPath: URL  = Bundle.main.url(forResource: Constant.sanjeevZip, withExtension: "zip")!
-                let steveZipPath: URL = Bundle.main.url(forResource: Constant.steveZip, withExtension: "zip")!
-                let scottZipPath: URL = Bundle.main.url(forResource: Constant.scottZip, withExtension: "zip")!
-                let sanjeevNegativeZipPath: URL = Bundle.main.url(forResource: Constant.sanjeevNegativeZip, withExtension: "zip")!
-                let steveNegativeZipPath: URL = Bundle.main.url(forResource: Constant.steveNegativeZip, withExtension: "zip")!
-                let scottNegativeZipPath: URL = Bundle.main.url(forResource: Constant.scottNegativeZip, withExtension: "zip")!
-            
-                let failure = { (error: Error) in print(error) }
-            
-                //Steve classification
-                var stevePos: [PositiveExample] = []
-                let steveClassifier = PositiveExample.init(name: "Steve", examples: steveZipPath)
-                stevePos.append(steveClassifier)
-            self.visualRecognition?.createClassifier(name: "SteveMartinelli", positiveExamples: stevePos, negativeExamples: steveNegativeZipPath, failure: failure){
-                    Classifier in
-                    let userData = ["classificationId": Classifier.classifierID,
-                                          "fullname": Constant.SteveName,
-                                          "linkedin": Constant.SteveLI,
-                                          "twitter": Constant.SteveTW,
-                                          "facebook": Constant.SteveFB,
-                                          "phone": Constant.StevePh,
-                                          "location": Constant.SteveLoc]
+                classifiers in
+                
+                self.cloudantRestCall?.createDatabase(databaseName: Constant.databaseName){ (dbDetails) in
+                    print(dbDetails)
+                    self.cloudantRestCall?.database = Constant.databaseName
                     
-                self.cloudantRestCall?.updatePersonData(userData: JSON(userData)){ (resultJSON) in
-                        if(!resultJSON["ok"].boolValue){
-                            print("Error while saving user Data",userData)
-                            return
+                    // check to see if VR classifier has already been created.
+                    if(classifiers.classifiers.count == 0){
+                        /*
+                         We will create 3 classifier by default during app load if not yet created:
+                         1. Steve
+                         2. Sanjeev
+                         3. Scott
+                         */
+                        let sanjeevZipPath: URL  = Bundle.main.url(forResource: Constant.sanjeevZip, withExtension: "zip")!
+                        let steveZipPath: URL = Bundle.main.url(forResource: Constant.steveZip, withExtension: "zip")!
+                        let scottZipPath: URL = Bundle.main.url(forResource: Constant.scottZip, withExtension: "zip")!
+                        let sanjeevNegativeZipPath: URL = Bundle.main.url(forResource: Constant.sanjeevNegativeZip, withExtension: "zip")!
+                        let steveNegativeZipPath: URL = Bundle.main.url(forResource: Constant.steveNegativeZip, withExtension: "zip")!
+                        let scottNegativeZipPath: URL = Bundle.main.url(forResource: Constant.scottNegativeZip, withExtension: "zip")!
+                        
+                        let failure = { (error: Error) in print(error) }
+                        
+                        //Steve classification
+                        var stevePos: [PositiveExample] = []
+                        let steveClassifier = PositiveExample.init(name: "Steve", examples: steveZipPath)
+                        stevePos.append(steveClassifier)
+                        self.visualRecognition?.createClassifier(name: "SteveMartinelli", positiveExamples: stevePos, negativeExamples: steveNegativeZipPath, failure: failure){
+                            Classifier in
+                            let userData = ["classificationId": Classifier.classifierID,
+                                            "fullname": Constant.SteveName,
+                                            "linkedin": Constant.SteveLI,
+                                            "twitter": Constant.SteveTW,
+                                            "facebook": Constant.SteveFB,
+                                            "phone": Constant.StevePh,
+                                            "location": Constant.SteveLoc]
+                            
+                            self.cloudantRestCall?.updatePersonData(userData: JSON(userData)){ (resultJSON) in
+                                if(!resultJSON["ok"].boolValue){
+                                    print("Error while saving user Data",userData)
+                                    return
+                                }
+                            }
                         }
+                        
+                        //Sanjeev  Classification
+                        var sanjeevPos: [PositiveExample] = []
+                        let sanjeevClassifier = PositiveExample.init(name: "Sanjeev", examples: sanjeevZipPath)
+                        sanjeevPos.append(sanjeevClassifier)
+                        self.visualRecognition?.createClassifier(name: "SanjeevGhimire", positiveExamples: sanjeevPos, negativeExamples: sanjeevNegativeZipPath, failure: failure){
+                            Classifier in
+                            let userData = ["classificationId": Classifier.classifierID,
+                                            "fullname": Constant.SanjeevName,
+                                            "linkedin": Constant.SanjeevLI,
+                                            "twitter": Constant.SanjeevTW,
+                                            "facebook": Constant.SanjeevFB,
+                                            "phone": Constant.SanjeevPh,
+                                            "location": Constant.SanjeevLoc]
+                            
+                            self.cloudantRestCall?.updatePersonData(userData: JSON(userData)){ (resultJSON) in
+                                if(!resultJSON["ok"].boolValue){
+                                    print("Error while saving user Data",userData)
+                                    return
+                                }
+                            }
+                        }
+                        // Scott classification
+                        var scottPos: [PositiveExample] = []
+                        let scottClassifier = PositiveExample.init(name: "Scott", examples: scottZipPath)
+                        scottPos.append(scottClassifier)
+                        self.visualRecognition?.createClassifier(name: "ScottDAngelo", positiveExamples: scottPos, negativeExamples: scottNegativeZipPath, failure: failure){
+                            Classifier in
+                            let userData = ["classificationId": Classifier.classifierID,
+                                            "fullname": Constant.ScottName,
+                                            "linkedin": Constant.ScottLI,
+                                            "twitter": Constant.ScottTW,
+                                            "facebook": Constant.ScottFB,
+                                            "phone": Constant.ScottPh,
+                                            "location": Constant.ScottLoc]
+                            
+                            self.cloudantRestCall?.updatePersonData(userData: JSON(userData)){ (resultJSON) in
+                                if(!resultJSON["ok"].boolValue){
+                                    print("Error while saving user Data",userData)
+                                    return
+                                }
+                            }
+                        }
+                    }else {
+                        self.isTraining = classifiers.classifiers[0].status == "training"
                     }
                 }
-            
-                //Sanjeev  Classification
-                var sanjeevPos: [PositiveExample] = []
-                let sanjeevClassifier = PositiveExample.init(name: "Sanjeev", examples: sanjeevZipPath)
-                sanjeevPos.append(sanjeevClassifier)
-            self.visualRecognition?.createClassifier(name: "SanjeevGhimire", positiveExamples: sanjeevPos, negativeExamples: sanjeevNegativeZipPath, failure: failure){
-                    Classifier in
-                    let userData = ["classificationId": Classifier.classifierID,
-                                    "fullname": Constant.SanjeevName,
-                                    "linkedin": Constant.SanjeevLI,
-                                    "twitter": Constant.SanjeevTW,
-                                    "facebook": Constant.SanjeevFB,
-                                    "phone": Constant.SanjeevPh,
-                                    "location": Constant.SanjeevLoc]
-                    
-                    self.cloudantRestCall?.updatePersonData(userData: JSON(userData)){ (resultJSON) in
-                        if(!resultJSON["ok"].boolValue){
-                            print("Error while saving user Data",userData)
-                            return
-                        }
-                    }
-                }
-                // Scott classification
-                var scottPos: [PositiveExample] = []
-                let scottClassifier = PositiveExample.init(name: "Scott", examples: scottZipPath)
-                scottPos.append(scottClassifier)
-            self.visualRecognition?.createClassifier(name: "ScottDAngelo", positiveExamples: scottPos, negativeExamples: scottNegativeZipPath, failure: failure){
-                    Classifier in
-                    let userData = ["classificationId": Classifier.classifierID,
-                                    "fullname": Constant.ScottName,
-                                    "linkedin": Constant.ScottLI,
-                                    "twitter": Constant.ScottTW,
-                                    "facebook": Constant.ScottFB,
-                                    "phone": Constant.ScottPh,
-                                    "location": Constant.ScottLoc]
-                    
-                    self.cloudantRestCall?.updatePersonData(userData: JSON(userData)){ (resultJSON) in
-                        if(!resultJSON["ok"].boolValue){
-                            print("Error while saving user Data",userData)
-                            return
-                        }
-                    }
-                }
-            }else {
-                self.isTraining = classifiers.classifiers[0].status == "training"
             }
-        }
         }
         
     }
- 
+    
     // Setup cloudant driver and visual recognition api
     func configureCloudantAndVisualRecognition() {
         // Retrieve plist
@@ -169,11 +173,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         self.visualRecognition = VisualRecognition.init(apiKey: vrApiKey, version: self.VERSION)
         self.cloudantRestCall = CloudantRESTCall.init(cloudantUrl: url)
         
-        self.cloudantRestCall?.createDatabase(databaseName: Constant.databaseName){ (dbDetails) in
-            print(dbDetails)
-            self.cloudantRestCall?.database = Constant.databaseName
-        }
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -187,7 +186,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         Observable<Int>.interval(0.6, scheduler: SerialDispatchQueueScheduler(qos: .default))
             .subscribeOn(SerialDispatchQueueScheduler(qos: .background))
-            .flatMap{_ in self.makeClassificationReadyForAR()}            
+            .flatMap{_ in self.makeClassificationReadyForAR()}
             .flatMap{ self.faceObservation(isReady: $0) }
             .flatMap{ Observable.from($0)}
             .flatMap{ self.faceClassification(face: $0.observation, image: $0.image, frame: $0.frame) }
@@ -313,12 +312,12 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             let pixel = image.cropImage(toFace: face)
             //convert the cropped image to UI image
             let uiImage: UIImage = self.convert(cmage: pixel)
-         
+            
             let failure = { (error: Error) in print(error) }
             self.visualRecognition?.classifyWithLocalModel(image: uiImage, classifierIDs: self.classifierIds, threshold: 0, failure: failure) { classifiedImages in
-                  print(classifiedImages)
-                  observer.onNext((classes: classifiedImages.images, position: worldCoord, frame: frame))
-                  observer.onCompleted()
+                print(classifiedImages)
+                observer.onNext((classes: classifiedImages.images, position: worldCoord, frame: frame))
+                observer.onCompleted()
             }
             
             return Disposables.create()
@@ -472,54 +471,54 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         return image
     }
     
-   
+    
     private func makeClassificationReadyForAR() -> Observable<Bool>{
         return Observable<Bool>.create{ observer in
-        //get all the classifier id
-        // check if visual recognition is not ready yet.
-          
-        if(!self.classifierIds.isEmpty){
-            observer.onNext(true)
-            observer.onCompleted()
-            return Disposables.create()
-        }
+            //get all the classifier id
+            // check if visual recognition is not ready yet.
+            
+            if(!self.classifierIds.isEmpty){
+                observer.onNext(true)
+                observer.onCompleted()
+                return Disposables.create()
+            }
             
             
-        let localModels = try? self.visualRecognition?.listLocalModels()
+            let localModels = try? self.visualRecognition?.listLocalModels()
             if let count = localModels??.count, count > 0 {
                 localModels??.forEach { classifierId in
-                if(!self.classifierIds.contains(classifierId)){
-                    self.classifierIds.append(classifierId)
-                }
-            }
-            observer.onNext(true)
-            observer.onCompleted()
-            return Disposables.create()
-        }
-          
-    
-        self.visualRecognition?.listClassifiers(){ classifiers in
-            let count: Int = classifiers.classifiers.count
-            if(count == 0 || classifiers.classifiers[0].status == "training"){
-                print("Still in Training phase")
-                observer.onNext(false)
-                observer.onCompleted()
-            }
-            
-            if(count > 0 && classifiers.classifiers[0].status == "ready"){
-                classifiers.classifiers.forEach{
-                    classifier in
-                    if(!self.classifierIds.contains(classifier.classifierID)){
-                        self.classifierIds.append(classifier.classifierID)
+                    if(!self.classifierIds.contains(classifierId)){
+                        self.classifierIds.append(classifierId)
                     }
-                    self.visualRecognition?.updateLocalModel(classifierID: classifier.classifierID)
                 }
                 observer.onNext(true)
                 observer.onCompleted()
+                return Disposables.create()
             }
             
-        }
-         return Disposables.create()
+            
+            self.visualRecognition?.listClassifiers(){ classifiers in
+                let count: Int = classifiers.classifiers.count
+                if(count == 0 || classifiers.classifiers[0].status == "training"){
+                    print("Still in Training phase")
+                    observer.onNext(false)
+                    observer.onCompleted()
+                }
+                
+                if(count > 0 && classifiers.classifiers[0].status == "ready"){
+                    classifiers.classifiers.forEach{
+                        classifier in
+                        if(!self.classifierIds.contains(classifier.classifierID)){
+                            self.classifierIds.append(classifier.classifierID)
+                        }
+                        self.visualRecognition?.updateLocalModel(classifierID: classifier.classifierID)
+                    }
+                    observer.onNext(true)
+                    observer.onCompleted()
+                }
+                
+            }
+            return Disposables.create()
         }
     }
     

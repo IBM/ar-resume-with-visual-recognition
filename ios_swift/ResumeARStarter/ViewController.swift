@@ -62,92 +62,96 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             self.visualRecognition?.listClassifiers(){
             classifiers in
  
-            
-        // check to see if VR classifier has already been created.
-        if(classifiers.classifiers.count == 0){
-                /*
-                 We will create 3 classifier by default during app load if not yet created:
-                 1. Steve
-                 2. Sanjeev
-                 3. Scott
-                 */
-                let sanjeevZipPath: URL  = Bundle.main.url(forResource: Constant.sanjeevZip, withExtension: "zip")!
-                let steveZipPath: URL = Bundle.main.url(forResource: Constant.steveZip, withExtension: "zip")!
-                let scottZipPath: URL = Bundle.main.url(forResource: Constant.scottZip, withExtension: "zip")!
-                let sanjeevNegativeZipPath: URL = Bundle.main.url(forResource: Constant.sanjeevNegativeZip, withExtension: "zip")!
-                let steveNegativeZipPath: URL = Bundle.main.url(forResource: Constant.steveNegativeZip, withExtension: "zip")!
-                let scottNegativeZipPath: URL = Bundle.main.url(forResource: Constant.scottNegativeZip, withExtension: "zip")!
-            
-                let failure = { (error: Error) in print(error) }
-            
-                //Steve classification
-                var stevePos: [PositiveExample] = []
-                let steveClassifier = PositiveExample.init(name: "Steve", examples: steveZipPath)
-                stevePos.append(steveClassifier)
-            self.visualRecognition?.createClassifier(name: "SteveMartinelli", positiveExamples: stevePos, negativeExamples: steveNegativeZipPath, failure: failure){
-                    Classifier in
-                    let userData = ["classificationId": Classifier.classifierID,
-                                          "fullname": Constant.SteveName,
-                                          "linkedin": Constant.SteveLI,
-                                          "twitter": Constant.SteveTW,
-                                          "facebook": Constant.SteveFB,
-                                          "phone": Constant.StevePh,
-                                          "location": Constant.SteveLoc]
-                    
-                self.cloudantRestCall?.updatePersonData(userData: JSON(userData)){ (resultJSON) in
-                        if(!resultJSON["ok"].boolValue){
-                            print("Error while saving user Data",userData)
-                            return
+                self.cloudantRestCall?.createDatabase(databaseName: Constant.databaseName){ (dbDetails) in
+                    print(dbDetails)
+                    self.cloudantRestCall?.database = Constant.databaseName
+               
+                    // check to see if VR classifier has already been created.
+                    if(classifiers.classifiers.count == 0){
+                            /*
+                             We will create 3 classifier by default during app load if not yet created:
+                             1. Steve
+                             2. Sanjeev
+                             3. Scott
+                             */
+                            let sanjeevZipPath: URL  = Bundle.main.url(forResource: Constant.sanjeevZip, withExtension: "zip")!
+                            let steveZipPath: URL = Bundle.main.url(forResource: Constant.steveZip, withExtension: "zip")!
+                            let scottZipPath: URL = Bundle.main.url(forResource: Constant.scottZip, withExtension: "zip")!
+                            let sanjeevNegativeZipPath: URL = Bundle.main.url(forResource: Constant.sanjeevNegativeZip, withExtension: "zip")!
+                            let steveNegativeZipPath: URL = Bundle.main.url(forResource: Constant.steveNegativeZip, withExtension: "zip")!
+                            let scottNegativeZipPath: URL = Bundle.main.url(forResource: Constant.scottNegativeZip, withExtension: "zip")!
+                        
+                            let failure = { (error: Error) in print(error) }
+                        
+                            //Steve classification
+                            var stevePos: [PositiveExample] = []
+                            let steveClassifier = PositiveExample.init(name: "Steve", examples: steveZipPath)
+                            stevePos.append(steveClassifier)
+                        self.visualRecognition?.createClassifier(name: "SteveMartinelli", positiveExamples: stevePos, negativeExamples: steveNegativeZipPath, failure: failure){
+                                Classifier in
+                                let userData = ["classificationId": Classifier.classifierID,
+                                                      "fullname": Constant.SteveName,
+                                                      "linkedin": Constant.SteveLI,
+                                                      "twitter": Constant.SteveTW,
+                                                      "facebook": Constant.SteveFB,
+                                                      "phone": Constant.StevePh,
+                                                      "location": Constant.SteveLoc]
+                            
+                            self.cloudantRestCall?.updatePersonData(userData: JSON(userData)){ (resultJSON) in
+                                    if(!resultJSON["ok"].boolValue){
+                                        print("Error while saving user Data",userData)
+                                        return
+                                    }
+                                }
+                            }
+                        
+                            //Sanjeev  Classification
+                            var sanjeevPos: [PositiveExample] = []
+                            let sanjeevClassifier = PositiveExample.init(name: "Sanjeev", examples: sanjeevZipPath)
+                            sanjeevPos.append(sanjeevClassifier)
+                        self.visualRecognition?.createClassifier(name: "SanjeevGhimire", positiveExamples: sanjeevPos, negativeExamples: sanjeevNegativeZipPath, failure: failure){
+                                Classifier in
+                                let userData = ["classificationId": Classifier.classifierID,
+                                                "fullname": Constant.SanjeevName,
+                                                "linkedin": Constant.SanjeevLI,
+                                                "twitter": Constant.SanjeevTW,
+                                                "facebook": Constant.SanjeevFB,
+                                                "phone": Constant.SanjeevPh,
+                                                "location": Constant.SanjeevLoc]
+                            
+                                self.cloudantRestCall?.updatePersonData(userData: JSON(userData)){ (resultJSON) in
+                                    if(!resultJSON["ok"].boolValue){
+                                        print("Error while saving user Data",userData)
+                                        return
+                                    }
+                                }
+                            }
+                            // Scott classification
+                            var scottPos: [PositiveExample] = []
+                            let scottClassifier = PositiveExample.init(name: "Scott", examples: scottZipPath)
+                            scottPos.append(scottClassifier)
+                        self.visualRecognition?.createClassifier(name: "ScottDAngelo", positiveExamples: scottPos, negativeExamples: scottNegativeZipPath, failure: failure){
+                                Classifier in
+                                let userData = ["classificationId": Classifier.classifierID,
+                                                "fullname": Constant.ScottName,
+                                                "linkedin": Constant.ScottLI,
+                                                "twitter": Constant.ScottTW,
+                                                "facebook": Constant.ScottFB,
+                                                "phone": Constant.ScottPh,
+                                                "location": Constant.ScottLoc]
+                            
+                                self.cloudantRestCall?.updatePersonData(userData: JSON(userData)){ (resultJSON) in
+                                    if(!resultJSON["ok"].boolValue){
+                                        print("Error while saving user Data",userData)
+                                        return
+                                    }
+                                }
+                            }
+                        }else {
+                            self.isTraining = classifiers.classifiers[0].status == "training"
                         }
                     }
-                }
-            
-                //Sanjeev  Classification
-                var sanjeevPos: [PositiveExample] = []
-                let sanjeevClassifier = PositiveExample.init(name: "Sanjeev", examples: sanjeevZipPath)
-                sanjeevPos.append(sanjeevClassifier)
-            self.visualRecognition?.createClassifier(name: "SanjeevGhimire", positiveExamples: sanjeevPos, negativeExamples: sanjeevNegativeZipPath, failure: failure){
-                    Classifier in
-                    let userData = ["classificationId": Classifier.classifierID,
-                                    "fullname": Constant.SanjeevName,
-                                    "linkedin": Constant.SanjeevLI,
-                                    "twitter": Constant.SanjeevTW,
-                                    "facebook": Constant.SanjeevFB,
-                                    "phone": Constant.SanjeevPh,
-                                    "location": Constant.SanjeevLoc]
-                    
-                    self.cloudantRestCall?.updatePersonData(userData: JSON(userData)){ (resultJSON) in
-                        if(!resultJSON["ok"].boolValue){
-                            print("Error while saving user Data",userData)
-                            return
-                        }
                     }
-                }
-                // Scott classification
-                var scottPos: [PositiveExample] = []
-                let scottClassifier = PositiveExample.init(name: "Scott", examples: scottZipPath)
-                scottPos.append(scottClassifier)
-            self.visualRecognition?.createClassifier(name: "ScottDAngelo", positiveExamples: scottPos, negativeExamples: scottNegativeZipPath, failure: failure){
-                    Classifier in
-                    let userData = ["classificationId": Classifier.classifierID,
-                                    "fullname": Constant.ScottName,
-                                    "linkedin": Constant.ScottLI,
-                                    "twitter": Constant.ScottTW,
-                                    "facebook": Constant.ScottFB,
-                                    "phone": Constant.ScottPh,
-                                    "location": Constant.ScottLoc]
-                    
-                    self.cloudantRestCall?.updatePersonData(userData: JSON(userData)){ (resultJSON) in
-                        if(!resultJSON["ok"].boolValue){
-                            print("Error while saving user Data",userData)
-                            return
-                        }
-                    }
-                }
-            }else {
-                self.isTraining = classifiers.classifiers[0].status == "training"
-            }
-        }
         }
         
     }
@@ -168,11 +172,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         self.visualRecognition = VisualRecognition.init(apiKey: vrApiKey, version: self.VERSION)
         self.cloudantRestCall = CloudantRESTCall.init(cloudantUrl: url)
-        
-        self.cloudantRestCall?.createDatabase(databaseName: Constant.databaseName){ (dbDetails) in
-            print(dbDetails)
-            self.cloudantRestCall?.database = Constant.databaseName
-        }
         
     }
     

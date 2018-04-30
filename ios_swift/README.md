@@ -44,7 +44,7 @@ This application will do the following by default:
 1. Additional information about the person are retrieved from a Cloudant database based on the classification from Watson Visual Recognition
 1. The information from the database is placed in front of the original person's face in the mobile camera view
 
-#### Included Components
+#### Included Capabilities
 
 * [ARKit](https://developer.apple.com/arkit/): ARKit is an augmented reality framework for iOS applications.
 * [Watson Visual Recognition](https://www.ibm.com/watson/developercloud/visual-recognition.html): Visual Recognition understands the contents of images - visual concepts tag the image, find human faces, approximate age and gender, and find similar images in a collection.
@@ -121,7 +121,7 @@ To create a new classifier and database entry, perform the following steps:
 
 1. Create a new Watson Visual Recognition classifier using the [online tool](https://watson-visual-recognition.ng.bluemix.net/) for each person you want to be able to identify, use at least ten images of that person.
 
-1. Update the Cloudant database using the classifier ID from the previous step. To update the database perform a `POST` command like the following:
+2. Update the Cloudant database using the classifier ID from the previous step. To update the database perform a `POST` command like the following:
 
 ```
 data='{"classificationId":"Watson_VR_Classifier_ID","fullname":"Joe Smith","linkedin":"jsmith","twitter":"jsmith","facebook":"jsmith","phone":"512-555-1234","location":"San Francisco"}'
@@ -135,7 +135,7 @@ curl -H "Content-Type: application/json" -X POST -d $data https://$ACCOUNT.cloud
 
 > See [`ResumeAR/schema.json`](ResumeAR/schema.json) for additional information about the Cloudant database configuration.
 
-1. Run the app and point the camera view to your image.
+3. Run the app and point the camera view to your newly classified image.
 
 ### Resources
 

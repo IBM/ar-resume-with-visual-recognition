@@ -62,13 +62,13 @@ This application will do the following by default:
 
 ### Configuration
 
-Install CocoaPods using the following command:
+1. Install CocoaPods using the following command:
 
 ```bash
 $ sudo gem install cocoapods
 ```
 
-If the CocoaPods repository is not configured, run the following command:
+1. If the CocoaPods repository is not configured, run the following command:
 
 ```bash
 $ pod setup
@@ -78,7 +78,6 @@ $ pod setup
 ![Pod Install Output](../images/pod-install-output.png)
 
 If you run into any issues during the pod install, it is recommended to run a pod update by using the following commands:
-
 ```bash
 $ pod update
 $ pod install
@@ -90,9 +89,7 @@ $ pod install
 1. Once the previous steps are complete, open the Xcode workspace: `{APP_Name}.xcworkspace`. Run the application by clicking the `Build` and `Run` menu options, specifying the native iOS device on which you will be running the application.
 ![Xcode Build and Run](../images/build-and-run.png)
 
-
-
-####
+#### Classification
 
 When the app loads, the app will create 3 classifiers for each of the zip files [`ResumeAR/sanjeev.zip`](ResumeAR/sanjeev.zip), [`ResumeAR/steve.zip`](ResumeAR/steve.zip) and [`ResumeAR/scott.zip`](ResumeAR/scott.zip).
 > To create a new classifier use the [Watson Visual Recognition tool](https://watson-visual-recognition.ng.bluemix.net/). A classifier will train the visual recognition service, it will be able to recognize different images of the same person. Use at least ten images of your head shot and also create a negative data set by using headshots that are not your own.

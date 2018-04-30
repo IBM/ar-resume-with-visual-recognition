@@ -68,13 +68,13 @@ This application will do the following by default:
 $ sudo gem install cocoapods
 ```
 
-1. If the CocoaPods repository is not configured, run the following command:
+2. If the CocoaPods repository is not configured, run the following command:
 
 ```bash
 $ pod setup
 ```
 
-1. At a command line, run `pod install` to install the dependencies.
+3. At a command line, run `pod install` to install the dependencies.
 ![Pod Install Output](../images/pod-install-output.png)
 
 If you run into any issues during the pod install, it is recommended to run a pod update by using the following commands:
@@ -83,10 +83,10 @@ $ pod update
 $ pod install
 ```
 
-1. Run `carthage bootstrap --platform iOS` to install the Watson related dependencies.
+4. Run `carthage bootstrap --platform iOS` to install the Watson related dependencies.
 ![Carthage Install Output](../images/carthage-output.png)
 
-1. Once the previous steps are complete, open the Xcode workspace: `{APP_Name}.xcworkspace`. Run the application by clicking the `Build` and `Run` menu options, specifying the native iOS device on which you will be running the application.
+5. Once the previous steps are complete, open the Xcode workspace: `{APP_Name}.xcworkspace`. Run the application by clicking the `Build` and `Run` menu options, specifying the native iOS device on which you will be running the application.
 ![Xcode Build and Run](../images/build-and-run.png)
 
 #### Classification

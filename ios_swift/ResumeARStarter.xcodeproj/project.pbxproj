@@ -193,7 +193,7 @@
 		};
 		B4BF235D1FA2745D002906DD /* ResumeARStarter */ = {
 			isa = PBXGroup;
-			children = (				
+			children = (
 				B479E7642068854C00786B47 /* sanjeev_negative.zip */,
 				B479E7652068854C00786B47 /* scott_negative.zip */,
 				B479E7632068854C00786B47 /* steve_negative.zip */,
@@ -363,7 +363,7 @@
 				B479E7672068854C00786B47 /* sanjeev_negative.zip in Resources */,
 				B479E7662068854C00786B47 /* steve_negative.zip in Resources */,
 				B479E7592064525F00786B47 /* steve.zip in Resources */,
-				B4BF23681FA2745D002906DD /* Assets.xcassets in Resources */,				
+				B4BF23681FA2745D002906DD /* Assets.xcassets in Resources */,
 				B4BF23661FA2745D002906DD /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -653,7 +653,7 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/ResumeARStarter/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.sg.ResumeARStarter;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sg.test.ResumeARStarter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
@@ -675,7 +675,7 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/ResumeARStarter/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.sg.ResumeARStarter;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sg.test.ResumeARStarter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;

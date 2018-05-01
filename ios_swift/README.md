@@ -111,9 +111,9 @@ Replace the `API_KEY` with the Watson Visual Recognition api key, as found in yo
 
 #### Sample Output
 
-![Sample Output](../images/sanjeev_sample_output.png)
-![Sample Output](../images/steve_sample_output.png)
-![Sample Output](../images/scott_sample_output.png)
+| | | |
+|-|-|-|
+| <img src="../images/sanjeev_sample_output.png" height=250px width=140px> | <img src="../images/steve_sample_output.png" height=250px width=140px> | <img src="../images/scott_sample_output.png" height=250px width=140px> |
 
 #### Extending the application
 

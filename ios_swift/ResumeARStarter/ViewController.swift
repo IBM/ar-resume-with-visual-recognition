@@ -64,7 +64,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
  
                 self.cloudantRestCall?.createDatabase(databaseName: Constant.databaseName){ (dbDetails) in
                     print(dbDetails)
-                    self.cloudantRestCall?.database = Constant.databaseName
                
                     // check to see if VR classifier has already been created.
                     if(classifiers.classifiers.count == 0){
@@ -172,6 +171,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         self.visualRecognition = VisualRecognition.init(apiKey: vrApiKey, version: self.VERSION)
         self.cloudantRestCall = CloudantRESTCall.init(cloudantUrl: url)
+        self.cloudantRestCall?.database = Constant.databaseName
         
     }
     

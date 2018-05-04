@@ -11,6 +11,9 @@
 		A17C9566A3740B96AF43E648 /* Pods_ResumeARStarterTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7982E6C28D22700E9D94651E /* Pods_ResumeARStarterTests.framework */; };
 		B424BCFA201F92DA00B18120 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = B424BCF9201F92DA00B18120 /* Cartfile */; };
 		B430E1231FE8448A00058C99 /* CloudantRESTCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = B430E1221FE8448A00058C99 /* CloudantRESTCall.swift */; };
+		B43158AA209BA0BB004A0BF4 /* ScottDAngelo_1040670748.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = B43158A7209BA0BB004A0BF4 /* ScottDAngelo_1040670748.mlmodel */; };
+		B43158AB209BA0BB004A0BF4 /* SanjeevGhimire_967590069.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = B43158A8209BA0BB004A0BF4 /* SanjeevGhimire_967590069.mlmodel */; };
+		B43158AC209BA0BB004A0BF4 /* SteveMartinelli_2096165720.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = B43158A9209BA0BB004A0BF4 /* SteveMartinelli_2096165720.mlmodel */; };
 		B460D4B61FA38E66004CB81F /* Face.swift in Sources */ = {isa = PBXBuildFile; fileRef = B460D4B51FA38E66004CB81F /* Face.swift */; };
 		B460D4B81FA39981004CB81F /* CIImage+FaceDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B460D4B71FA39981004CB81F /* CIImage+FaceDetection.swift */; };
 		B460D4BA1FA3A433004CB81F /* SCNVector3+Distance.swift in Sources */ = {isa = PBXBuildFile; fileRef = B460D4B91FA3A433004CB81F /* SCNVector3+Distance.swift */; };
@@ -80,6 +83,9 @@
 		AE1F8E97AE6145B021ACA986 /* Pods_ResumeARStarterUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ResumeARStarterUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B424BCF9201F92DA00B18120 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		B430E1221FE8448A00058C99 /* CloudantRESTCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudantRESTCall.swift; sourceTree = "<group>"; };
+		B43158A7209BA0BB004A0BF4 /* ScottDAngelo_1040670748.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = ScottDAngelo_1040670748.mlmodel; sourceTree = "<group>"; };
+		B43158A8209BA0BB004A0BF4 /* SanjeevGhimire_967590069.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = SanjeevGhimire_967590069.mlmodel; sourceTree = "<group>"; };
+		B43158A9209BA0BB004A0BF4 /* SteveMartinelli_2096165720.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = SteveMartinelli_2096165720.mlmodel; sourceTree = "<group>"; };
 		B460D4B51FA38E66004CB81F /* Face.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Face.swift; sourceTree = "<group>"; };
 		B460D4B71FA39981004CB81F /* CIImage+FaceDetection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CIImage+FaceDetection.swift"; sourceTree = "<group>"; };
 		B460D4B91FA3A433004CB81F /* SCNVector3+Distance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNVector3+Distance.swift"; sourceTree = "<group>"; };
@@ -194,6 +200,9 @@
 		B4BF235D1FA2745D002906DD /* ResumeARStarter */ = {
 			isa = PBXGroup;
 			children = (
+				B43158A8209BA0BB004A0BF4 /* SanjeevGhimire_967590069.mlmodel */,
+				B43158A7209BA0BB004A0BF4 /* ScottDAngelo_1040670748.mlmodel */,
+				B43158A9209BA0BB004A0BF4 /* SteveMartinelli_2096165720.mlmodel */,
 				B479E7642068854C00786B47 /* sanjeev_negative.zip */,
 				B479E7652068854C00786B47 /* scott_negative.zip */,
 				B479E7632068854C00786B47 /* steve_negative.zip */,
@@ -470,11 +479,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B43158AB209BA0BB004A0BF4 /* SanjeevGhimire_967590069.mlmodel in Sources */,
 				B4BF23631FA2745D002906DD /* ViewController.swift in Sources */,
 				B460D4B61FA38E66004CB81F /* Face.swift in Sources */,
+				B43158AC209BA0BB004A0BF4 /* SteveMartinelli_2096165720.mlmodel in Sources */,
 				B460D4B81FA39981004CB81F /* CIImage+FaceDetection.swift in Sources */,
 				B479E75E2064616800786B47 /* Constant.swift in Sources */,
 				B4BF235F1FA2745D002906DD /* AppDelegate.swift in Sources */,
+				B43158AA209BA0BB004A0BF4 /* ScottDAngelo_1040670748.mlmodel in Sources */,
 				B460D4BA1FA3A433004CB81F /* SCNVector3+Distance.swift in Sources */,
 				B430E1231FE8448A00058C99 /* CloudantRESTCall.swift in Sources */,
 				B4B2E7961FCDDF4E006DDB9D /* SCNNode+Text.swift in Sources */,

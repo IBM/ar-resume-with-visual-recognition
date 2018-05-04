@@ -32,7 +32,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     var bounds: CGRect = CGRect(x: 0, y: 0, width: 0, height: 0)
     var visualRecognition: VisualRecognition?
     var cloudantRestCall: CloudantRESTCall?
-    var classifierIds: [String] = []
+    var classifierIds: [String] = ["SanjeevGhimire_967590069","ScottDAngelo_1040670748","SteveMartinelli_2096165720"]
     
     let VERSION = "2017-12-07"
     
@@ -49,110 +49,81 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         //configure IBM cloud services required by this app
         self.configureCloudantAndVisualRecognition()
         
-        let localModels = try? self.visualRecognition?.listLocalModels()
-        if let count = localModels??.count, count > 0 {
-            localModels??.forEach { classifierId in
-                if(!self.classifierIds.contains(classifierId)){
-                    self.classifierIds.append(classifierId)
+        self.cloudantRestCall?.createDatabase(databaseName: Constant.databaseName){ (dbDetails) in
+            print(dbDetails)
+            if(dbDetails["ok"].exists()){
+                //add info for test database.
+                let userData1 = ["classificationId": "SteveMartinelli_2096165720",
+                                 "fullname": Constant.SteveName,
+                                 "linkedin": Constant.SteveLI,
+                                 "twitter": Constant.SteveTW,
+                                 "facebook": Constant.SteveFB,
+                                 "phone": Constant.StevePh,
+                                 "location": Constant.SteveLoc]
+                
+                self.cloudantRestCall?.updatePersonData(userData: JSON(userData1)){ (resultJSON) in
+                    if(!resultJSON["ok"].boolValue){
+                        print("Error while saving user Data",userData1)
+                        return
+                    }
+                }
+                
+                let userData2 = ["classificationId": "SanjeevGhimire_967590069",
+                                 "fullname": Constant.SanjeevName,
+                                 "linkedin": Constant.SanjeevLI,
+                                 "twitter": Constant.SanjeevTW,
+                                 "facebook": Constant.SanjeevFB,
+                                 "phone": Constant.SanjeevPh,
+                                 "location": Constant.SanjeevLoc]
+                
+                self.cloudantRestCall?.updatePersonData(userData: JSON(userData2)){ (resultJSON) in
+                    if(!resultJSON["ok"].boolValue){
+                        print("Error while saving user Data",userData2)
+                        return
+                    }
+                }
+                
+                let userData3 = ["classificationId": "ScottDAngelo_1040670748",
+                                 "fullname": Constant.ScottName,
+                                 "linkedin": Constant.ScottLI,
+                                 "twitter": Constant.ScottTW,
+                                 "facebook": Constant.ScottFB,
+                                 "phone": Constant.ScottPh,
+                                 "location": Constant.ScottLoc]
+                
+                self.cloudantRestCall?.updatePersonData(userData: JSON(userData3)){ (resultJSON) in
+                    if(!resultJSON["ok"].boolValue){
+                        print("Error while saving user Data",userData3)
+                        return
+                    }
                 }
             }
-            self.isTraining = false;
-        }else{
-        
-            self.visualRecognition?.listClassifiers(){
-            classifiers in
- 
-                self.cloudantRestCall?.createDatabase(databaseName: Constant.databaseName){ (dbDetails) in
-                    print(dbDetails)
-               
-                    // check to see if VR classifier has already been created.
-                    if(classifiers.classifiers.count == 0){
-                            /*
-                             We will create 3 classifier by default during app load if not yet created:
-                             1. Steve
-                             2. Sanjeev
-                             3. Scott
-                             */
-                            let sanjeevZipPath: URL  = Bundle.main.url(forResource: Constant.sanjeevZip, withExtension: "zip")!
-                            let steveZipPath: URL = Bundle.main.url(forResource: Constant.steveZip, withExtension: "zip")!
-                            let scottZipPath: URL = Bundle.main.url(forResource: Constant.scottZip, withExtension: "zip")!
-                            let sanjeevNegativeZipPath: URL = Bundle.main.url(forResource: Constant.sanjeevNegativeZip, withExtension: "zip")!
-                            let steveNegativeZipPath: URL = Bundle.main.url(forResource: Constant.steveNegativeZip, withExtension: "zip")!
-                            let scottNegativeZipPath: URL = Bundle.main.url(forResource: Constant.scottNegativeZip, withExtension: "zip")!
-                        
-                            let failure = { (error: Error) in print(error) }
-                        
-                            //Steve classification
-                            var stevePos: [PositiveExample] = []
-                            let steveClassifier = PositiveExample.init(name: "Steve", examples: steveZipPath)
-                            stevePos.append(steveClassifier)
-                        self.visualRecognition?.createClassifier(name: "SteveMartinelli", positiveExamples: stevePos, negativeExamples: steveNegativeZipPath, failure: failure){
-                                Classifier in
-                                let userData = ["classificationId": Classifier.classifierID,
-                                                      "fullname": Constant.SteveName,
-                                                      "linkedin": Constant.SteveLI,
-                                                      "twitter": Constant.SteveTW,
-                                                      "facebook": Constant.SteveFB,
-                                                      "phone": Constant.StevePh,
-                                                      "location": Constant.SteveLoc]
-                            
-                            self.cloudantRestCall?.updatePersonData(userData: JSON(userData)){ (resultJSON) in
-                                    if(!resultJSON["ok"].boolValue){
-                                        print("Error while saving user Data",userData)
-                                        return
-                                    }
-                                }
-                            }
-                        
-                            //Sanjeev  Classification
-                            var sanjeevPos: [PositiveExample] = []
-                            let sanjeevClassifier = PositiveExample.init(name: "Sanjeev", examples: sanjeevZipPath)
-                            sanjeevPos.append(sanjeevClassifier)
-                        self.visualRecognition?.createClassifier(name: "SanjeevGhimire", positiveExamples: sanjeevPos, negativeExamples: sanjeevNegativeZipPath, failure: failure){
-                                Classifier in
-                                let userData = ["classificationId": Classifier.classifierID,
-                                                "fullname": Constant.SanjeevName,
-                                                "linkedin": Constant.SanjeevLI,
-                                                "twitter": Constant.SanjeevTW,
-                                                "facebook": Constant.SanjeevFB,
-                                                "phone": Constant.SanjeevPh,
-                                                "location": Constant.SanjeevLoc]
-                            
-                                self.cloudantRestCall?.updatePersonData(userData: JSON(userData)){ (resultJSON) in
-                                    if(!resultJSON["ok"].boolValue){
-                                        print("Error while saving user Data",userData)
-                                        return
-                                    }
-                                }
-                            }
-                            // Scott classification
-                            var scottPos: [PositiveExample] = []
-                            let scottClassifier = PositiveExample.init(name: "Scott", examples: scottZipPath)
-                            scottPos.append(scottClassifier)
-                        self.visualRecognition?.createClassifier(name: "ScottDAngelo", positiveExamples: scottPos, negativeExamples: scottNegativeZipPath, failure: failure){
-                                Classifier in
-                                let userData = ["classificationId": Classifier.classifierID,
-                                                "fullname": Constant.ScottName,
-                                                "linkedin": Constant.ScottLI,
-                                                "twitter": Constant.ScottTW,
-                                                "facebook": Constant.ScottFB,
-                                                "phone": Constant.ScottPh,
-                                                "location": Constant.ScottLoc]
-                            
-                                self.cloudantRestCall?.updatePersonData(userData: JSON(userData)){ (resultJSON) in
-                                    if(!resultJSON["ok"].boolValue){
-                                        print("Error while saving user Data",userData)
-                                        return
-                                    }
-                                }
-                            }
-                        }else {
-                            self.isTraining = classifiers.classifiers[0].status == "training"
-                        }
-                    }
-                    }
         }
         
+        let localModels = try? self.visualRecognition?.listLocalModels()
+            if let count = localModels??.count, count > 0 {
+                localModels??.forEach { classifierId in
+                    if(!self.classifierIds.contains(classifierId)){
+                        self.classifierIds.append(classifierId)
+                    }
+                }
+                self.isTraining = false;
+            }else{
+            
+                self.visualRecognition?.listClassifiers(){
+                classifiers in
+                    //if in case users have uploaded their images and trained VR in the cloud
+                    if(classifiers.classifiers.count > 0 && classifiers.classifiers[0].status == "ready"){
+                        classifiers.classifiers.forEach{
+                            classifier in
+                            if(!self.classifierIds.contains(classifier.classifierID)){
+                                self.classifierIds.append(classifier.classifierID)
+                            }
+                            self.visualRecognition?.updateLocalModel(classifierID: classifier.classifierID)
+                        }
+                    }
+            }
+        }
     }
  
     // Setup cloudant driver and visual recognition api
@@ -186,8 +157,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         Observable<Int>.interval(0.6, scheduler: SerialDispatchQueueScheduler(qos: .default))
             .subscribeOn(SerialDispatchQueueScheduler(qos: .background))
-            .flatMap{_ in self.makeClassificationReadyForAR()}            
-            .flatMap{ self.faceObservation(isReady: $0) }
+            .flatMap{_ in self.updateToLocalModels()}
+            .flatMap{_ in self.faceObservation() }
             .flatMap{ Observable.from($0)}
             .flatMap{ self.faceClassification(face: $0.observation, image: $0.image, frame: $0.frame) }
             .subscribe { [unowned self] event in
@@ -254,15 +225,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     
     // MARK: - Face detections
-    private func faceObservation(isReady: Bool) -> Observable<[(observation: VNFaceObservation, image: CIImage, frame: ARFrame)]> {
+    private func faceObservation() -> Observable<[(observation: VNFaceObservation, image: CIImage, frame: ARFrame)]> {
         return Observable<[(observation: VNFaceObservation, image: CIImage, frame: ARFrame)]>.create{ observer in
-            if(!isReady){
-                print("Training is still in progress")
-                self.updateNodeWithStillInTraining()
-                observer.onCompleted()
-                return Disposables.create()
-            }
-            
             guard let frame = self.sceneView.session.currentFrame else {
                 print("No frame available")
                 observer.onCompleted()
@@ -314,8 +278,12 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             let uiImage: UIImage = self.convert(cmage: pixel)
          
             let failure = { (error: Error) in print(error) }
-            self.visualRecognition?.classifyWithLocalModel(image: uiImage, classifierIDs: self.classifierIds, threshold: 0, failure: failure) { classifiedImages in
-                  print(classifiedImages)
+            guard let visualRecognition = self.visualRecognition else {
+                print("No handle on visual recognition service")
+                observer.onCompleted()
+                return Disposables.create()
+            }
+            visualRecognition.classifyWithLocalModel(image: uiImage, classifierIDs: self.classifierIds, threshold: 0, failure: failure) { classifiedImages in
                   observer.onNext((classes: classifiedImages.images, position: worldCoord, frame: frame))
                   observer.onCompleted()
             }
@@ -397,16 +365,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         return nil
     }
     
-    
-    // updating node when not ready for visual recogntion aka training in progress.
-    private func updateNodeWithStillInTraining(){
-        let node = SCNNode.init(withText: "Training in progress", position: SCNVector3.init(0, 0, 0))
-        DispatchQueue.main.async {
-            self.sceneView.scene.rootNode.addChildNode(node)
-            node.show()
-        }
-    }
-    
     private func updateNode(classes: [ClassifiedImage], position: SCNVector3, frame: ARFrame) {
         guard let classifiedImage = classes.first else {
             print("No classification found")
@@ -417,8 +375,13 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         var personWithHighScore: ClassifierResult? = nil
         var highestScore: Double = 0.0
         classifiedImage.classifiers.forEach { classifierResult in
-            let score: Double = (classifierResult.classes.first?.score)!
-            if(score > highestScore){
+            guard let score = classifierResult.classes.first?.score else {
+                // handle error Throw or return
+                print("Score not found in the JSON")
+                return
+            }
+//            let score: Double = (classifierResult.classes.first?.score)!
+            if(Double(score) > highestScore){
                 highestScore = score
                 personWithHighScore = classifierResult
             }
@@ -426,6 +389,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         let name = personWithHighScore?.name
         let classifierId = personWithHighScore?.classifierID
+        
         // Filter for existent face
         let results = self.faces.filter{ $0.name == name && $0.timestamp != frame.timestamp }
             .sorted{ $0.node.position.distance(toVector: position) < $1.node.position.distance(toVector: position) }
@@ -472,56 +436,25 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
    
-    private func makeClassificationReadyForAR() -> Observable<Bool>{
+    private func updateToLocalModels() -> Observable<Bool>{
         return Observable<Bool>.create{ observer in
-        //get all the classifier id
-        // check if visual recognition is not ready yet.
-          
-        if(!self.classifierIds.isEmpty){
-            observer.onNext(true)
-            observer.onCompleted()
-            return Disposables.create()
-        }
-            
-            
-        let localModels = try? self.visualRecognition?.listLocalModels()
-            if let count = localModels??.count, count > 0 {
-                localModels??.forEach { classifierId in
-                if(!self.classifierIds.contains(classifierId)){
-                    self.classifierIds.append(classifierId)
-                }
-            }
-            observer.onNext(true)
-            observer.onCompleted()
-            return Disposables.create()
-        }
-          
-    
-        self.visualRecognition?.listClassifiers(){ classifiers in
-            let count: Int = classifiers.classifiers.count
-            if(count == 0 || classifiers.classifiers[0].status == "training"){
-                print("Still in Training phase")
-                observer.onNext(false)
-                observer.onCompleted()
-            }
-            
-            if(count > 0 && classifiers.classifiers[0].status == "ready"){
-                classifiers.classifiers.forEach{
-                    classifier in
-                    if(!self.classifierIds.contains(classifier.classifierID)){
-                        self.classifierIds.append(classifier.classifierID)
+            // check if visual recognition is not ready yet.
+            self.visualRecognition?.listClassifiers(){ classifiers in
+                let count: Int = classifiers.classifiers.count
+                if(count > 0 && classifiers.classifiers[0].status == "ready"){
+                    classifiers.classifiers.forEach{
+                        classifier in
+                        if(!self.classifierIds.contains(classifier.classifierID)){
+                            self.classifierIds.append(classifier.classifierID)
+                        }
+                        self.visualRecognition?.updateLocalModel(classifierID: classifier.classifierID)
                     }
-                    self.visualRecognition?.updateLocalModel(classifierID: classifier.classifierID)
                 }
-                observer.onNext(true)
-                observer.onCompleted()
             }
-            
-        }
-         return Disposables.create()
+            observer.onNext(true)
+            observer.onCompleted()
+            return Disposables.create()
         }
     }
-    
-    
 }
 

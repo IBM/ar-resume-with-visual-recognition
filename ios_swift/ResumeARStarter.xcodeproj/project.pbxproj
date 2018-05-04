@@ -14,7 +14,6 @@
 		B43158AA209BA0BB004A0BF4 /* ScottDAngelo_1040670748.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = B43158A7209BA0BB004A0BF4 /* ScottDAngelo_1040670748.mlmodel */; };
 		B43158AB209BA0BB004A0BF4 /* SanjeevGhimire_967590069.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = B43158A8209BA0BB004A0BF4 /* SanjeevGhimire_967590069.mlmodel */; };
 		B43158AC209BA0BB004A0BF4 /* SteveMartinelli_2096165720.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = B43158A9209BA0BB004A0BF4 /* SteveMartinelli_2096165720.mlmodel */; };
-		B43158AE209BABF7004A0BF4 /* BMSCredentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = B43158AD209BABF7004A0BF4 /* BMSCredentials.plist */; };
 		B460D4B61FA38E66004CB81F /* Face.swift in Sources */ = {isa = PBXBuildFile; fileRef = B460D4B51FA38E66004CB81F /* Face.swift */; };
 		B460D4B81FA39981004CB81F /* CIImage+FaceDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B460D4B71FA39981004CB81F /* CIImage+FaceDetection.swift */; };
 		B460D4BA1FA3A433004CB81F /* SCNVector3+Distance.swift in Sources */ = {isa = PBXBuildFile; fileRef = B460D4B91FA3A433004CB81F /* SCNVector3+Distance.swift */; };
@@ -87,7 +86,6 @@
 		B43158A7209BA0BB004A0BF4 /* ScottDAngelo_1040670748.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = ScottDAngelo_1040670748.mlmodel; sourceTree = "<group>"; };
 		B43158A8209BA0BB004A0BF4 /* SanjeevGhimire_967590069.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = SanjeevGhimire_967590069.mlmodel; sourceTree = "<group>"; };
 		B43158A9209BA0BB004A0BF4 /* SteveMartinelli_2096165720.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = SteveMartinelli_2096165720.mlmodel; sourceTree = "<group>"; };
-		B43158AD209BABF7004A0BF4 /* BMSCredentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BMSCredentials.plist; sourceTree = SOURCE_ROOT; };
 		B460D4B51FA38E66004CB81F /* Face.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Face.swift; sourceTree = "<group>"; };
 		B460D4B71FA39981004CB81F /* CIImage+FaceDetection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CIImage+FaceDetection.swift"; sourceTree = "<group>"; };
 		B460D4B91FA3A433004CB81F /* SCNVector3+Distance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNVector3+Distance.swift"; sourceTree = "<group>"; };
@@ -202,7 +200,6 @@
 		B4BF235D1FA2745D002906DD /* ResumeARStarter */ = {
 			isa = PBXGroup;
 			children = (
-				B43158AD209BABF7004A0BF4 /* BMSCredentials.plist */,
 				B43158A8209BA0BB004A0BF4 /* SanjeevGhimire_967590069.mlmodel */,
 				B43158A7209BA0BB004A0BF4 /* ScottDAngelo_1040670748.mlmodel */,
 				B43158A9209BA0BB004A0BF4 /* SteveMartinelli_2096165720.mlmodel */,
@@ -376,7 +373,6 @@
 				B479E7662068854C00786B47 /* steve_negative.zip in Resources */,
 				B479E7592064525F00786B47 /* steve.zip in Resources */,
 				B4BF23681FA2745D002906DD /* Assets.xcassets in Resources */,
-				B43158AE209BABF7004A0BF4 /* BMSCredentials.plist in Resources */,
 				B4BF23661FA2745D002906DD /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

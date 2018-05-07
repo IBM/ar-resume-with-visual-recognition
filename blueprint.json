@@ -1,7 +1,7 @@
 {
   "appIconURL": "blueprint/AR_Kit-72.png",
-  "description": "Use Watson Visual Recognition and Core ML to your iOS APP to create Augmented Reality based rèsumè",
-  "name": "AR résumé with CoreML and Visual Recognition",
+  "description": "Create an Augmented Reality iOS app that uses facial recognition to share someone's resume.",
+  "name": "Visual Recognition with Core ML and ARKit for iOS with Watson",
   "type" : "MOBILE",
   "thumbnailURL": "blueprint/AR_Kit-72.png",
   "email": "sanjeev.ghimire@ibm.com",

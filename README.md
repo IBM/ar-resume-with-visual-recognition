@@ -1,3 +1,4 @@
+*Read this in other languages: [中国](README-cn.md).*
 # Use Watson Visual Recognition and Core ML to create an Augmented Reality based résumé
 
 The easiest way to find and connect to people around the world is through social media apps like Facebook, Twitter and LinkedIn. These, however, only provide text based search capabilities. However, with the recently announced release of the iOS ARKit toolkit, search is now possible using facial recognition. Combining iOS face recognition using Vision API, classification using IBM Visual Recognition, and person identification using classified image and data, one can build an app to search faces and identify them. One of the use cases is to build a Augmented Reality based résumé using visual recognition.

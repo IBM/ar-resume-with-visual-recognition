@@ -163,7 +163,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             // Create service sdks
             self.visualRecognition = VisualRecognition(version: self.VERSION, apiKey: apiKey)
 
-        // Else for user/pwd authentication
+        // Else for legacy api_key authentication
         } else {
             guard let apiKey = credentials["visualrecognitionApi_key"] as? String else {
               return
@@ -171,7 +171,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             // Create service sdks
             self.visualRecognition = VisualRecognition.init(apiKey: apiKey, version: self.VERSION)
         }
-          
+
         self.cloudantRestCall = CloudantRESTCall.init(cloudantUrl: url)
         self.cloudantRestCall?.database = Constant.databaseName
     }

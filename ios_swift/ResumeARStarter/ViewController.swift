@@ -151,16 +151,29 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 return
         }
 
-        // Retrieve credentials
-        guard let vrApiKey = credentials["visualrecognitionApi_key"] as? String, !vrApiKey.isEmpty,
-            let url = credentials["cloudantUrl"] as? String, !url.isEmpty else {
+        // Retrieve Cloudant credentials
+        guard let url = credentials["cloudantUrl"] as? String, !url.isEmpty else {
                 return
         }
 
-        self.visualRecognition = VisualRecognition.init(apiKey: vrApiKey, version: self.VERSION)
+        // Set the Watson credentials for Visual Recognition service from the BMSCredentials.plist
+        // If using IAM authentication
+        if let apiKey = credentials["visualrecognitionApikey"] as? String {
+
+            // Create service sdks
+            self.visualRecognition = VisualRecognition(version: self.VERSION, apiKey: apiKey)
+
+        // Else for legacy api_key authentication
+        } else {
+            guard let apiKey = credentials["visualrecognitionApi_key"] as? String else {
+              return
+            }
+            // Create service sdks
+            self.visualRecognition = VisualRecognition.init(apiKey: apiKey, version: self.VERSION)
+        }
+
         self.cloudantRestCall = CloudantRESTCall.init(cloudantUrl: url)
         self.cloudantRestCall?.database = Constant.databaseName
-
     }
 
     override func viewWillAppear(_ animated: Bool) {

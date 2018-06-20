@@ -8,7 +8,7 @@
   "author": "Sanjeev Ghimire",
   "requiredCapabilities": ["visualRecognition","cloudant"],
   "servicePlans": {
-      "visualRecognition": "free",
+      "visualRecognition": "lite",
       "cloudant": "free"
   },
   "tags": ["devex","appledevelopment"]

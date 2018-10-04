@@ -28,7 +28,7 @@ import CoreML
 
 
 class ViewController: UIViewController, ARSCNViewDelegate {
-
+    print("Starting!")
     @IBOutlet var sceneView: ARSCNView!
     var 👜 = DisposeBag()
     var faces: [Face] = []
@@ -72,7 +72,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
                 self.cloudantRestCall?.updatePersonData(userData: JSON(userData1)){ (resultJSON) in
                     if(!resultJSON["ok"].boolValue){
-                        print("Error while saving user Data",userData1)
+                        print("Err: Error while saving user Data",userData1)
                         return
                     }
                 }
@@ -87,7 +87,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
                 self.cloudantRestCall?.updatePersonData(userData: JSON(userData2)){ (resultJSON) in
                     if(!resultJSON["ok"].boolValue){
-                        print("Error while saving user Data",userData2)
+                        print("Err: Error while saving user Data",userData2)
                         return
                     }
                 }
@@ -102,7 +102,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
                 self.cloudantRestCall?.updatePersonData(userData: JSON(userData3)){ (resultJSON) in
                     if(!resultJSON["ok"].boolValue){
-                        print("Error while saving user Data",userData3)
+                        print("Err: Error while saving user Data",userData3)
                         return
                     }
                 }
@@ -193,7 +193,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             .flatMap{ self.faceClassification(face: $0.observation, image: $0.image, frame: $0.frame) }
             .subscribe { [unowned self] event in
                 guard let element = event.element else {
-                    print("No element available")
+                    print("Err: No element available")
                     return
                 }
                 self.updateNode(classes: element.classes, position: element.position, frame: element.frame)
@@ -232,7 +232,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             PKHUD.sharedHUD.contentView = PKHUDProgressView(title: "Initializing", subtitle: nil)
             PKHUD.sharedHUD.show()
         case .notAvailable:
-            print("Not available")
+            print("Err: Not available")
         default:
             PKHUD.sharedHUD.hide()
         }
@@ -258,7 +258,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     private func faceObservation() -> Observable<[(observation: VNFaceObservation, image: CIImage, frame: ARFrame)]> {
         return Observable<[(observation: VNFaceObservation, image: CIImage, frame: ARFrame)]>.create{ observer in
             guard let frame = self.sceneView.session.currentFrame else {
-                print("No frame available")
+                print("Err: No frame available")
                 observer.onCompleted()
                 return Disposables.create()
             }
@@ -267,12 +267,12 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             let image = CIImage.init(cvPixelBuffer: frame.capturedImage).rotate
             let facesRequest = VNDetectFaceRectanglesRequest { request, error in
                 guard error == nil else {
-                    print("Face request error: \(error!.localizedDescription)")
+                    print("Err: Face request error: \(error!.localizedDescription)")
                     observer.onCompleted()
                     return
                 }
                 guard let observations = request.results as? [VNFaceObservation] else {
-                    print("No face observations")
+                    print("Err: No face observations")
                     observer.onCompleted()
                     return
                 }
@@ -297,7 +297,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             // Determine position of the face
             let boundingBox = self.transformBoundingBox(face.boundingBox)
             guard let worldCoord = self.normalizeWorldCoord(boundingBox) else {
-                print("No feature point found")
+                print("Err: No feature point found")
                 observer.onCompleted()
                 return Disposables.create()
             }
@@ -309,7 +309,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
             let failure = { (error: Error) in print(error) }
             guard let visualRecognition = self.visualRecognition else {
-                print("No handle on visual recognition service")
+                print("Err: No handle on visual recognition service")
                 observer.onCompleted()
                 return Disposables.create()
             }
@@ -397,7 +397,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
     private func updateNode(classes: [ClassifiedImage], position: SCNVector3, frame: ARFrame) {
         guard let classifiedImage = classes.first else {
-            print("No classification found")
+            print("Err: No classification found")
             return
         }
 
@@ -407,7 +407,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         classifiedImage.classifiers.forEach { classifierResult in
             guard let score = classifierResult.classes.first?.score else {
                 // handle error Throw or return
-                print("Score not found in the JSON")
+                print("Err: Score not found in the JSON")
                 return
             }
 //            let score: Double = (classifierResult.classes.first?.score)!

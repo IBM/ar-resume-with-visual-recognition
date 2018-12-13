@@ -120,15 +120,28 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             }else{
 
                 self.visualRecognition?.listClassifiers(){
-                classifiers in
+                response, error in
+                    if let error = error {
+                        print(error)
+                        return
+                    }
+                    guard let classifiers = response?.result?.classifiers else {
+                        print("missing result")
+                        return
+                    }
                     //if in case users have uploaded their images and trained VR in the cloud
-                    if(classifiers.classifiers.count > 0 && classifiers.classifiers[0].status == "ready"){
-                        classifiers.classifiers.forEach{
+                    if(classifiers.count > 0 && classifiers[0].status == "ready"){
+                        classifiers.forEach{
                             classifier in
                             if(!self.classifierIds.contains(classifier.classifierID)){
                                 self.classifierIds.append(classifier.classifierID)
                             }
-                            self.visualRecognition?.updateLocalModel(classifierID: classifier.classifierID)
+                            self.visualRecognition?.updateLocalModel(classifierID: classifier.classifierID) {
+                                _, error in
+                                if let error = error {
+                                    print(error)
+                                }
+                            }
                         }
                     }
             }
@@ -169,7 +182,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
               return
             }
             // Create service sdks
-            self.visualRecognition = VisualRecognition.init(apiKey: apiKey, version: self.VERSION)
+            self.visualRecognition = VisualRecognition.init(version: self.VERSION, apiKey: apiKey)
         }
 
         self.cloudantRestCall = CloudantRESTCall.init(cloudantUrl: url)
@@ -313,8 +326,12 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 observer.onCompleted()
                 return Disposables.create()
             }
-            visualRecognition.classifyWithLocalModel(image: uiImage, classifierIDs: self.classifierIds, threshold: 0, failure: failure) { classifiedImages in
-                  observer.onNext((classes: classifiedImages.images, position: worldCoord, frame: frame))
+            visualRecognition.classifyWithLocalModel(image: uiImage, classifierIDs: self.classifierIds, threshold: 0) { classifiedImages, error in
+                  if let error = error {
+                    print(error)
+                    return
+                  }
+                observer.onNext((classes: (classifiedImages?.images)!, position: worldCoord, frame: frame))
                   observer.onCompleted()
             }
 
@@ -469,15 +486,28 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     private func updateToLocalModels() -> Observable<Bool>{
         return Observable<Bool>.create{ observer in
             // check if visual recognition is not ready yet.
-            self.visualRecognition?.listClassifiers(){ classifiers in
-                let count: Int = classifiers.classifiers.count
-                if(count > 0 && classifiers.classifiers[0].status == "ready"){
-                    classifiers.classifiers.forEach{
+            self.visualRecognition?.listClassifiers(){ response, error in
+                if let error = error {
+                    print(error)
+                    return
+                }
+                guard let classifiers = response?.result?.classifiers else {
+                    print("missing result")
+                    return
+                }
+                let count: Int = classifiers.count
+                if(count > 0 && classifiers[0].status == "ready"){
+                    classifiers.forEach{
                         classifier in
                         if(!self.classifierIds.contains(classifier.classifierID)){
                             self.classifierIds.append(classifier.classifierID)
                         }
-                        self.visualRecognition?.updateLocalModel(classifierID: classifier.classifierID)
+                        self.visualRecognition?.updateLocalModel(classifierID: classifier.classifierID) {
+                            _, error in
+                            if let error = error {
+                                print(error)
+                            }
+                        }
                     }
                 }
             }

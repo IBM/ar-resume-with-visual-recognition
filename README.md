@@ -39,6 +39,8 @@ After completing this code pattern a user will know how to:
 
 # Steps
 
+> As an alternative to the steps below, you can [create this project as a starter kit](https://cloud.ibm.com/developer/appledevelopment/starter-kits/visual-recognition-with-core-ml-and-arkit-for-ios-with-watson) on IBM Cloud, which automatically provisions required services, and injects service credentials into a custom fork of this pattern.
+
 1. At a command line, clone this repo:
 ```
 git clone https://github.com/IBM/ar-resume-with-visual-recognition

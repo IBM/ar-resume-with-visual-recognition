@@ -6,7 +6,7 @@ IBM Cloud iOS Swift starter with Watson Visual Recognition and Core ML
 [![Platform](https://img.shields.io/badge/platform-ios_swift-lightgrey.svg?style=flat)](https://developer.apple.com/swift/)
 
 [img-ibmcloud-powered]: https://img.shields.io/badge/IBM%20Cloud-powered-blue.svg
-[url-bluemix]: http://bluemix.net
+[url-bluemix]: (https://cloud.ibm.com)
 
 ### Table of Contents
 * [Summary](#summary)
@@ -49,7 +49,7 @@ This application will do the following by default:
 * [ARKit](https://developer.apple.com/arkit/): ARKit is an augmented reality framework for iOS applications.
 * [Watson Visual Recognition](https://www.ibm.com/watson/developercloud/visual-recognition.html): Visual Recognition understands the contents of images - visual concepts tag the image, find human faces, approximate age and gender, and find similar images in a collection.
 * [Core ML](https://developer.apple.com/documentation/coreml): With Core ML, you can integrate trained machine learning models into your app.
-* [Cloudant NoSQL DB](https://console.ng.bluemix.net/catalog/services/cloudant-nosql-db): A fully managed data layer designed for modern web and mobile applications that leverages a flexible JSON schema.
+* [Cloudant NoSQL DB](https://cloud.ibm.com/catalog/services/cloudant-nosql-db): A fully managed data layer designed for modern web and mobile applications that leverages a flexible JSON schema.
 
 #### Technologies
 
@@ -94,7 +94,7 @@ $ pod install
 When the app loads, the app will create 3 classifiers for each of the zip files [`ResumeAR/sanjeev.zip`](ResumeAR/sanjeev.zip), [`ResumeAR/steve.zip`](ResumeAR/steve.zip) and [`ResumeAR/scott.zip`](ResumeAR/scott.zip).
 > To create a new classifier use the [Watson Visual Recognition tool](https://watson-visual-recognition.ng.bluemix.net/). A classifier will train the visual recognition service, it will be able to recognize different images of the same person. Use at least ten images of your head shot and also create a negative data set by using headshots that are not your own.
 
-The app will also create an [IBM Cloudant NoSQL database](https://console.bluemix.net/catalog/services/cloudant-nosql-db) in the service instance referenced in the `BMSCredentials.plist` file. Each JSON document in this database represents **one** person. The JSON schema can be found in [`schema.json`](ResumeAR/schema.json). When the app loads, it will also create 3 documents for the 3 classification done in step 3.
+The app will also create an [IBM Cloudant NoSQL database](https://cloud.ibm.com/catalog/services/cloudant-nosql-db) in the service instance referenced in the `BMSCredentials.plist` file. Each JSON document in this database represents **one** person. The JSON schema can be found in [`schema.json`](ResumeAR/schema.json). When the app loads, it will also create 3 documents for the 3 classification done in step 3.
 > To create new documents in the same database, use the [`schema.json`](ResumeAR/schema.json) provided to fill out the details. Replace the `classificationId` in the schema with the `classificationId` you receive from the classifier once the Watson Visual Recognition model has been successfully trained. This ID will be used to retrieve details about the classified person.
 
 **NOTE:** The training in Watson Visual Recognition might take couple of minutes. If the status is in `training`, then the AR will show `Training in progress` in your AR view. You can check the status of your classifier by using following curl command:

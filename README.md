@@ -26,7 +26,7 @@ After completing this code pattern a user will know how to:
 * [ARKit](https://developer.apple.com/arkit/): ARKit is an augmented reality framework for iOS applications.
 * [Watson Visual Recognition](https://www.ibm.com/watson/developercloud/visual-recognition.html): Visual Recognition understands the contents of images - visual concepts tag the image, find human faces, approximate age and gender, and find similar images in a collection.
 * [Core ML](https://developer.apple.com/documentation/coreml): With Core ML, you can integrate trained machine learning models into your app.
-* [Cloudant NoSQL DB](https://console.ng.bluemix.net/catalog/services/cloudant-nosql-db): A fully managed data layer designed for modern web and mobile applications that leverages a flexible JSON schema.
+* [Cloudant NoSQL DB](https://cloud.ibm.com/catalog/services/cloudant-nosql-db): A fully managed data layer designed for modern web and mobile applications that leverages a flexible JSON schema.
 
 # Technologies
 
@@ -46,12 +46,12 @@ After completing this code pattern a user will know how to:
 git clone https://github.com/IBM/ar-resume-with-visual-recognition
 ```
 
-2. Log into [IBM Cloud](http://bluemix.net/) account and create a [Watson Visual Recognition](https://console.bluemix.net/catalog/services/visual-recognition) service. Create a set of credentials and identify your API key.
+2. Log into [IBM Cloud](https://cloud.ibm.com) account and create a [Watson Visual Recognition](https://cloud.ibm.com/catalog/services/visual-recognition) service. Create a set of credentials and identify your API key.
 
 3. When the app loads, it also loads 3 Core ML models which is bundled part of the app. The models were trained using IBM Watson Visual Recognition Tool and downloaded as Core ML model. 
 > To create a new classifier use the [Watson Visual Recognition tool](https://watson-visual-recognition.ng.bluemix.net/). A classifier will train the visual recognition service, it will be able to recognize different images of the same person. Use at least ten images of your head shot and also create a negative data set by using headshots that are not your own.
 
-4. Create an [IBM Cloudant NoSQL database](https://console.bluemix.net/catalog/services/cloudant-nosql-db) and save the credentials. Each JSON document in this database represents **one** person. The JSON schema can be found in [`schema.json`](ResumeAR/schema.json). When the app loads, it will also create 3 documents for the 3 CoreML models which is bundled part of the app as mentioned in step 3. 
+4. Create an [IBM Cloudant NoSQL database](https://cloud.ibm.com/catalog/services/cloudant-nosql-db) and save the credentials. Each JSON document in this database represents **one** person. The JSON schema can be found in [`schema.json`](ResumeAR/schema.json). When the app loads, it will also create 3 documents for the 3 CoreML models which is bundled part of the app as mentioned in step 3. 
 > To create new documents in the same database, use the [`schema.json`](ResumeAR/schema.json) provided to fill out the details. Replace the `classificationId` in the schema with the `classificationId` you receive from the classifier once the Watson Visual Recognition model has been successfully trained. This ID will be used to retrieve details about the classified person.
 
 5. Go to `ios_swift` directory and open the project using `Xcode`.

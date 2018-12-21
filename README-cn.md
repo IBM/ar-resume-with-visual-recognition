@@ -26,7 +26,7 @@
 * [ARKit](https://developer.apple.com/arkit/)：ARKit 是用于 iOS 应用的增强现实框架。
 * [Watson Visual Recognition](https://www.ibm.com/watson/developercloud/visual-recognition.html)：视觉识别可以理解图像的内容 - 为图像添加视觉概念标记，查找人脸、大约年龄和性别，并在图库中查找类似图像。
 * [Core ML](https://developer.apple.com/documentation/coreml)：通过 Core ML，您可以将经过训练的机器学习模型整合到您的应用中。
-* [Cloudant 非关系型数据库](https://console.ng.bluemix.net/catalog/services/cloudant-nosql-db)：完全托管的数据层，专为采用灵活 JSON 模式的现代 Web 和移动应用而设计。
+* [Cloudant 非关系型数据库](https://cloud.ibm.com/catalog/services/cloudant-nosql-db)：完全托管的数据层，专为采用灵活 JSON 模式的现代 Web 和移动应用而设计。
 
 # 技术
 
@@ -40,12 +40,12 @@
 git clone https://github.com/IBM/ar-resume-with-visual-recognition
 ```
 
-2. 登录到 [IBM Cloud](http://bluemix.net/) 帐户，创建 [Watson Visual Recognition](https://console.bluemix.net/catalog/services/visual-recognition) 服务。创建一系列的凭证并识别 API 密钥。
+2. 登录到 [IBM Cloud](https://cloud.ibm.com) 帐户，创建 [Watson Visual Recognition](https://cloud.ibm.com/catalog/services/visual-recognition) 服务。创建一系列的凭证并识别 API 密钥。
 
 3. 加载应用时，将为以下每个 zip 文件创建 3 个分类器：[`ResumeAR/sanjeev.zip`](ResumeAR/sanjeev.zip)、 [`ResumeAR/steve.zip`](ResumeAR/steve.zip) 和 [`ResumeAR/scott.zip`](ResumeAR/scott.zip)。
 > 使用 [Watson Visual Recognition 工具](https://watson-visual-recognition.ng.bluemix.net/)创建新的分类器。分类器将训练视觉识别服务，它将能够识别同一个人的多张不同图像。这需要至少使用十张大头照，同时通过使用不是自己的大头照来创建反面数据集训练。
 
-4. 创建 [IBM Cloudant 非关系型数据库](https://console.bluemix.net/catalog/services/cloudant-nosql-db)并保存凭证。该数据库中的每个 JSON 文档都表示**一个**人。可在 [`schema.json`](ResumeAR/schema.json) 中找到 JSON 模式。加载应用时，也会为第 3 步中完成的 3 个分类创建 3 个文档。 
+4. 创建 [IBM Cloudant 非关系型数据库](https://cloud.ibm.com/catalog/services/cloudant-nosql-db)并保存凭证。该数据库中的每个 JSON 文档都表示**一个**人。可在 [`schema.json`](ResumeAR/schema.json) 中找到 JSON 模式。加载应用时，也会为第 3 步中完成的 3 个分类创建 3 个文档。 
 > 要在同一数据库中创建新文档，请使用提供的 [`schema.json`](ResumeAR/schema.json) 来填充详细信息。Watson Visual Recognition 模型训练成功之后，使用从分类器收到的 `classificationId` 替换该模式中的 `classificationId`。此 ID 将用于检索有关经过分类的个人的详细信息。
 
 5. 转至 `ios_swift` 目录并使用 `Xcode` 打开项目。

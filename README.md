@@ -26,7 +26,7 @@ After completing this code pattern a user will know how to:
 * [ARKit](https://developer.apple.com/arkit/): ARKit is an augmented reality framework for iOS applications.
 * [Watson Visual Recognition](https://www.ibm.com/watson/developercloud/visual-recognition.html): Visual Recognition understands the contents of images - visual concepts tag the image, find human faces, approximate age and gender, and find similar images in a collection.
 * [Core ML](https://developer.apple.com/documentation/coreml): With Core ML, you can integrate trained machine learning models into your app.
-* [Cloudant NoSQL DB](https://cloud.ibm.com/catalog/services/cloudant-nosql-db): A fully managed data layer designed for modern web and mobile applications that leverages a flexible JSON schema.
+* [Cloudant NoSQL DB](https://cloud.ibm.com/catalog/services/cloudant): A fully managed data layer designed for modern web and mobile applications that leverages a flexible JSON schema.
 
 # Technologies
 
@@ -48,11 +48,11 @@ git clone https://github.com/IBM/ar-resume-with-visual-recognition
 
 2. Log into [IBM Cloud](https://cloud.ibm.com) account and create a [Watson Visual Recognition](https://cloud.ibm.com/catalog/services/visual-recognition) service. Create a set of credentials and identify your API key.
 
-3. When the app loads, it also loads 3 Core ML models which is bundled part of the app. The models were trained using IBM Watson Visual Recognition Tool and downloaded as Core ML model. 
+3. When the app loads, it also loads 3 Core ML models which is bundled part of the app. The models were trained using IBM Watson Visual Recognition Tool and downloaded as Core ML model.
 > To create a new classifier use the [Watson Visual Recognition tool](https://watson-visual-recognition.ng.bluemix.net/). A classifier will train the visual recognition service, it will be able to recognize different images of the same person. Use at least ten images of your head shot and also create a negative data set by using headshots that are not your own.
 
-4. Create an [IBM Cloudant NoSQL database](https://cloud.ibm.com/catalog/services/cloudant-nosql-db) and save the credentials. Each JSON document in this database represents **one** person. The JSON schema can be found in [`schema.json`](ResumeAR/schema.json). When the app loads, it will also create 3 documents for the 3 CoreML models which is bundled part of the app as mentioned in step 3. 
-> To create new documents in the same database, use the [`schema.json`](ResumeAR/schema.json) provided to fill out the details. Replace the `classificationId` in the schema with the `classificationId` you receive from the classifier once the Watson Visual Recognition model has been successfully trained. This ID will be used to retrieve details about the classified person.
+4. Create an [IBM Cloudant NoSQL database](https://cloud.ibm.com/catalog/services/cloudant) and save the credentials. Each JSON document in this database represents **one** person. The JSON schema can be found in [`schema.json`](schema.json). When the app loads, it will also create 3 documents for the 3 CoreML models which is bundled part of the app as mentioned in step 3.
+> To create new documents in the same database, use the [`schema.json`](schema.json) provided to fill out the details. Replace the `classificationId` in the schema with the `classificationId` you receive from the classifier once the Watson Visual Recognition model has been successfully trained. This ID will be used to retrieve details about the classified person.
 
 5. Go to `ios_swift` directory and open the project using `Xcode`.
 
@@ -65,7 +65,7 @@ git clone https://github.com/IBM/ar-resume-with-visual-recognition
 	<key>visualrecognitionApi_key</key>
 	<string>VR_API_KEY</string>
 	<key>cloudantUrl</key>
-	<string>CLOUDANT_URL</string>	
+	<string>CLOUDANT_URL</string>
 </dict>
 </plist>
 ```
@@ -91,7 +91,7 @@ Replace the `API_KEY` with the Watson Visual Recognition api key.
 
 # Adding to the database
 
-To create a new entry in the database perform the following steps: 
+To create a new entry in the database perform the following steps:
 
 1. Create a new Watson Visual Recognition classifier using the [online tool](https://watson-visual-recognition.ng.bluemix.net/) for each person you want to be able to identify, use at least ten images of that person.
 
@@ -107,7 +107,7 @@ curl -H "Content-Type: application/json" -X POST -d $data https://$ACCOUNT.cloud
 
 > The `$DATABASE` variable is the database name you created in IBM Cloudant.
 
-> See [`ResumeAR/schema.json`](ResumeAR/schema.json) for additional information about the Cloudant database configuration.
+> See [`schema.json`](schema.json) for additional information about the Cloudant database configuration.
 
 3. Run the app and point the camera view to your image.
 
@@ -119,7 +119,7 @@ curl -H "Content-Type: application/json" -X POST -d $data https://$ACCOUNT.cloud
 
 # Learn more
 
-* **Artificial Intelligence Code Patterns**: Enjoyed this Code Pattern? Check out our other [AI Code Patterns](https://developer.ibm.com/code/technologies/artificial-intelligence/).
+* **Artificial Intelligence Code Patterns**: Enjoyed this Code Pattern? Check out our other [AI Code Patterns](https://developer.ibm.com/technologies/artificial-intelligence/).
 * **AI and Data Code Pattern Playlist**: Bookmark our [playlist](https://www.youtube.com/playlist?list=PLzUbsvIyrNfknNewObx5N7uGZ5FKH0Fde) with all of our Code Pattern videos
 * **With Watson**: Want to take your Watson app to the next level? Looking to utilize Watson Brand assets? [Join the With Watson program](https://www.ibm.com/watson/with-watson/) to leverage exclusive brand, marketing, and tech resources to amplify and accelerate your Watson embedded commercial solution.
 * **Offline image classification using Watson Visual Recognition and Core ML** [Visual Recognition Example](https://github.com/watson-developer-cloud/visual-recognition-coreml)
@@ -131,11 +131,11 @@ curl -H "Content-Type: application/json" -X POST -d $data https://$ACCOUNT.cloud
 
 * [ARKit](https://developer.apple.com/arkit)
 * [Watson Swift SDK](https://github.com/watson-developer-cloud/swift-sdk)
-* [IBM Visual Recognition](https://www.ibm.com/watson/services/visual-recognition-4)
-* [IBM Cloudant](https://www.ibm.com/cloud/cloudant) 
+* [IBM Visual Recognition](https://www.ibm.com/watson/services/visual-recognition)
+* [IBM Cloudant](https://www.ibm.com/cloud/cloudant)
 
 # License
 
-This code pattern is licensed under the Apache Software License, Version 2.  Separate third party code objects invoked within this code pattern are licensed by their respective providers pursuant to their own separate licenses. Contributions are subject to the [Developer Certificate of Origin, Version 1.1 (DCO)](https://developercertificate.org/) and the [Apache Software License, Version 2](http://www.apache.org/licenses/LICENSE-2.0.txt).
+This code pattern is licensed under the Apache Software License, Version 2.  Separate third party code objects invoked within this code pattern are licensed by their respective providers pursuant to their own separate licenses. Contributions are subject to the [Developer Certificate of Origin, Version 1.1 (DCO)](https://developercertificate.org/) and the [Apache Software License, Version 2](https://www.apache.org/licenses/LICENSE-2.0.txt).
 
-[Apache Software License (ASL) FAQ](http://www.apache.org/foundation/license-faq.html#WhatDoesItMEAN)
+[Apache Software License (ASL) FAQ](https://www.apache.org/foundation/license-faq.html#WhatDoesItMEAN)

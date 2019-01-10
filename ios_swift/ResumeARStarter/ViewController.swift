@@ -128,8 +128,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                     }
                     //if in case users have uploaded their images and trained VR in the cloud
                     if classifiers.count > 0 && classifiers[0].status == "ready" {
-                        classifiers.forEach {
-                            classifier in
+                        classifiers.forEach { classifier in
                             if !self.classifierIds.contains(classifier.classifierID) {
                                 self.classifierIds.append(classifier.classifierID)
                             }
@@ -311,18 +310,24 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             //convert the cropped image to UI image
             let uiImage: UIImage = self.convert(cmage: pixel)
 
-            let failure = { (error: Error) in print(error) }
             guard let visualRecognition = self.visualRecognition else {
                 print("No handle on visual recognition service")
                 observer.onCompleted()
                 return Disposables.create()
             }
+
             visualRecognition.classifyWithLocalModel(image: uiImage, classifierIDs: self.classifierIds, threshold: 0) { classifiedImages, error in
                   if let error = error {
                     print(error)
                     return
                   }
-                observer.onNext((classes: (classifiedImages?.images)!, position: worldCoord, frame: frame))
+
+                  guard let images = classifiedImages?.images else {
+                      print("missing result")
+                      return
+                  }
+
+                  observer.onNext((classes: images, position: worldCoord, frame: frame))
                   observer.onCompleted()
             }
 
@@ -444,6 +449,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             }
             return
         }
+        
         // Update existent face
         DispatchQueue.main.async {
 
@@ -482,15 +488,15 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                     print("missing result")
                     return
                 }
+
                 let count: Int = classifiers.count
                 if count > 0 && classifiers[0].status == "ready" {
-                    classifiers.forEach {
-                        classifier in
+                    classifiers.forEach { classifier in
                         if !self.classifierIds.contains(classifier.classifierID) {
                             self.classifierIds.append(classifier.classifierID)
                         }
-                        self.visualRecognition?.updateLocalModel(classifierID: classifier.classifierID) {
-                            _, error in
+
+                        self.visualRecognition?.updateLocalModel(classifierID: classifier.classifierID) { _, error in
                             if let error = error {
                                 print(error)
                             }
@@ -498,8 +504,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                     }
                 }
             }
+
             observer.onNext(true)
             observer.onCompleted()
+
             return Disposables.create()
         }
     }

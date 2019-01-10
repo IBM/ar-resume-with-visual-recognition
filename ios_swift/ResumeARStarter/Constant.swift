@@ -14,7 +14,6 @@
 
 import Foundation
 
-
 public struct Constant {
     //Sanjeev's Detail
     public static let SanjeevName = "Sanjeev Ghimire"
@@ -23,7 +22,7 @@ public struct Constant {
     public static let SanjeevTW = "sanjeevghimire"
     public static let SanjeevPh = "859-864-9371"
     public static let SanjeevLoc = "Austin, TX"
-    
+
     //Steve's Details
     public static let SteveName = "Steve Martinelli"
     public static let SteveFB = "N/A"
@@ -31,7 +30,7 @@ public struct Constant {
     public static let SteveTW = "stevebot"
     public static let StevePh = "416-555-1234"
     public static let SteveLoc = "Toronto"
-    
+
     //Scott's Details
     public static let ScottName = "Scott D'Angelo"
     public static let ScottFB = "scottfb"
@@ -39,7 +38,7 @@ public struct Constant {
     public static let ScottTW = "Scottbot"
     public static let ScottPh = "416-555-1234"
     public static let ScottLoc = "Denver, Colorado"
-    
+
     //default zip
     public static let sanjeevZip = "sanjeev"
     public static let steveZip = "steve"
@@ -47,8 +46,8 @@ public struct Constant {
     public static let sanjeevNegativeZip = "sanjeev_negative"
     public static let scottNegativeZip = "scott_negative"
     public static let steveNegativeZip = "steve_negative"
-    
+
     // database name
     public static let databaseName =  "resumear"
-    
+
 }

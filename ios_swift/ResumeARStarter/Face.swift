@@ -19,7 +19,7 @@ class Face {
     let name: String
     let node: SCNNode
     var hidden: Bool {
-        get{
+        get {
             return node.opacity != 1
         }
     }
@@ -29,7 +29,7 @@ class Face {
         }
     }
     private(set) var updated = Date()
-    
+
     init(name: String, node: SCNNode, timestamp: TimeInterval) {
         self.name = name
         self.node = node
@@ -40,11 +40,10 @@ class Face {
 extension Date {
     func isAfter(seconds: Double) -> Bool {
         let elapsed = Date.init().timeIntervalSince(self)
-        
+
         if elapsed > seconds {
             return true
         }
         return false
     }
 }
-

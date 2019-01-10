@@ -1,1 +1,1 @@
-github "watson-developer-cloud/swift-sdk"
+github "watson-developer-cloud/swift-sdk" ~> 1.1

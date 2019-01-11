@@ -26,7 +26,6 @@ import CoreML
 // {{applaunchIncludes}}
 // {{objectstorageIncludes}}
 
-
 class ViewController: UIViewController, ARSCNViewDelegate {
 
     @IBOutlet var sceneView: ARSCNView!
@@ -35,7 +34,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     var bounds: CGRect = CGRect(x: 0, y: 0, width: 0, height: 0)
     var visualRecognition: VisualRecognition?
     var cloudantRestCall: CloudantRESTCall?
-    var classifierIds: [String] = ["SanjeevGhimire_967590069","ScottDAngelo_1040670748","SteveMartinelli_2096165720"]
+    var classifierIds: [String] = ["SanjeevGhimire_967590069", "ScottDAngelo_1040670748", "SteveMartinelli_2096165720"]
 
     let VERSION = "2017-12-07"
 
@@ -58,9 +57,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         //configure IBM cloud services required by this app
         self.configureCloudantAndVisualRecognition()
 
-        self.cloudantRestCall?.createDatabase(databaseName: Constant.databaseName){ (dbDetails) in
+        self.cloudantRestCall?.createDatabase(databaseName: Constant.databaseName) { (dbDetails) in
             print(dbDetails)
-            if(dbDetails["ok"].exists()){
+            if dbDetails["ok"].exists() {
                 //add info for test database.
                 let userData1 = ["classificationId": "SteveMartinelli_2096165720",
                                  "fullname": Constant.SteveName,
@@ -70,9 +69,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                                  "phone": Constant.StevePh,
                                  "location": Constant.SteveLoc]
 
-                self.cloudantRestCall?.updatePersonData(userData: JSON(userData1)){ (resultJSON) in
-                    if(!resultJSON["ok"].boolValue){
-                        print("Error while saving user Data",userData1)
+                self.cloudantRestCall?.updatePersonData(userData: JSON(userData1)) { (resultJSON) in
+                    if !resultJSON["ok"].boolValue {
+                        print("Error while saving user Data", userData1)
                         return
                     }
                 }
@@ -85,9 +84,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                                  "phone": Constant.SanjeevPh,
                                  "location": Constant.SanjeevLoc]
 
-                self.cloudantRestCall?.updatePersonData(userData: JSON(userData2)){ (resultJSON) in
-                    if(!resultJSON["ok"].boolValue){
-                        print("Error while saving user Data",userData2)
+                self.cloudantRestCall?.updatePersonData(userData: JSON(userData2)) { (resultJSON) in
+                    if !resultJSON["ok"].boolValue {
+                        print("Error while saving user Data", userData2)
                         return
                     }
                 }
@@ -100,9 +99,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                                  "phone": Constant.ScottPh,
                                  "location": Constant.ScottLoc]
 
-                self.cloudantRestCall?.updatePersonData(userData: JSON(userData3)){ (resultJSON) in
-                    if(!resultJSON["ok"].boolValue){
-                        print("Error while saving user Data",userData3)
+                self.cloudantRestCall?.updatePersonData(userData: JSON(userData3)) { (resultJSON) in
+                    if !resultJSON["ok"].boolValue {
+                        print("Error while saving user Data", userData3)
                         return
                     }
                 }
@@ -112,23 +111,32 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let localModels = try? self.visualRecognition?.listLocalModels()
             if let count = localModels??.count, count > 0 {
                 localModels??.forEach { classifierId in
-                    if(!self.classifierIds.contains(classifierId)){
+                    if !self.classifierIds.contains(classifierId) {
                         self.classifierIds.append(classifierId)
                     }
                 }
-                self.isTraining = false;
-            }else{
-
-                self.visualRecognition?.listClassifiers(){
-                classifiers in
+                self.isTraining = false
+            } else {
+                self.visualRecognition?.listClassifiers { response, error in
+                    if let error = error {
+                        print(error)
+                        return
+                    }
+                    guard let classifiers = response?.result?.classifiers else {
+                        print("missing result")
+                        return
+                    }
                     //if in case users have uploaded their images and trained VR in the cloud
-                    if(classifiers.classifiers.count > 0 && classifiers.classifiers[0].status == "ready"){
-                        classifiers.classifiers.forEach{
-                            classifier in
-                            if(!self.classifierIds.contains(classifier.classifierID)){
+                    if classifiers.count > 0 && classifiers[0].status == "ready" {
+                        classifiers.forEach { classifier in
+                            if !self.classifierIds.contains(classifier.classifierID) {
                                 self.classifierIds.append(classifier.classifierID)
                             }
-                            self.visualRecognition?.updateLocalModel(classifierID: classifier.classifierID)
+                            self.visualRecognition?.updateLocalModel(classifierID: classifier.classifierID) { _, error in
+                                if let error = error {
+                                    print(error)
+                                }
+                            }
                         }
                     }
             }
@@ -169,7 +177,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
               return
             }
             // Create service sdks
-            self.visualRecognition = VisualRecognition.init(apiKey: apiKey, version: self.VERSION)
+            self.visualRecognition = VisualRecognition.init(version: self.VERSION, apiKey: apiKey)
         }
 
         self.cloudantRestCall = CloudantRESTCall.init(cloudantUrl: url)
@@ -187,10 +195,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
         Observable<Int>.interval(0.6, scheduler: SerialDispatchQueueScheduler(qos: .default))
             .subscribeOn(SerialDispatchQueueScheduler(qos: .background))
-            .flatMap{_ in self.updateToLocalModels()}
-            .flatMap{_ in self.faceObservation() }
-            .flatMap{ Observable.from($0)}
-            .flatMap{ self.faceClassification(face: $0.observation, image: $0.image, frame: $0.frame) }
+            .flatMap {_ in self.updateToLocalModels()}
+            .flatMap {_ in self.faceObservation() }
+            .flatMap { Observable.from($0)}
+            .flatMap { self.faceClassification(face: $0.observation, image: $0.image, frame: $0.frame) }
             .subscribe { [unowned self] event in
                 guard let element = event.element else {
                     print("No element available")
@@ -203,9 +211,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             .subscribeOn(SerialDispatchQueueScheduler(qos: .background))
             .subscribe { [unowned self] _ in
 
-                self.faces.filter{ $0.updated.isAfter(seconds: 1.5) && !$0.hidden }.forEach{ face in
+                self.faces.filter { $0.updated.isAfter(seconds: 1.5) && !$0.hidden }.forEach { face in
                     //print("Hide node: \(face.name)")
-                    DispatchQueue.main.async{ face.node.hide() }
+                    DispatchQueue.main.async { face.node.hide() }
                 }
             }.disposed(by: 👜)
     }
@@ -216,9 +224,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         👜 = DisposeBag()
         sceneView.session.pause()
     }
-
-
-
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -253,10 +258,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
     }
 
-
     // MARK: - Face detections
     private func faceObservation() -> Observable<[(observation: VNFaceObservation, image: CIImage, frame: ARFrame)]> {
-        return Observable<[(observation: VNFaceObservation, image: CIImage, frame: ARFrame)]>.create{ observer in
+        return Observable<[(observation: VNFaceObservation, image: CIImage, frame: ARFrame)]>.create { observer in
             guard let frame = self.sceneView.session.currentFrame else {
                 print("No frame available")
                 observer.onCompleted()
@@ -290,9 +294,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
     }
 
-
     private func faceClassification(face: VNFaceObservation, image: CIImage, frame: ARFrame) -> Observable<(classes: [ClassifiedImage], position: SCNVector3, frame: ARFrame)> {
-        return Observable<(classes: [ClassifiedImage], position: SCNVector3, frame: ARFrame)>.create{ observer in
+        return Observable<(classes: [ClassifiedImage], position: SCNVector3, frame: ARFrame)>.create { observer in
 
             // Determine position of the face
             let boundingBox = self.transformBoundingBox(face.boundingBox)
@@ -307,21 +310,30 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             //convert the cropped image to UI image
             let uiImage: UIImage = self.convert(cmage: pixel)
 
-            let failure = { (error: Error) in print(error) }
             guard let visualRecognition = self.visualRecognition else {
                 print("No handle on visual recognition service")
                 observer.onCompleted()
                 return Disposables.create()
             }
-            visualRecognition.classifyWithLocalModel(image: uiImage, classifierIDs: self.classifierIds, threshold: 0, failure: failure) { classifiedImages in
-                  observer.onNext((classes: classifiedImages.images, position: worldCoord, frame: frame))
+
+            visualRecognition.classifyWithLocalModel(image: uiImage, classifierIDs: self.classifierIds, threshold: 0) { classifiedImages, error in
+                  if let error = error {
+                    print(error)
+                    return
+                  }
+
+                  guard let images = classifiedImages?.images else {
+                      print("missing result")
+                      return
+                  }
+
+                  observer.onNext((classes: images, position: worldCoord, frame: frame))
                   observer.onCompleted()
             }
 
             return Disposables.create()
         }
     }
-
 
     /// Transform bounding box according to device orientation
     ///
@@ -365,7 +377,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     private func normalizeWorldCoord(_ boundingBox: CGRect) -> SCNVector3? {
 
         var array: [SCNVector3] = []
-        Array(0...2).forEach{_ in
+        Array(0...2).forEach {_ in
             if let position = determineWorldCoord(boundingBox) {
                 array.append(position)
             }
@@ -378,7 +390,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
         return SCNVector3.center(array)
     }
-
 
     /// Determine the vector from the position on the screen.
     ///
@@ -402,7 +413,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
 
         // get the classifier result with best score
-        var personWithHighScore: ClassifierResult? = nil
+        var personWithHighScore: ClassifierResult?
         var highestScore: Double = 0.0
         classifiedImage.classifiers.forEach { classifierResult in
             guard let score = classifierResult.classes.first?.score else {
@@ -410,8 +421,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 print("Score not found in the JSON")
                 return
             }
-//            let score: Double = (classifierResult.classes.first?.score)!
-            if(Double(score) > highestScore){
+
+            if Double(score) > highestScore {
                 highestScore = score
                 personWithHighScore = classifierResult
             }
@@ -421,8 +432,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let classifierId = personWithHighScore?.classifierID
 
         // Filter for existent face
-        let results = self.faces.filter{ $0.name == name && $0.timestamp != frame.timestamp }
-            .sorted{ $0.node.position.distance(toVector: position) < $1.node.position.distance(toVector: position) }
+        let results = self.faces.filter { $0.name == name && $0.timestamp != frame.timestamp }
+            .sorted { $0.node.position.distance(toVector: position) < $1.node.position.distance(toVector: position) }
 
         // Create new face
         //note:: texture
@@ -438,13 +449,14 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             }
             return
         }
+        
         // Update existent face
         DispatchQueue.main.async {
 
             // Filter for face that's already displayed
-            if let displayFace = results.filter({ !$0.hidden }).first  {
+            if let displayFace = results.filter({ !$0.hidden }).first {
                 let distance = displayFace.node.position.distance(toVector: position)
-                if(distance >= 0.03 ) {
+                if distance >= 0.03 {
                     displayFace.node.move(position)
                 }
                 displayFace.timestamp = frame.timestamp
@@ -457,32 +469,45 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
     }
 
-    func convert(cmage:CIImage) -> UIImage
-    {
-        let context:CIContext = CIContext.init(options: nil)
-        let cgImage:CGImage = context.createCGImage(cmage, from: cmage.extent)!
-        let image:UIImage = UIImage.init(cgImage: cgImage)
+    func convert(cmage: CIImage) -> UIImage {
+        let context: CIContext = CIContext.init(options: nil)
+        let cgImage: CGImage = context.createCGImage(cmage, from: cmage.extent)!
+        let image: UIImage = UIImage.init(cgImage: cgImage)
         return image
     }
 
-
-    private func updateToLocalModels() -> Observable<Bool>{
-        return Observable<Bool>.create{ observer in
+    private func updateToLocalModels() -> Observable<Bool> {
+        return Observable<Bool>.create { observer in
             // check if visual recognition is not ready yet.
-            self.visualRecognition?.listClassifiers(){ classifiers in
-                let count: Int = classifiers.classifiers.count
-                if(count > 0 && classifiers.classifiers[0].status == "ready"){
-                    classifiers.classifiers.forEach{
-                        classifier in
-                        if(!self.classifierIds.contains(classifier.classifierID)){
+            self.visualRecognition?.listClassifiers { response, error in
+                if let error = error {
+                    print(error)
+                    return
+                }
+                guard let classifiers = response?.result?.classifiers else {
+                    print("missing result")
+                    return
+                }
+
+                let count: Int = classifiers.count
+                if count > 0 && classifiers[0].status == "ready" {
+                    classifiers.forEach { classifier in
+                        if !self.classifierIds.contains(classifier.classifierID) {
                             self.classifierIds.append(classifier.classifierID)
                         }
-                        self.visualRecognition?.updateLocalModel(classifierID: classifier.classifierID)
+
+                        self.visualRecognition?.updateLocalModel(classifierID: classifier.classifierID) { _, error in
+                            if let error = error {
+                                print(error)
+                            }
+                        }
                     }
                 }
             }
+
             observer.onNext(true)
             observer.onCompleted()
+
             return Disposables.create()
         }
     }

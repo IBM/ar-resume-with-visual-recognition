@@ -311,15 +311,18 @@
 				TargetAttributes = {
 					B4BF235A1FA2745D002906DD = {
 						CreatedOnToolsVersion = 9.0.1;
+						LastSwiftMigration = 1010;
 						ProvisioningStyle = Automatic;
 					};
 					B4BF23701FA2745D002906DD = {
 						CreatedOnToolsVersion = 9.0.1;
+						LastSwiftMigration = 1010;
 						ProvisioningStyle = Automatic;
 						TestTargetID = B4BF235A1FA2745D002906DD;
 					};
 					B4BF237B1FA2745D002906DD = {
 						CreatedOnToolsVersion = 9.0.1;
+						LastSwiftMigration = 1010;
 						ProvisioningStyle = Automatic;
 						TestTargetID = B4BF235A1FA2745D002906DD;
 					};
@@ -660,7 +663,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.codepattern.ResumeARStarter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -682,7 +685,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.codepattern.ResumeARStarter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -695,11 +698,11 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = PP64RT7P8Z;
-				INFOPLIST_FILE = ResumeARTests/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/ResumeARStarterTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.codepattern.ResumeARStarter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ResumeARStarter.app/ResumeARStarter";
 			};
@@ -713,11 +716,11 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = PP64RT7P8Z;
-				INFOPLIST_FILE = ResumeARTests/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/ResumeARStarterTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.codepattern.ResumeARStarter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ResumeARStarter.app/ResumeARStarter";
 			};
@@ -730,11 +733,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = PP64RT7P8Z;
-				INFOPLIST_FILE = ResumeARUITests/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/ResumeARStarterUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.sg.ResumeARUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.codepattern.ResumeARUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = ResumeAR;
 			};
@@ -747,11 +750,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = PP64RT7P8Z;
-				INFOPLIST_FILE = ResumeARUITests/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/ResumeARStarterUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.sg.ResumeARUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.codepattern.ResumeARUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = ResumeAR;
 			};

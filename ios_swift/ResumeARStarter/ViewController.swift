@@ -46,7 +46,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Register observer
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(didBecomeActive),
-                                               name: .UIApplicationDidBecomeActive,
+                                               name: UIApplication.didBecomeActiveNotification,
                                                object: nil)
         // Set the view's delegate
         sceneView.delegate = self

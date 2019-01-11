@@ -156,29 +156,25 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Retrieve plist
         guard let path = Bundle.main.path(forResource: "BMSCredentials", ofType: "plist"),
             let credentials = NSDictionary(contentsOfFile: path) as? [String: AnyObject] else {
+                // Add a meaningful error message here Christian
                 return
         }
 
         // Retrieve Cloudant credentials
         guard let url = credentials["cloudantUrl"] as? String, !url.isEmpty else {
+                // Add a meaningful error message here Christian
                 return
         }
 
         // Set the Watson credentials for Visual Recognition service from the BMSCredentials.plist
         // If using IAM authentication
-        if let apiKey = credentials["visualrecognitionApikey"] as? String {
-
-            // Create service sdks
-            self.visualRecognition = VisualRecognition(version: self.VERSION, apiKey: apiKey)
-
-        // Else for legacy api_key authentication
-        } else {
-            guard let apiKey = credentials["visualrecognitionApi_key"] as? String else {
-              return
-            }
-            // Create service sdks
-            self.visualRecognition = VisualRecognition.init(version: self.VERSION, apiKey: apiKey)
+        guard let apiKey = credentials["visualrecognitionApikey"] as? String else {
+            // Add Meaningful message here Christian
+            return
         }
+        
+        // Create service sdks
+        self.visualRecognition = VisualRecognition(version: self.VERSION, apiKey: apiKey)
 
         self.cloudantRestCall = CloudantRESTCall.init(cloudantUrl: url)
         self.cloudantRestCall?.database = Constant.databaseName
@@ -449,7 +445,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             }
             return
         }
-        
+
         // Update existent face
         DispatchQueue.main.async {
 

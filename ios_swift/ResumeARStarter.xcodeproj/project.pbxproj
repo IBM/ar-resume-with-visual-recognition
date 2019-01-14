@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		3842A74647F25DB5BCED9FBB /* Pods_ResumeARStarterUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE1F8E97AE6145B021ACA986 /* Pods_ResumeARStarterUITests.framework */; };
 		A17C9566A3740B96AF43E648 /* Pods_ResumeARStarterTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7982E6C28D22700E9D94651E /* Pods_ResumeARStarterTests.framework */; };
+		AA27243821E93A90005B7878 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA27243721E93A90005B7878 /* RestKit.framework */; };
+		AA27243921E93A90005B7878 /* RestKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AA27243721E93A90005B7878 /* RestKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		AA27243B21E93E0B005B7878 /* BMSCredentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = AA27243A21E93E0B005B7878 /* BMSCredentials.plist */; };
 		B424BCFA201F92DA00B18120 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = B424BCF9201F92DA00B18120 /* Cartfile */; };
 		B430E1231FE8448A00058C99 /* CloudantRESTCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = B430E1221FE8448A00058C99 /* CloudantRESTCall.swift */; };
 		B43158AA209BA0BB004A0BF4 /* ScottDAngelo_1040670748.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = B43158A7209BA0BB004A0BF4 /* ScottDAngelo_1040670748.mlmodel */; };
@@ -61,6 +64,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				B4BE3DAF1FDB186C00268324 /* VisualRecognitionV3.framework in Embed Frameworks */,
+				AA27243921E93A90005B7878 /* RestKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -74,6 +78,8 @@
 		6B562D0F95F07D1705DB003A /* Pods-ResumeARStarterTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ResumeARStarterTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ResumeARStarterTests/Pods-ResumeARStarterTests.release.xcconfig"; sourceTree = "<group>"; };
 		7735D50469CCC5D6A4C37810 /* Pods-ResumeARStarterTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ResumeARStarterTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ResumeARStarterTests/Pods-ResumeARStarterTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7982E6C28D22700E9D94651E /* Pods_ResumeARStarterTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ResumeARStarterTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA27243721E93A90005B7878 /* RestKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RestKit.framework; path = Carthage/Build/iOS/RestKit.framework; sourceTree = "<group>"; };
+		AA27243A21E93E0B005B7878 /* BMSCredentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BMSCredentials.plist; sourceTree = "<group>"; };
 		AE1F8E97AE6145B021ACA986 /* Pods_ResumeARStarterUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ResumeARStarterUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B424BCF9201F92DA00B18120 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		B430E1221FE8448A00058C99 /* CloudantRESTCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudantRESTCall.swift; sourceTree = "<group>"; };
@@ -115,6 +121,7 @@
 			files = (
 				B4BE3DAE1FDB186C00268324 /* VisualRecognitionV3.framework in Frameworks */,
 				D77DFA937B3DBE328F4F3D53 /* Pods_ResumeARStarter.framework in Frameworks */,
+				AA27243821E93A90005B7878 /* RestKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -164,6 +171,7 @@
 		B4BF23521FA2745C002906DD = {
 			isa = PBXGroup;
 			children = (
+				AA27243721E93A90005B7878 /* RestKit.framework */,
 				B479E7612064643600786B47 /* Podfile */,
 				B424BCF9201F92DA00B18120 /* Cartfile */,
 				B4BF235D1FA2745D002906DD /* ResumeARStarter */,
@@ -188,6 +196,7 @@
 		B4BF235D1FA2745D002906DD /* ResumeARStarter */ = {
 			isa = PBXGroup;
 			children = (
+				AA27243A21E93E0B005B7878 /* BMSCredentials.plist */,
 				B43158A8209BA0BB004A0BF4 /* SanjeevGhimire_967590069.mlmodel */,
 				B43158A7209BA0BB004A0BF4 /* ScottDAngelo_1040670748.mlmodel */,
 				B43158A9209BA0BB004A0BF4 /* SteveMartinelli_2096165720.mlmodel */,
@@ -297,20 +306,23 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0900;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = "Sanjeev Ghimire";
 				TargetAttributes = {
 					B4BF235A1FA2745D002906DD = {
 						CreatedOnToolsVersion = 9.0.1;
+						LastSwiftMigration = 1010;
 						ProvisioningStyle = Automatic;
 					};
 					B4BF23701FA2745D002906DD = {
 						CreatedOnToolsVersion = 9.0.1;
+						LastSwiftMigration = 1010;
 						ProvisioningStyle = Automatic;
 						TestTargetID = B4BF235A1FA2745D002906DD;
 					};
 					B4BF237B1FA2745D002906DD = {
 						CreatedOnToolsVersion = 9.0.1;
+						LastSwiftMigration = 1010;
 						ProvisioningStyle = Automatic;
 						TestTargetID = B4BF235A1FA2745D002906DD;
 					};
@@ -347,6 +359,7 @@
 				B4BF236B1FA2745D002906DD /* LaunchScreen.storyboard in Resources */,
 				B479E7532059A3C300786B47 /* facebook.png in Resources */,
 				B479E7522059A3C300786B47 /* linkedin.png in Resources */,
+				AA27243B21E93E0B005B7878 /* BMSCredentials.plist in Resources */,
 				B479E7622064643600786B47 /* Podfile in Resources */,
 				B4BF23681FA2745D002906DD /* Assets.xcassets in Resources */,
 				B4BF23661FA2745D002906DD /* Main.storyboard in Resources */,
@@ -414,6 +427,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ResumeARStarter/Pods-ResumeARStarter-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/PKHUD/PKHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/RxAtomic/RxAtomic.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
@@ -421,6 +435,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PKHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAtomic.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
@@ -534,6 +549,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -541,6 +557,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -591,6 +608,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -598,6 +616,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -634,17 +653,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8T393AQ955;
+				DEVELOPMENT_TEAM = PP64RT7P8Z;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/ResumeARStarter/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.sg.test.ResumeARStarter;
+				PRODUCT_BUNDLE_IDENTIFIER = com.codepattern.ResumeARStarter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -656,17 +675,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8T393AQ955;
+				DEVELOPMENT_TEAM = PP64RT7P8Z;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/ResumeARStarter/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.sg.test.ResumeARStarter;
+				PRODUCT_BUNDLE_IDENTIFIER = com.codepattern.ResumeARStarter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -678,12 +697,12 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8T393AQ955;
-				INFOPLIST_FILE = ResumeARTests/Info.plist;
+				DEVELOPMENT_TEAM = PP64RT7P8Z;
+				INFOPLIST_FILE = "$(SRCROOT)/ResumeARStarterTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.sg.ResumeARTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.codepattern.ResumeARStarter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ResumeARStarter.app/ResumeARStarter";
 			};
@@ -696,12 +715,12 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8T393AQ955;
-				INFOPLIST_FILE = ResumeARTests/Info.plist;
+				DEVELOPMENT_TEAM = PP64RT7P8Z;
+				INFOPLIST_FILE = "$(SRCROOT)/ResumeARStarterTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.sg.ResumeARTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.codepattern.ResumeARStarter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ResumeARStarter.app/ResumeARStarter";
 			};
@@ -713,12 +732,12 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8T393AQ955;
-				INFOPLIST_FILE = ResumeARUITests/Info.plist;
+				DEVELOPMENT_TEAM = PP64RT7P8Z;
+				INFOPLIST_FILE = "$(SRCROOT)/ResumeARStarterUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.sg.ResumeARUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.codepattern.ResumeARUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = ResumeAR;
 			};
@@ -730,12 +749,12 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8T393AQ955;
-				INFOPLIST_FILE = ResumeARUITests/Info.plist;
+				DEVELOPMENT_TEAM = PP64RT7P8Z;
+				INFOPLIST_FILE = "$(SRCROOT)/ResumeARStarterUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.sg.ResumeARUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.codepattern.ResumeARUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = ResumeAR;
 			};

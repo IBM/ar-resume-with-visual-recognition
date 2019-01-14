@@ -18,7 +18,7 @@ IBM Cloud iOS Swift starter with Watson Visual Recognition and Core ML
 
 ### Summary
 
-Combining iOS face recognition using Vision API, classification using IBM Visual Recognition, and person identification using classified image and data, one can build an app to search faces and identify them. One of the use cases is to build a Augmented Reality based résumé using visual recognition.
+Combining iOS face recognition using Vision API, classification using IBM Visual Recognition, and person identification using classified image and data, one can build an app to search faces and identify them. One of the usecases is to build an Augmented Reality based résumé using visual recognition.
 
 This iOS app recognizes the face and presents you with an AR view that displays a résumé of the person in the camera view. The app classifies a face with Watson Visual Recognition and Core ML. The images are classified offline using a deep neural network that is trained by Visual Recognition.
 

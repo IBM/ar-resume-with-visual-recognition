@@ -56,7 +56,7 @@ git clone https://github.com/IBM/ar-resume-with-visual-recognition
 
 5. Go to `ios_swift` directory and open the project using `Xcode`.
 
-6. Create `BMSCredentials.plist` in the project and replace the credentials. The `plist` file looks like below:
+6. Create a `ResumeARStarter/BMSCredentials.plist` in the project and replace the credentials. The `plist` file looks like below:
 ```
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">

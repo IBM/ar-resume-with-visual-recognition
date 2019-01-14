@@ -28,7 +28,7 @@ public extension SCNNode {
         let fullName = profile["fullname"].stringValue
         let fullNameBubble = SCNText(string: fullName, extrusionDepth: CGFloat(bubbleDepth))
         fullNameBubble.font = UIFont(name: "Futura", size: 0.10)?.withTraits(traits: .traitBold)
-        fullNameBubble.alignmentMode = kCAAlignmentCenter
+        fullNameBubble.alignmentMode = convertFromCATextLayerAlignmentMode(CATextLayerAlignmentMode.center)
         fullNameBubble.firstMaterial?.diffuse.contents = UIColor.orange
         fullNameBubble.firstMaterial?.specular.contents = UIColor.white
         fullNameBubble.firstMaterial?.isDoubleSided = true
@@ -56,7 +56,7 @@ public extension SCNNode {
         let linkedIn = profile["linkedin"].stringValue
         let linkedInBubble = SCNText(string: linkedIn, extrusionDepth: CGFloat(bubbleDepth))
         linkedInBubble.font = UIFont(name: "Futura", size: 0.10)?.withTraits(traits: .traitBold)
-        linkedInBubble.alignmentMode = kCAAlignmentCenter
+        linkedInBubble.alignmentMode = convertFromCATextLayerAlignmentMode(CATextLayerAlignmentMode.center)
         linkedInBubble.firstMaterial?.diffuse.contents = UIColor.orange
         linkedInBubble.firstMaterial?.specular.contents = UIColor.white
         linkedInBubble.firstMaterial?.isDoubleSided = true
@@ -84,7 +84,7 @@ public extension SCNNode {
         let twitter = profile["twitter"].stringValue
         let twitterBubble = SCNText(string: twitter, extrusionDepth: CGFloat(bubbleDepth))
         twitterBubble.font = UIFont(name: "Futura", size: 0.10)?.withTraits(traits: .traitBold)
-        twitterBubble.alignmentMode = kCAAlignmentCenter
+        twitterBubble.alignmentMode = convertFromCATextLayerAlignmentMode(CATextLayerAlignmentMode.center)
         twitterBubble.firstMaterial?.diffuse.contents = UIColor.orange
         twitterBubble.firstMaterial?.specular.contents = UIColor.white
         twitterBubble.firstMaterial?.isDoubleSided = true
@@ -112,7 +112,7 @@ public extension SCNNode {
         let facebook = profile["facebook"].stringValue
         let fbBubble = SCNText(string: facebook, extrusionDepth: CGFloat(bubbleDepth))
         fbBubble.font = UIFont(name: "Futura", size: 0.10)?.withTraits(traits: .traitBold)
-        fbBubble.alignmentMode = kCAAlignmentCenter
+        fbBubble.alignmentMode = convertFromCATextLayerAlignmentMode(CATextLayerAlignmentMode.center)
         fbBubble.firstMaterial?.diffuse.contents = UIColor.orange
         fbBubble.firstMaterial?.specular.contents = UIColor.white
         fbBubble.firstMaterial?.isDoubleSided = true
@@ -130,7 +130,7 @@ public extension SCNNode {
         let phone = profile["phone"].stringValue
         let phoneBubble = SCNText(string: phone, extrusionDepth: CGFloat(bubbleDepth))
         phoneBubble.font = UIFont(name: "Futura", size: 0.09)?.withTraits(traits: .traitBold)
-        phoneBubble.alignmentMode = kCAAlignmentCenter
+        phoneBubble.alignmentMode = convertFromCATextLayerAlignmentMode(CATextLayerAlignmentMode.center)
         phoneBubble.firstMaterial?.diffuse.contents = UIColor.orange
         phoneBubble.firstMaterial?.specular.contents = UIColor.white
         phoneBubble.firstMaterial?.isDoubleSided = true
@@ -147,7 +147,7 @@ public extension SCNNode {
         let location = profile["location"].stringValue
         let locBubble = SCNText(string: location, extrusionDepth: CGFloat(bubbleDepth))
         locBubble.font = UIFont(name: "Futura", size: 0.10)?.withTraits(traits: .traitBold)
-        locBubble.alignmentMode = kCAAlignmentCenter
+        locBubble.alignmentMode = convertFromCATextLayerAlignmentMode(CATextLayerAlignmentMode.center)
         locBubble.firstMaterial?.diffuse.contents = UIColor.orange
         locBubble.firstMaterial?.specular.contents = UIColor.white
         locBubble.firstMaterial?.isDoubleSided = true
@@ -201,7 +201,7 @@ public extension SCNNode {
         // BUBBLE-TEXT
         let bubble = SCNText(string: text, extrusionDepth: CGFloat(bubbleDepth))
         bubble.font = UIFont(name: "Futura", size: 0.15)?.withTraits(traits: .traitBold)
-        bubble.alignmentMode = kCAAlignmentCenter
+        bubble.alignmentMode = convertFromCATextLayerAlignmentMode(CATextLayerAlignmentMode.center)
         bubble.firstMaterial?.diffuse.contents = UIColor.orange
         bubble.firstMaterial?.specular.contents = UIColor.white
         bubble.firstMaterial?.isDoubleSided = true
@@ -225,7 +225,7 @@ public extension SCNNode {
     func move(_ position: SCNVector3) {
         SCNTransaction.begin()
         SCNTransaction.animationDuration = 0.4
-        SCNTransaction.animationTimingFunction = CAMediaTimingFunction.init(name: kCAMediaTimingFunctionLinear)
+        SCNTransaction.animationTimingFunction = CAMediaTimingFunction.init(name: CAMediaTimingFunctionName.linear)
         self.position = position
         opacity = 1
         SCNTransaction.commit()
@@ -234,7 +234,7 @@ public extension SCNNode {
     func hide() {
         SCNTransaction.begin()
         SCNTransaction.animationDuration = 2.0
-        SCNTransaction.animationTimingFunction = CAMediaTimingFunction.init(name: kCAMediaTimingFunctionLinear)
+        SCNTransaction.animationTimingFunction = CAMediaTimingFunction.init(name: CAMediaTimingFunctionName.linear)
         opacity = 0
         SCNTransaction.commit()
     }
@@ -243,7 +243,7 @@ public extension SCNNode {
         opacity = 0
         SCNTransaction.begin()
         SCNTransaction.animationDuration = 0.4
-        SCNTransaction.animationTimingFunction = CAMediaTimingFunction.init(name: kCAMediaTimingFunctionLinear)
+        SCNTransaction.animationTimingFunction = CAMediaTimingFunction.init(name: CAMediaTimingFunctionName.linear)
         opacity = 1
         SCNTransaction.commit()
     }
@@ -251,8 +251,13 @@ public extension SCNNode {
 
 private extension UIFont {
     // Based on: https://stackoverflow.com/questions/4713236/how-do-i-set-bold-and-italic-on-uilabel-of-iphone-ipad
-    func withTraits(traits: UIFontDescriptorSymbolicTraits...) -> UIFont {
-        let descriptor = self.fontDescriptor.withSymbolicTraits(UIFontDescriptorSymbolicTraits(traits))
+    func withTraits(traits: UIFontDescriptor.SymbolicTraits...) -> UIFont {
+        let descriptor = self.fontDescriptor.withSymbolicTraits(UIFontDescriptor.SymbolicTraits(traits))
         return UIFont(descriptor: descriptor!, size: 0)
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromCATextLayerAlignmentMode(_ input: CATextLayerAlignmentMode) -> String {
+	return input.rawValue
 }

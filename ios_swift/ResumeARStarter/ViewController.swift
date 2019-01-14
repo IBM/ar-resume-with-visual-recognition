@@ -156,23 +156,23 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Retrieve plist
         guard let path = Bundle.main.path(forResource: "BMSCredentials", ofType: "plist"),
             let credentials = NSDictionary(contentsOfFile: path) as? [String: AnyObject] else {
-                // Add a meaningful error message here Christian
+                print("Cannot retrieve 'BMSCredentials.plist' file")
                 return
         }
 
         // Retrieve Cloudant credentials
         guard let url = credentials["cloudantUrl"] as? String, !url.isEmpty else {
-                // Add a meaningful error message here Christian
+                print("Cannot retrieve 'cloudantURL' from 'BMSCredentials.plist'")
                 return
         }
 
         // Set the Watson credentials for Visual Recognition service from the BMSCredentials.plist
         // If using IAM authentication
         guard let apiKey = credentials["visualrecognitionApikey"] as? String else {
-            // Add Meaningful message here Christian
+            print("Cannot retrieve 'visualrecognitionApikey' from 'BMSCredentials.plist'")
             return
         }
-        
+
         // Create service sdks
         self.visualRecognition = VisualRecognition(version: self.VERSION, apiKey: apiKey)
 

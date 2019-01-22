@@ -59,7 +59,7 @@ git clone https://github.com/IBM/ar-resume-with-visual-recognition
 6. Create a `ResumeARStarter/BMSCredentials.plist` in the project and replace the credentials. The `plist` file looks like below:
 ```
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "https://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
 	<key>visualrecognitionApi_key</key>

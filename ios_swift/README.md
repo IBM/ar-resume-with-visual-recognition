@@ -74,7 +74,7 @@ $ sudo gem install cocoapods
 $ pod setup
 ```
 
-3. At a command line, run `pod install` to install the dependencies.
+3. At a command line, run `pod install` to install the [Watson SDK](https://github.com/watson-developer-cloud/swift-sdk#watson-developer-cloud-swift-sdk) and other dependencies.
 ![Pod Install Output](../images/pod-install-output.png)
 
 If you run into any issues during the pod install, it is recommended to run a pod update by using the following commands:
@@ -83,19 +83,16 @@ $ pod update
 $ pod install
 ```
 
-4. Run `carthage bootstrap --platform iOS` to install the Watson related dependencies.
-![Carthage Install Output](../images/carthage-output.png)
-
-5. Once the previous steps are complete, open the Xcode workspace: `{APP_Name}.xcworkspace`. Run the application by clicking the `Build` and `Run` menu options, specifying the native iOS device on which you will be running the application.
+4. Once the previous steps are complete, open the Xcode workspace: `{APP_Name}.xcworkspace`. Run the application by clicking the `Build` and `Run` menu options, specifying the native iOS device on which you will be running the application.
 ![Xcode Build and Run](../images/build-and-run.png)
 
 #### Classification
 
-When the app loads, the app will create 3 classifiers for each of the zip files [`ResumeAR/sanjeev.zip`](ResumeAR/sanjeev.zip), [`ResumeAR/steve.zip`](ResumeAR/steve.zip) and [`ResumeAR/scott.zip`](ResumeAR/scott.zip).
-> To create a new classifier use the [Watson Visual Recognition tool](https://watson-visual-recognition.ng.bluemix.net/). A classifier will train the visual recognition service, it will be able to recognize different images of the same person. Use at least ten images of your head shot and also create a negative data set by using headshots that are not your own.
+By default, the app comes with 3 classifiers that are put onto the device to classify faces right away.
+> To create a new classifier use the [Watson Visual Recognition tool](https://cloud.ibm.com/catalog/services/visual-recognition). A classifier will train the visual recognition service, it will be able to recognize different images of the same person. Use at least ten images of your head shot and also create a negative data set by using headshots that are not your own.
 
-The app will also create an [IBM Cloudant NoSQL database](https://cloud.ibm.com/catalog/services/cloudant-nosql-db) in the service instance referenced in the `BMSCredentials.plist` file. Each JSON document in this database represents **one** person. The JSON schema can be found in [`schema.json`](ResumeAR/schema.json). When the app loads, it will also create 3 documents for the 3 classification done in step 3.
-> To create new documents in the same database, use the [`schema.json`](ResumeAR/schema.json) provided to fill out the details. Replace the `classificationId` in the schema with the `classificationId` you receive from the classifier once the Watson Visual Recognition model has been successfully trained. This ID will be used to retrieve details about the classified person.
+The app will also create an [IBM Cloudant NoSQL database](https://cloud.ibm.com/catalog/services/cloudant-nosql-db) in the service instance referenced in the `BMSCredentials.plist` file. Each JSON document in this database represents **one** person. The JSON schema can be found in [`schema.json`](./schema.json). When the app loads, it will also create 3 documents for the 3 classification done in step 3.
+> To create new documents in the same database, use the [`schema.json`](./schema.json) provided to fill out the details. Replace the `classificationId` in the schema with the `classificationId` you receive from the classifier once the Watson Visual Recognition model has been successfully trained. This ID will be used to retrieve details about the classified person.
 
 **NOTE:** The training in Watson Visual Recognition might take couple of minutes. If the status is in `training`, then the AR will show `Training in progress` in your AR view. You can check the status of your classifier by using following curl command:
 
@@ -107,7 +104,7 @@ Replace the `API_KEY` with the Watson Visual Recognition api key, as found in yo
 
 ### Run
 
-1. To test the running application on the iPhone, you can use the test images provided in [`Test Images`](../images/TestImages) folder, which will yield the output shown below.
+1. To test the running application on the iPhone, you can use the test images provided in [`Test Images`](https://github.com/IBM/ar-resume-with-visual-recognition/tree/master/images/TestImages) folder, which will yield the output shown below.
 
 #### Sample Output
 
@@ -119,7 +116,7 @@ Replace the `API_KEY` with the Watson Visual Recognition api key, as found in yo
 
 To create a new classifier and database entry, perform the following steps:
 
-1. Create a new Watson Visual Recognition classifier using the [online tool](https://watson-visual-recognition.ng.bluemix.net/) for each person you want to be able to identify, use at least ten images of that person.
+1. Create a new Watson Visual Recognition classifier using the [online tool](https://cloud.ibm.com/catalog/services/visual-recognition) for each person you want to be able to identify, use at least ten images of that person.
 
 2. Update the Cloudant database using the classifier ID from the previous step. To update the database perform a `POST` command like the following:
 
@@ -133,7 +130,7 @@ curl -H "Content-Type: application/json" -X POST -d $data https://$ACCOUNT.cloud
 
 > The `$DATABASE` variable is the database name you created in IBM Cloudant.
 
-> See [`ResumeAR/schema.json`](ResumeAR/schema.json) for additional information about the Cloudant database configuration.
+> See [`schema.json`](./schema.json) for additional information about the Cloudant database configuration.
 
 3. Run the app and point the camera view to your newly classified image.
 

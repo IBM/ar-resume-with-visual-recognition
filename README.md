@@ -49,7 +49,7 @@ git clone https://github.com/IBM/ar-resume-with-visual-recognition
 2. Log into [IBM Cloud](https://cloud.ibm.com) account and create a [Watson Visual Recognition](https://cloud.ibm.com/catalog/services/visual-recognition) service. Create a set of credentials and identify your API key.
 
 3. When the app loads, it also loads 3 Core ML models which is bundled part of the app. The models were trained using IBM Watson Visual Recognition Tool and downloaded as Core ML model.
-> To create a new classifier use the [Watson Visual Recognition tool](https://watson-visual-recognition.ng.bluemix.net/). A classifier will train the visual recognition service, it will be able to recognize different images of the same person. Use at least ten images of your head shot and also create a negative data set by using headshots that are not your own.
+> To create a new classifier use the [Watson Visual Recognition tool](https://cloud.ibm.com/catalog/services/visual-recognition). A classifier will train the visual recognition service, it will be able to recognize different images of the same person. Use at least ten images of your head shot and also create a negative data set by using headshots that are not your own.
 
 4. Create an [IBM Cloudant NoSQL database](https://cloud.ibm.com/catalog/services/cloudant) and save the credentials. Each JSON document in this database represents **one** person. The JSON schema can be found in [`schema.json`](schema.json). When the app loads, it will also create 3 documents for the 3 CoreML models which is bundled part of the app as mentioned in step 3.
 > To create new documents in the same database, use the [`schema.json`](schema.json) provided to fill out the details. Replace the `classificationId` in the schema with the `classificationId` you receive from the classifier once the Watson Visual Recognition model has been successfully trained. This ID will be used to retrieve details about the classified person.
@@ -93,7 +93,7 @@ Replace the `API_KEY` with the Watson Visual Recognition api key.
 
 To create a new entry in the database perform the following steps:
 
-1. Create a new Watson Visual Recognition classifier using the [online tool](https://watson-visual-recognition.ng.bluemix.net/) for each person you want to be able to identify, use at least ten images of that person.
+1. Create a new Watson Visual Recognition classifier using the [online tool](https://cloud.ibm.com/catalog/services/visual-recognition) for each person you want to be able to identify, use at least ten images of that person.
 
 2. Update the Cloudant database using the classifier ID from the previous step. To update the database perform a `POST` command like the following:
 

@@ -43,9 +43,9 @@ git clone https://github.com/IBM/ar-resume-with-visual-recognition
 2. 登录到 [IBM Cloud](https://cloud.ibm.com) 帐户，创建 [Watson Visual Recognition](https://cloud.ibm.com/catalog/services/visual-recognition) 服务。创建一系列的凭证并识别 API 密钥。
 
 3. 加载应用时，将为以下每个 zip 文件创建 3 个分类器：[`ResumeAR/sanjeev.zip`](ResumeAR/sanjeev.zip)、 [`ResumeAR/steve.zip`](ResumeAR/steve.zip) 和 [`ResumeAR/scott.zip`](ResumeAR/scott.zip)。
-> 使用 [Watson Visual Recognition 工具](https://watson-visual-recognition.ng.bluemix.net/)创建新的分类器。分类器将训练视觉识别服务，它将能够识别同一个人的多张不同图像。这需要至少使用十张大头照，同时通过使用不是自己的大头照来创建反面数据集训练。
+> 使用 [Watson Visual Recognition 工具](https://cloud.ibm.com/catalog/services/visual-recognition)创建新的分类器。分类器将训练视觉识别服务，它将能够识别同一个人的多张不同图像。这需要至少使用十张大头照，同时通过使用不是自己的大头照来创建反面数据集训练。
 
-4. 创建 [IBM Cloudant 非关系型数据库](https://cloud.ibm.com/catalog/services/cloudant-nosql-db)并保存凭证。该数据库中的每个 JSON 文档都表示**一个**人。可在 [`schema.json`](ResumeAR/schema.json) 中找到 JSON 模式。加载应用时，也会为第 3 步中完成的 3 个分类创建 3 个文档。 
+4. 创建 [IBM Cloudant 非关系型数据库](https://cloud.ibm.com/catalog/services/cloudant-nosql-db)并保存凭证。该数据库中的每个 JSON 文档都表示**一个**人。可在 [`schema.json`](ResumeAR/schema.json) 中找到 JSON 模式。加载应用时，也会为第 3 步中完成的 3 个分类创建 3 个文档。
 > 要在同一数据库中创建新文档，请使用提供的 [`schema.json`](ResumeAR/schema.json) 来填充详细信息。Watson Visual Recognition 模型训练成功之后，使用从分类器收到的 `classificationId` 替换该模式中的 `classificationId`。此 ID 将用于检索有关经过分类的个人的详细信息。
 
 5. 转至 `ios_swift` 目录并使用 `Xcode` 打开项目。
@@ -59,16 +59,14 @@ git clone https://github.com/IBM/ar-resume-with-visual-recognition
 	<key>visualrecognitionApi_key</key>
 	<string>VR_API_KEY</string>
 	<key>cloudantUrl</key>
-	<string>CLOUDANT_URL</string>	
+	<string>CLOUDANT_URL</string>
 </dict>
 </plist>
 ```
 
 7. 在命令行中，运行 `pod install` 以安装依赖项。![Pod 安装输出](images/pod-install-output.png)
 
-8. 运行 `carthage bootstrap --platform iOS` 以安装 Watson 相关依赖项。![Carthage 安装输出](images/carthage-output.png)
-
-9. 完成前面的步骤后，返回到 Xcode，通过单击 `Build` 和 `Run` 菜单选项来运行应用。![Xcode 构建和运行](images/build-and-run.png)
+8. 完成前面的步骤后，返回到 Xcode，通过单击 `Build` 和 `Run` 菜单选项来运行应用。![Xcode 构建和运行](images/build-and-run.png)
 
 注意：Watson Visual Recognition 中的训练可能需要几分钟时间。如果状态为 `training`，那么 AR 将在您的 AR 视图中显示 `Training in progress`。您可以通过使用以下 curl 命令来检查分类器的状态：
 
@@ -78,13 +76,13 @@ curl "https://gateway-a.watsonplatform.net/visual-recognition/api/v3/classifiers
 
 使用 Watson Visual Recognition API 密钥替换 `API_KEY`。
 
-10. 要进行测试，您可以使用 [`images/TestImages`](images/TestImages) 文件夹中提供的测试图像。
+9. 要进行测试，您可以使用 [`images/TestImages`](images/TestImages) 文件夹中提供的测试图像。
 
 # 添加到数据库
 
-要在数据库中创建新的条目，请执行以下步骤： 
+要在数据库中创建新的条目，请执行以下步骤：
 
-1. 使用[联机工具](https://watson-visual-recognition.ng.bluemix.net/)为希望能够识别的每个人创建新的 Watson Visual Recognition 分类器，使用至少十张此人的图像。
+1. 使用[联机工具](https://cloud.ibm.com/catalog/services/visual-recognition)为希望能够识别的每个人创建新的 Watson Visual Recognition 分类器，使用至少十张此人的图像。
 
 2. 使用从前一步获得的分类器 ID 更新 Cloudant 数据库。要更新该数据库，请如下所示执行 `POST` 命令：
 
@@ -123,7 +121,7 @@ curl -H "Content-Type: application/json" -X POST -d $data https://$ACCOUNT.cloud
 * [ARKit](https://developer.apple.com/arkit)
 * [Watson Swift SDK](https://github.com/watson-developer-cloud/swift-sdk)
 * [IBM 视觉识别](https://www.ibm.com/watson/services/visual-recognition-4)
-* [IBM Cloudant](https://www.ibm.com/cloud/cloudant) 
+* [IBM Cloudant](https://www.ibm.com/cloud/cloudant)
 
 # 许可
 

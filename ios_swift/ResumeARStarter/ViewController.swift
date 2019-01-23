@@ -19,7 +19,7 @@ import Vision
 import RxSwift
 import RxCocoa
 import SwiftyJSON
-import VisualRecognitionV3
+import VisualRecognition
 import PKHUD
 import CoreML
 // {{allIncludes}}

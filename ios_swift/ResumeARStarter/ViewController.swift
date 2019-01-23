@@ -189,7 +189,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Run the view's session
         sceneView.session.run(configuration)
 
-        Observable<Int>.interval(0.6, scheduler: SerialDispatchQueueScheduler(qos: .default))
+        Observable<Int>.interval(3, scheduler: SerialDispatchQueueScheduler(qos: .default))
             .subscribeOn(SerialDispatchQueueScheduler(qos: .background))
             .flatMap {_ in self.updateToLocalModels()}
             .flatMap {_ in self.faceObservation() }
@@ -203,7 +203,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 self.updateNode(classes: element.classes, position: element.position, frame: element.frame)
             }.disposed(by: 👜)
 
-        Observable<Int>.interval(0.6, scheduler: SerialDispatchQueueScheduler(qos: .default))
+        Observable<Int>.interval(3, scheduler: SerialDispatchQueueScheduler(qos: .default))
             .subscribeOn(SerialDispatchQueueScheduler(qos: .background))
             .subscribe { [unowned self] _ in
 

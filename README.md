@@ -70,13 +70,10 @@ git clone https://github.com/IBM/ar-resume-with-visual-recognition
 </plist>
 ```
 
-7. At a command line, run `pod install` to install the dependencies.
+7. At a command line, run `pod install` to install the [Watson SDK](https://github.com/watson-developer-cloud/swift-sdk#watson-developer-cloud-swift-sdk) and other dependencies.
 ![Pod Install Output](images/pod-install-output.png)
 
-8. Run `carthage bootstrap --platform iOS` to install the Watson related dependencies.
-![Carthage Install Output](images/carthage-output.png)
-
-9. Once the previous steps are complete go back to Xcode and run the application by clicking the `Build` and `Run` menu options.
+8. Once the previous steps are complete go back to Xcode and run the application by clicking the `Build` and `Run` menu options.
 ![Xcode Build and Run](images/build-and-run.png)
 
 NOTE: The training in Watson Visual Recognition might take couple of minutes. If the status is in `training`, then the AR will show `Training in progress` in your AR view. You can check the status of your classifier by using following curl command:
@@ -87,7 +84,7 @@ curl "https://gateway-a.watsonplatform.net/visual-recognition/api/v3/classifiers
 
 Replace the `API_KEY` with the Watson Visual Recognition api key.
 
-10. To test you can use the test images provided in [`images/TestImages`](images/TestImages) folder.
+9. To test you can use the test images provided in [`images/TestImages`](images/TestImages) folder.
 
 # Adding to the database
 

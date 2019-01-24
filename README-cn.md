@@ -13,7 +13,7 @@
 * 利用 [Watson Visual Recognition](https://www.ibm.com/watson/services/visual-recognition/) 和 [Core ML](https://developer.apple.com/machine-learning/) 对图像进行分类
 
 # 操作流程
-![ARResume 架构](images/architecture.png)
+![ARResume 架构](https://raw.githubusercontent.com/IBM/pattern-utils/master/arkit-starter/images/architecture.png)
 
 1. 用户在移动设备上打开该应用
 2. 使用 iOS Vision 模块检测到人脸
@@ -64,9 +64,9 @@ git clone https://github.com/IBM/ar-resume-with-visual-recognition
 </plist>
 ```
 
-7. 在命令行中，运行 `pod install` 以安装依赖项。![Pod 安装输出](images/pod-install-output.png)
+7. 在命令行中，运行 `pod install` 以安装依赖项。![Pod 安装输出](https://raw.githubusercontent.com/IBM/pattern-utils/master/arkit-starter/images/pod-install-output.png)
 
-8. 完成前面的步骤后，返回到 Xcode，通过单击 `Build` 和 `Run` 菜单选项来运行应用。![Xcode 构建和运行](images/build-and-run.png)
+8. 完成前面的步骤后，返回到 Xcode，通过单击 `Build` 和 `Run` 菜单选项来运行应用。![Xcode 构建和运行](https://raw.githubusercontent.com/IBM/pattern-utils/master/arkit-starter/images/build-and-run.png)
 
 注意：Watson Visual Recognition 中的训练可能需要几分钟时间。如果状态为 `training`，那么 AR 将在您的 AR 视图中显示 `Training in progress`。您可以通过使用以下 curl 命令来检查分类器的状态：
 
@@ -102,9 +102,7 @@ curl -H "Content-Type: application/json" -X POST -d $data https://$ACCOUNT.cloud
 
 # 样本输出
 
-| | | |
-|-|-|-|
-| <img src="images/sanjeev_sample_output.png" height=250px width=140px> | <img src="images/steve_sample_output.png" height=250px width=140px> | <img src="images/scott_sample_output.png" height=250px width=140px> |
+<img src="https://raw.githubusercontent.com/IBM/pattern-utils/master/arkit-starter/images/sanjeev_sample_output.png" height=250px width=140px> | <img src="https://raw.githubusercontent.com/IBM/pattern-utils/master/arkit-starter/images/steve_sample_output.png" height=250px width=140px> | <img src="https://raw.githubusercontent.com/IBM/pattern-utils/master/arkit-starter/images/scott_sample_output.png" height=250px width=140px> |
 
 # 了解更多信息
 

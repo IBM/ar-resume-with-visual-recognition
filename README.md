@@ -13,7 +13,7 @@ After completing this code pattern a user will know how to:
 * Classify images with [Watson Visual Recognition](https://www.ibm.com/watson/services/visual-recognition/) and [Core ML](https://developer.apple.com/machine-learning/)
 
 # Flow
-![ARResume Architecture](images/architecture.png)
+![ARResume Architecture](https://raw.githubusercontent.com/IBM/pattern-utils/master/arkit-starter/images/architecture.png)
 
 1. User opens the app on their mobile
 2. A face is detected using the iOS Vision module
@@ -71,10 +71,10 @@ git clone https://github.com/IBM/ar-resume-with-visual-recognition
 ```
 
 7. At a command line, run `pod install` to install the [Watson SDK](https://github.com/watson-developer-cloud/swift-sdk#watson-developer-cloud-swift-sdk) and other dependencies.
-![Pod Install Output](images/pod-install-output.png)
+![Pod Install Output](https://raw.githubusercontent.com/IBM/pattern-utils/master/arkit-starter/images/pod-install-output.png)
 
 8. Once the previous steps are complete go back to Xcode and run the application by clicking the `Build` and `Run` menu options.
-![Xcode Build and Run](images/build-and-run.png)
+![Xcode Build and Run](https://raw.githubusercontent.com/IBM/pattern-utils/master/arkit-starter/images/build-and-run.png)
 
 NOTE: The training in Watson Visual Recognition might take couple of minutes. If the status is in `training`, then the AR will show `Training in progress` in your AR view. You can check the status of your classifier by using following curl command:
 
@@ -110,9 +110,7 @@ curl -H "Content-Type: application/json" -X POST -d $data https://$ACCOUNT.cloud
 
 # Sample Output
 
-| | | |
-|-|-|-|
-| <img src="images/sanjeev_sample_output.png" height=250px width=140px> | <img src="images/steve_sample_output.png" height=250px width=140px> | <img src="images/scott_sample_output.png" height=250px width=140px> |
+<img src="https://raw.githubusercontent.com/IBM/pattern-utils/master/arkit-starter/images/sanjeev_sample_output.png" height=250px width=140px> | <img src="https://raw.githubusercontent.com/IBM/pattern-utils/master/arkit-starter/images/steve_sample_output.png" height=250px width=140px> | <img src="https://raw.githubusercontent.com/IBM/pattern-utils/master/arkit-starter/images/scott_sample_output.png" height=250px width=140px> |
 
 # Learn more
 

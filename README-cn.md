@@ -76,7 +76,7 @@ curl "https://gateway-a.watsonplatform.net/visual-recognition/api/v3/classifiers
 
 使用 Watson Visual Recognition API 密钥替换 `API_KEY`。
 
-9. 要进行测试，您可以使用 [`images/TestImages`](images/TestImages) 文件夹中提供的测试图像。
+9. 要进行测试，您可以使用 [`TestImages`](https://github.com/IBM/pattern-utils/tree/master/arkit-starter/images/TestImages) 文件夹中提供的测试图像。
 
 # 添加到数据库
 

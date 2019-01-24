@@ -84,7 +84,7 @@ curl "https://gateway-a.watsonplatform.net/visual-recognition/api/v3/classifiers
 
 Replace the `API_KEY` with the Watson Visual Recognition api key.
 
-9. To test you can use the test images provided in [`images/TestImages`](images/TestImages) folder.
+9. To test you can use the test images provided in [`TestImages`](https://github.com/IBM/pattern-utils/tree/master/arkit-starter/images/TestImages) folder.
 
 # Adding to the database
 

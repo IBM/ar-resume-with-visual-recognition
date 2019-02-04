@@ -42,7 +42,7 @@ After completing this code pattern a user will know how to:
 > As an alternative to the steps below, you can [create this project as a starter kit](https://cloud.ibm.com/developer/appledevelopment/starter-kits/visual-recognition-with-core-ml-and-arkit-for-ios-with-watson) on IBM Cloud, which automatically provisions required services, and injects service credentials into a custom fork of this pattern.
 
 1. At a command line, clone this repo:
-```
+```bash
 git clone https://github.com/IBM/ar-resume-with-visual-recognition
 ```
 
@@ -57,7 +57,8 @@ git clone https://github.com/IBM/ar-resume-with-visual-recognition
 5. Go to `ios_swift` directory and open the project using `Xcode`.
 
 6. Create a `ResumeARStarter/BMSCredentials.plist` in the project and replace the credentials. The `plist` file looks like below:
-```
+
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
@@ -78,7 +79,7 @@ git clone https://github.com/IBM/ar-resume-with-visual-recognition
 
 NOTE: The training in Watson Visual Recognition might take couple of minutes. If the status is in `training`, then the AR will show `Training in progress` in your AR view. You can check the status of your classifier by using following curl command:
 
-```
+```bash
 curl "https://gateway-a.watsonplatform.net/visual-recognition/api/v3/classifiers?api_key={API_KEY}&verbose=true&version=2016-05-20"
 ```
 
@@ -94,7 +95,7 @@ To create a new entry in the database perform the following steps:
 
 2. Update the Cloudant database using the classifier ID from the previous step. To update the database perform a `POST` command like the following:
 
-```
+```bash
 data='{"classificationId":"Watson_VR_Classifier_ID","fullname":"Joe Smith","linkedin":"jsmith","twitter":"jsmith","facebook":"jsmith","phone":"512-555-1234","location":"San Francisco"}'
 
 curl -H "Content-Type: application/json" -X POST -d $data https://$ACCOUNT.cloudant.com/$DATABASE

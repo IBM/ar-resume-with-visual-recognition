@@ -17,7 +17,8 @@ import ARKit
 import SwiftyJSON
 
 public extension SCNNode {
-    convenience init(withJSON profile: JSON, position: SCNVector3) {
+    
+    internal convenience init(withUser user: User, position: SCNVector3) {
         let bubbleDepth: Float = 0.01 // the 'depth' of 3D text
 
         // TEXT BILLBOARD CONSTRAINT
@@ -25,7 +26,7 @@ public extension SCNNode {
         billboardConstraint.freeAxes = SCNBillboardAxis.Y
 
         // Full Name text
-        let fullName = profile["fullname"].stringValue
+        let fullName = user.name
         let fullNameBubble = SCNText(string: fullName, extrusionDepth: CGFloat(bubbleDepth))
         fullNameBubble.font = UIFont(name: "Futura", size: 0.10)?.withTraits(traits: .traitBold)
         fullNameBubble.alignmentMode = convertFromCATextLayerAlignmentMode(CATextLayerAlignmentMode.center)
@@ -53,7 +54,7 @@ public extension SCNNode {
         linkedinBoxNode.simdPosition = simd_float3.init(x: 0.02, y: 0.085, z: 0)
 
         // linkedin text
-        let linkedIn = profile["linkedin"].stringValue
+        let linkedIn = user.linkedin
         let linkedInBubble = SCNText(string: linkedIn, extrusionDepth: CGFloat(bubbleDepth))
         linkedInBubble.font = UIFont(name: "Futura", size: 0.10)?.withTraits(traits: .traitBold)
         linkedInBubble.alignmentMode = convertFromCATextLayerAlignmentMode(CATextLayerAlignmentMode.center)
@@ -81,7 +82,7 @@ public extension SCNNode {
         twitterIconNode.simdPosition = simd_float3.init(x: 0.02, y: 0.075, z: 0)
 
         //twitter text
-        let twitter = profile["twitter"].stringValue
+        let twitter = user.twitter
         let twitterBubble = SCNText(string: twitter, extrusionDepth: CGFloat(bubbleDepth))
         twitterBubble.font = UIFont(name: "Futura", size: 0.10)?.withTraits(traits: .traitBold)
         twitterBubble.alignmentMode = convertFromCATextLayerAlignmentMode(CATextLayerAlignmentMode.center)
@@ -109,7 +110,7 @@ public extension SCNNode {
         fbIconNode.simdPosition = simd_float3.init(x: 0.02, y: 0.065, z: 0)
 
         //facebook
-        let facebook = profile["facebook"].stringValue
+        let facebook = user.facebook
         let fbBubble = SCNText(string: facebook, extrusionDepth: CGFloat(bubbleDepth))
         fbBubble.font = UIFont(name: "Futura", size: 0.10)?.withTraits(traits: .traitBold)
         fbBubble.alignmentMode = convertFromCATextLayerAlignmentMode(CATextLayerAlignmentMode.center)
@@ -127,7 +128,7 @@ public extension SCNNode {
         fbNode.simdPosition = simd_float3.init(x: 0.07, y: 0.06, z: 0)
 
         //        //phone
-        let phone = profile["phone"].stringValue
+        let phone = user.phone
         let phoneBubble = SCNText(string: phone, extrusionDepth: CGFloat(bubbleDepth))
         phoneBubble.font = UIFont(name: "Futura", size: 0.09)?.withTraits(traits: .traitBold)
         phoneBubble.alignmentMode = convertFromCATextLayerAlignmentMode(CATextLayerAlignmentMode.center)
@@ -144,7 +145,7 @@ public extension SCNNode {
         phoneNode.scale = SCNVector3Make(0.1, 0.1, 0.1)
         phoneNode.simdPosition = simd_float3.init(x: 0.07, y: 0.05, z: 0)
         //location
-        let location = profile["location"].stringValue
+        let location = user.location
         let locBubble = SCNText(string: location, extrusionDepth: CGFloat(bubbleDepth))
         locBubble.font = UIFont(name: "Futura", size: 0.10)?.withTraits(traits: .traitBold)
         locBubble.alignmentMode = convertFromCATextLayerAlignmentMode(CATextLayerAlignmentMode.center)
@@ -160,15 +161,6 @@ public extension SCNNode {
         // Reduce default text size
         locNode.scale = SCNVector3Make(0.1, 0.1, 0.1)
         locNode.simdPosition = simd_float3.init(x: 0.07, y: 0.04, z: 0)
-
-        //        // 3D IMAGE NODE
-        //        let faceScene = SCNScene(named: "art.scnassets/ship.scn")
-        //        //let box = SCNBox.init(width: 0.5, height: 0.5, length: 0.01, chamferRadius: 0)
-        //        let boxNode = SCNNode()
-        //        //faceScene!.rootNode.addChildNode(boxNode)
-        //        boxNode.addChildNode((faceScene?.rootNode)!)
-        //        boxNode.scale = SCNVector3Make(0.2, 0.2, 0.2)
-        //        boxNode.simdPosition = simd_float3.init(x: -0.05, y: 0, z: 0)
 
         // CENTRE POINT NODE
         let sphere = SCNSphere(radius: 0.004)
@@ -187,37 +179,6 @@ public extension SCNNode {
         addChildNode(phoneNode)
         addChildNode(locNode)
         addChildNode(sphereNode)
-        constraints = [billboardConstraint]
-        self.position = position
-    }
-
-    convenience init(withText text: String, position: SCNVector3) {
-        let bubbleDepth: Float = 0.01 // the 'depth' of 3D text
-
-        // TEXT BILLBOARD CONSTRAINT
-        let billboardConstraint = SCNBillboardConstraint()
-        billboardConstraint.freeAxes = SCNBillboardAxis.Y
-
-        // BUBBLE-TEXT
-        let bubble = SCNText(string: text, extrusionDepth: CGFloat(bubbleDepth))
-        bubble.font = UIFont(name: "Futura", size: 0.15)?.withTraits(traits: .traitBold)
-        bubble.alignmentMode = convertFromCATextLayerAlignmentMode(CATextLayerAlignmentMode.center)
-        bubble.firstMaterial?.diffuse.contents = UIColor.orange
-        bubble.firstMaterial?.specular.contents = UIColor.white
-        bubble.firstMaterial?.isDoubleSided = true
-        bubble.chamferRadius = CGFloat(bubbleDepth)
-
-        // BUBBLE NODE
-        let (minBound, maxBound) = bubble.boundingBox
-        let bubbleNode = SCNNode(geometry: bubble)
-        // Centre Node - to Centre-Bottom point
-        bubbleNode.pivot = SCNMatrix4MakeTranslation( (maxBound.x - minBound.x)/2, minBound.y, bubbleDepth/2)
-        // Reduce default text size
-        bubbleNode.scale = SCNVector3Make(0.1, 0.1, 0.1)
-        bubbleNode.simdPosition = simd_float3.init(x: 0.06, y: 0.09, z: 0)
-
-        self.init()
-        addChildNode(bubbleNode)
         constraints = [billboardConstraint]
         self.position = position
     }

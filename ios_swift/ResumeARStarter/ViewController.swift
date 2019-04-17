@@ -37,7 +37,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     var userInfo: [String:User] = [:]
 
-    let VERSION = "2017-12-07"
+    let VERSION = "2018-03-19"
 
     var isTraining: Bool = true
 

@@ -33,10 +33,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     var faces: [Face] = []
     var bounds: CGRect = CGRect(x: 0, y: 0, width: 0, height: 0)
     var visualRecognition: VisualRecognition?
-    var cloudantRestCall: CloudantRESTCall?
     var classifierIds: [String] = ["SanjeevGhimire_967590069", "ScottDAngelo_1040670748", "SteveMartinelli_2096165720"]
+    
+    var userInfo: [String:User] = [:]
 
-    let VERSION = "2017-12-07"
+    let VERSION = "2018-03-19"
 
     var isTraining: Bool = true
 
@@ -57,57 +58,14 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         //configure IBM cloud services required by this app
         self.configureCloudantAndVisualRecognition()
 
-        self.cloudantRestCall?.createDatabase(databaseName: Constant.databaseName) { (dbDetails) in
-            print(dbDetails)
-            if dbDetails["ok"].exists() {
-                //add info for test database.
-                let userData1 = ["classificationId": "SteveMartinelli_2096165720",
-                                 "fullname": Constant.SteveName,
-                                 "linkedin": Constant.SteveLI,
-                                 "twitter": Constant.SteveTW,
-                                 "facebook": Constant.SteveFB,
-                                 "phone": Constant.StevePh,
-                                 "location": Constant.SteveLoc]
-
-                self.cloudantRestCall?.updatePersonData(userData: JSON(userData1)) { (resultJSON) in
-                    if !resultJSON["ok"].boolValue {
-                        print("Error while saving user Data", userData1)
-                        return
-                    }
-                }
-
-                let userData2 = ["classificationId": "SanjeevGhimire_967590069",
-                                 "fullname": Constant.SanjeevName,
-                                 "linkedin": Constant.SanjeevLI,
-                                 "twitter": Constant.SanjeevTW,
-                                 "facebook": Constant.SanjeevFB,
-                                 "phone": Constant.SanjeevPh,
-                                 "location": Constant.SanjeevLoc]
-
-                self.cloudantRestCall?.updatePersonData(userData: JSON(userData2)) { (resultJSON) in
-                    if !resultJSON["ok"].boolValue {
-                        print("Error while saving user Data", userData2)
-                        return
-                    }
-                }
-
-                let userData3 = ["classificationId": "ScottDAngelo_1040670748",
-                                 "fullname": Constant.ScottName,
-                                 "linkedin": Constant.ScottLI,
-                                 "twitter": Constant.ScottTW,
-                                 "facebook": Constant.ScottFB,
-                                 "phone": Constant.ScottPh,
-                                 "location": Constant.ScottLoc]
-
-                self.cloudantRestCall?.updatePersonData(userData: JSON(userData3)) { (resultJSON) in
-                    if !resultJSON["ok"].boolValue {
-                        print("Error while saving user Data", userData3)
-                        return
-                    }
-                }
-            }
+        //load the users
+        do {
+            try userInfo = UserLoad.load();
+        } catch let error {
+            print("Error while loading user mock data: \(error.localizedDescription)")
         }
 
+        // download the models.
         let localModels = try? self.visualRecognition?.listLocalModels()
             if let count = localModels??.count, count > 0 {
                 localModels??.forEach { classifierId in
@@ -160,12 +118,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 return
         }
 
-        // Retrieve Cloudant credentials
-        guard let url = credentials["cloudantUrl"] as? String, !url.isEmpty else {
-                print("Cannot retrieve 'cloudantURL' from 'BMSCredentials.plist'")
-                return
-        }
-
         // Set the Watson credentials for Visual Recognition service from the BMSCredentials.plist
         // If using IAM authentication
         guard let apiKey = credentials["visualrecognitionApikey"] as? String else {
@@ -175,9 +127,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
         // Create service sdks
         self.visualRecognition = VisualRecognition(version: self.VERSION, apiKey: apiKey)
-
-        self.cloudantRestCall = CloudantRESTCall.init(cloudantUrl: url)
-        self.cloudantRestCall?.database = Constant.databaseName
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -434,15 +383,16 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Create new face
         //note:: texture
         guard let existentFace = results.first else {
-            self.cloudantRestCall?.getResumeInfo(classificationId: classifierId!) { (resultJSON) in
-                let node = SCNNode.init(withJSON: resultJSON["docs"][0], position: position)
-                DispatchQueue.main.async {
-                    self.sceneView.scene.rootNode.addChildNode(node)
-                    node.show()
-                }
-                let face = Face.init(name: name!, node: node, timestamp: frame.timestamp)
-                self.faces.append(face)
-            }
+            
+        let user = userInfo[classifierId!]
+        let node = SCNNode.init(withUser: user!, position: position)
+        DispatchQueue.main.async {
+            self.sceneView.scene.rootNode.addChildNode(node)
+            node.show()
+        }
+        let face = Face.init(name: name!, node: node, timestamp: frame.timestamp)
+        self.faces.append(face)
+            
             return
         }
 

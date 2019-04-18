@@ -18,8 +18,7 @@ After completing this code pattern a user will know how to:
 1. User opens the app on their mobile
 2. A face is detected using the iOS Vision module
 3. An image of the face is sent to Watson Visual Recognition to be classified
-4. Additional information about the person are retrieved from a Cloudant database based on the classification from Watson Visual Recognition
-5. The information from the database is placed in front of the original person's face in the mobile camera view
+5. The information from the JSON database related to the user is placed in front of the original person's face in the mobile camera view
 
 # Included Components
 

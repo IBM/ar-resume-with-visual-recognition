@@ -4,10 +4,9 @@
   "type" : "MOBILE",
   "email": "sanjeev.ghimire@ibm.com",
   "author": "Sanjeev Ghimire",
-  "requiredCapabilities": ["visualRecognition","cloudant"],
+  "requiredCapabilities": ["visualRecognition"],
   "servicePlans": {
-      "visualRecognition": "lite",
-      "cloudant": "free"
+      "visualRecognition": "lite"
   },
   "tags": ["devex","appledevelopment"]
 }

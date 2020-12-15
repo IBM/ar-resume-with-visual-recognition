@@ -1,3 +1,6 @@
+# WARNING: This repository is no longer maintained :warning:
+> This repository will not be updated. The repository will be kept available in read-only mode.
+
 *Read this in other languages: [中国](README-cn.md).*
 # Use Watson Visual Recognition and Core ML to create an Augmented Reality based résumé
 
